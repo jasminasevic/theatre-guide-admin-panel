@@ -7,6 +7,10 @@ const routes: Routes = [
       import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
+    path: 'users',
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
+  },
+  {
     path: 'email',
     loadChildren: () => import('./email/email.module').then(m => m.EmailModule)
   },
