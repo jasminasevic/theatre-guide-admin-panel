@@ -23,13 +23,9 @@ import { SelectionModel } from '@angular/cdk/collections';
 export class AllUsersComponent implements OnInit {
   displayedColumns = [
     'select',
-    'img',
-    'name',
-    'designation',
-    'mobile',
+    // 'img',
+    'firstName',
     'email',
-    'date',
-    'address',
     'actions'
   ];
   exampleDatabase: UserService | null;
@@ -92,7 +88,7 @@ export class AllUsersComponent implements OnInit {
       if (result === 1) {
         // When using an edit things are little different, firstly we find record inside DataService by id
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-          x => x.id === this.id
+          x => x.Id === this.id
         );
         // Then you update that record using data from dialogData (values you enetered)
         this.exampleDatabase.dataChange.value[
@@ -117,7 +113,7 @@ export class AllUsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-          x => x.id === this.id
+          x => x.Id === this.id
         );
         // for delete we use splice in order to remove single object from DataService
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
@@ -238,12 +234,10 @@ export class ExampleDataSource extends DataSource<User> {
           .slice()
           .filter((user: User) => {
             const searchStr = (
-              user.name +
-              user.designation +
-              user.email +
-              user.mobile +
-              user.date +
-              user.address
+              user.FirstName +
+              user.LastName +
+              user.Email +
+              user.Password
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
@@ -270,22 +264,16 @@ export class ExampleDataSource extends DataSource<User> {
       let propertyB: number | string = '';
       switch (this._sort.active) {
         case 'id':
-          [propertyA, propertyB] = [a.id, b.id];
+          [propertyA, propertyB] = [a.Id, b.Id];
           break;
-        case 'name':
-          [propertyA, propertyB] = [a.name, b.name];
+        case 'firstName':
+          [propertyA, propertyB] = [a.FirstName, b.FirstName];
           break;
         case 'email':
-          [propertyA, propertyB] = [a.email, b.email];
+          [propertyA, propertyB] = [a.Email, b.Email];
           break;
-        case 'date':
-          [propertyA, propertyB] = [a.date, b.date];
-          break;
-        case 'address':
-          [propertyA, propertyB] = [a.address, b.address];
-          break;
-        case 'mobile':
-          [propertyA, propertyB] = [a.mobile, b.mobile];
+        case 'lastName':
+          [propertyA, propertyB] = [a.LastName, b.LastName];
           break;
       }
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

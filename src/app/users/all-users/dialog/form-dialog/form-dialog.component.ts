@@ -49,20 +49,15 @@ export class FormDialogComponent {
   }
   createContactForm(): FormGroup {
     return this.fb.group({
-      id: [this.user.id],
-      img: [this.user.img],
-      name: [this.user.name],
+      id: [this.user.Id],
+      // img: [this.user.img],
+      name: [this.user.FirstName],
       email: [
-        this.user.email,
+        this.user.Email,
         [Validators.required, Validators.email, Validators.minLength(5)]
       ],
-      date: [
-        formatDate(this.user.date, 'yyyy-MM-dd', 'en'),
-        [Validators.required]
-      ],
-      designation: [this.user.designation],
-      address: [this.user.address],
-      mobile: [this.user.mobile]
+      lastName: [this.user.LastName],
+      pasword: [this.user.Password],
     });
   }
   submit() {
@@ -72,6 +67,6 @@ export class FormDialogComponent {
     this.dialogRef.close();
   }
   public confirmAdd(): void {
-    this.userService.addUser(this.userForm.getRawValue());
+    this.userService.onSubmit(this.userForm.getRawValue());
   }
 }

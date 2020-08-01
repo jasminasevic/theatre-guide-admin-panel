@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "spice": {
+    "theatreguidefront": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -26,6 +26,17 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
+            ],
+            "allowedCommonJsDependencies": [
+              "chart.js",
+              "echarts",
+              "apexcharts/dist/apexcharts.min.js",
+              "svg-gauge",
+              "dragula",
+              "zrender/lib/vml/vml",
+              "zrender/lib/svg/svg",
+              "contra/emitter",
+              "crossvent"
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.css",
@@ -79,18 +90,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "spice:build"
+            "browserTarget": "theatreguidefront:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "spice:build:production"
+              "browserTarget": "theatreguidefront:build:production",
+              "proxyConfig": "src/proxy.conf.json"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "spice:build"
+            "browserTarget": "theatreguidefront:build"
           }
         },
         "test": {
@@ -117,7 +129,7 @@
         }
       }
     },
-    "spice-e2e": {
+    "theatreguidefront-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -126,11 +138,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "spice:serve"
+            "devServerTarget": "theatreguidefront:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "spice:serve:production"
+              "devServerTarget": "theatreguidefront:serve:production"
             }
           }
         },
@@ -144,7 +156,7 @@
       }
     }
   },
-  "defaultProject": "spice",
+  "defaultProject": "theatreguidefront",
   "cli": {
     "analytics": false
   }

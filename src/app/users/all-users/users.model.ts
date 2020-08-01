@@ -1,23 +1,22 @@
 import { formatDate } from '@angular/common';
 export class User {
-  id: number;
-  img: string;
-  name: string;
-  email: string;
-  date: string;
-  address: string;
-  mobile: string;
-  designation: string;
+  Id: number;
+  // img: string;
+  FirstName: string;
+  LastName: string;
+  Email: string;
+  Password: string;
+  RoleId: number;
   constructor(user) {
     {
-      this.id = user.id || this.getRandomID();
-      this.img = user.avatar || 'assets/images/user/user1.jpg';
-      this.name = user.name || '';
-      this.designation = user.designation || '';
-      this.email = user.email || '';
-      this.date = formatDate(new Date(), 'yyyy-MM-dd', 'en') || '';
-      this.address = user.address || '';
-      this.mobile = user.mobile || '';
+      this.Id = 0;
+      //this.Id = user.Id || this.getRandomID();
+      // this.img = user.avatar || 'assets/images/user/user1.jpg';
+      this.FirstName = user.FirstName || '';
+      this.LastName = user.LastName || '';
+      this.Email = user.Email || '';
+      this.Password = user.Password || '';
+      this.RoleId = user.RoleId || '';
     }
   }
   public getRandomID(): string {

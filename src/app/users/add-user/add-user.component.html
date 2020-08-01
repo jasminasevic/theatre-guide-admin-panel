@@ -12,7 +12,7 @@
                 <i class="fas fa-home"></i> Home</a>
             </li>
             <li class="breadcrumb-item bcrumb-2">
-              <a href="#" onClick="return false;">users</a>
+              <a href="#" onClick="return false;">Users</a>
             </li>
             <li class="breadcrumb-item active">Add</li>
           </ul>
@@ -45,13 +45,14 @@
             </ul>
           </div>
           <div class="body">
-            <form class="m-4" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <form class="m-4" [formGroup]="userForm" (ngSubmit)="onSubmit();">
+              <!-- <input type="hidden" formControlName="Id" [value]="service.userForm.Id"> -->
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>First name</mat-label>
-                    <input matInput formControlName="first" required>
-                    <mat-error *ngIf="userForm.get('first').hasError('required')">
+                    <input matInput formControlName="FirstName" required>
+                    <mat-error *ngIf="userForm.get('FirstName').hasError('required')">
                       First name is required
                     </mat-error>
                   </mat-form-field>
@@ -59,31 +60,34 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Last name</mat-label>
-                    <input matInput formControlName="last">
+                    <input matInput formControlName="LastName">
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Gender</mat-label>
-                    <mat-select formControlName="gender" required>
-                      <mat-option [value]="'Male'">
-                        Male
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="RoleId" required>
+                      <mat-option [value]="1">
+                        Admin
                       </mat-option>
-                      <mat-option [value]="'Female'">
-                        Female
+                      <mat-option [value]="3">
+                        User
                       </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="userForm.get('gender').hasError('required')">
-                      Gender is required
+                    <mat-error *ngIf="userForm.get('RoleId').hasError('required')">
+                      Role is required
                     </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Mobile</mat-label>
-                    <input matInput formControlName="mobile" type="number" required>
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="Email" required>
+                    <mat-error *ngIf="userForm.get('Email').hasError('Email') && userForm.get('Email').touched">
+                      Please enter a valid email address
+                    </mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -91,117 +95,23 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Password</mat-label>
-                    <input matInput formControlName="password" type="password" required>
-                    <mat-error *ngIf="userForm.get('password').hasError('required')">
-                      password is required
+                    <input matInput formControlName="Password" type="password" required>
+                    <mat-error *ngIf="userForm.get('Password').hasError('required')">
+                      Password is required
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Re-Enter Password</mat-label>
-                    <input matInput formControlName="conformPassword" type="password" required>
-                    <mat-error *ngIf="userForm.get('conformPassword').hasError('required')">
+                    <input matInput formControlName="ConfirmPassword" type="password" required>
+                    <mat-error *ngIf="userForm.get('ConfirmPassword').hasError('required')">
                       Re-Enter password is required
                     </mat-error>
                   </mat-form-field>
-                </div>
+                </div> -->
               </div>
-              <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Designation</mat-label>
-                    <mat-select formControlName="designation" required>
-                      <mat-option [value]="'Cook'">
-                        Cook
-                      </mat-option>
-                      <mat-option [value]="'Kitchen Manager'">
-                        Kitchen Manager
-                      </mat-option>
-                      <mat-option [value]="'Casino Host'">
-                        Casino Host
-                      </mat-option>
-                      <mat-option [value]="'Driver'">
-                        Driver
-                      </mat-option>
-                      <mat-option [value]="'Purchase Officer'">
-                        Purchase Officer
-                      </mat-option>
-                      <mat-option [value]="'Receptionist'">
-                        Receptionist
-                      </mat-option>
-                      <mat-option [value]="'Events Manager'">
-                        Events Manager
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="userForm.get('designation').hasError('required')">
-                      Designation is required
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Department</mat-label>
-                    <mat-select formControlName="department" required>
-                      <mat-option [value]="'Housekeeping'">
-                        Housekeeping
-                      </mat-option>
-                      <mat-option [value]="'Food and Beverage'">
-                        Food and Beverage
-                      </mat-option>
-                      <mat-option [value]="'Kitchen'">
-                        Kitchen
-                      </mat-option>
-                      <mat-option [value]="'Accounts'">
-                        Accounts
-                      </mat-option>
-                      <mat-option [value]="'Security'">
-                        Security
-                      </mat-option>
-                      <mat-option [value]="'Transport'">
-                        Transport
-                      </mat-option>
-                      <mat-option [value]="'Purchase'">
-                        Purchase
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="userForm.get('department').hasError('required')">
-                      Select Any Department
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Email</mat-label>
-                    <input matInput formControlName="email" required>
-                    <mat-error *ngIf="userForm.get('email').hasError('email') && userForm.get('email').touched">
-                      Please enter a valid email address
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Date Of Birth</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="dob" required>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngIf="userForm.get('dob').hasError('required')">
-                      Please select date
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Address</mat-label>
-                    <textarea matInput formControlName="address"></textarea>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Upload Image</mat-label>
@@ -210,15 +120,7 @@
                     <mat-icon matSuffix>face</mat-icon>
                   </mat-form-field>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Education</mat-label>
-                    <textarea matInput formControlName="education"></textarea>
-                  </mat-form-field>
-                </div>
-              </div>
+              </div> -->
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <button class="mr-3" [disabled]="!userForm.valid " mat-raised-button color="primary">Submit</button>

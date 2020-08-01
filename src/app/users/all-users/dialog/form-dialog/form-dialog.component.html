@@ -1,13 +1,13 @@
 <div class="addContainer">
   <div class="modalHeader">
     <div class="editRowModal">
-      <div class="modalHeader clearfix">
+      <!-- <div class="modalHeader clearfix">
         <img [src]='user.img' alt="avatar">
         <div class="modal-about">
           <div class="font-weight-bold p-t-5 p-l-10 font-17">
             {{dialogTitle}}</div>
         </div>
-      </div>
+      </div> -->
     </div>
     <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
       <mat-icon>close</mat-icon>
@@ -18,57 +18,26 @@
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
           <mat-form-field class="example-full-width mb-3" appearance="outline">
-            <mat-label>Name</mat-label>
-            <input matInput formControlName="name" required>
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="firstName" required>
             <mat-icon matSuffix>face</mat-icon>
-            <mat-error *ngIf="userForm.get('name').hasError('required')">
-              Name is required
+            <mat-error *ngIf="userForm.get('firstName').hasError('required')">
+              First Name is required
             </mat-error>
           </mat-form-field>
         </div>
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
           <mat-form-field class="example-full-width mb-3" appearance="outline">
-            <mat-label>Designation</mat-label>
-            <mat-select formControlName="designation" required>
-              <mat-option [value]="'Cook'">
-                Cook
-              </mat-option>
-              <mat-option [value]="'Kitchen Manager'">
-                Kitchen Manager
-              </mat-option>
-              <mat-option [value]="'Casino Host'">
-                Casino Host
-              </mat-option>
-              <mat-option [value]="'Driver'">
-                Driver
-              </mat-option>
-              <mat-option [value]="'Purchase Officer'">
-                Purchase Officer
-              </mat-option>
-              <mat-option [value]="'Receptionist'">
-                Receptionist
-              </mat-option>
-              <mat-option [value]="'Events Manager'">
-                Events Manager
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="userForm.get('designation').hasError('required')">
-              Designation is required
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName="lastName" required>
+            <mat-icon matSuffix>face</mat-icon>
+            <mat-error *ngIf="userForm.get('lastName').hasError('required')">
+              Last Name is required
             </mat-error>
           </mat-form-field>
         </div>
       </div>
       <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-          <mat-form-field class="example-full-width mb-3" appearance="outline">
-            <mat-label>Mobile</mat-label>
-            <input matInput formControlName="mobile" type="number">
-            <mat-icon matSuffix>phone</mat-icon>
-            <mat-error *ngIf="userForm.get('mobile').hasError('required')">
-              Mobile is required
-            </mat-error>
-          </mat-form-field>
-        </div>
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
           <mat-form-field class="example-full-width mb-3" appearance="outline">
             <mat-label>Email</mat-label>
@@ -79,25 +48,14 @@
             </mat-error>
           </mat-form-field>
         </div>
-      </div>
-      <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
           <mat-form-field class="example-full-width mb-3" appearance="outline">
-            <mat-label>Joining date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="date">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="userForm.get('date').hasError('required')">
-              Please select date
+            <mat-label>Mobile</mat-label>
+            <input matInput formControlName="mobile" type="number">
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error *ngIf="userForm.get('mobile').hasError('required')">
+              Mobile is required
             </mat-error>
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-          <mat-form-field class="example-full-width mb-3" appearance="outline">
-            <mat-label>Address</mat-label>
-            <textarea matInput formControlName="address"></textarea>
           </mat-form-field>
         </div>
       </div>

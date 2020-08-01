@@ -1,34 +1,42 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
+import { UserService } from '../all-users/users.service';
+import { MatDatetimePickerInputEvent } from '@angular-material-components/datetime-picker';
+
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.sass']
 })
+
+// @CrossOrigin(origins = "http://localhost:4200")
 export class AddUserComponent {
+  // @Output() userAdded = new EventEmitter();
   userForm: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userService: UserService) {
     this.userForm = this.fb.group({
-      first: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
-      last: [''],
-      gender: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      conformPassword: ['', [Validators.required]],
-      designation: [''],
-      department: [''],
-      address: [''],
-      email: [
+      Id: 0,
+      FirstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
+      LastName: [''],
+      Email: [
         '',
         [Validators.required, Validators.email, Validators.minLength(5)]
       ],
-      dob: ['', [Validators.required]],
-      education: [''],
-      uploadImg: ['']
+      Password: ['', [Validators.required]],
+      //ConfirmPassword: ['', [Validators.required]],
+      RoleId: ['', Validators.required],
+      // uploadImg: ['']
     });
   }
   onSubmit() {
-    console.log('Form Value', this.userForm.value);
+    // const userToAdd = this.userForm.value;
+    // console.log('Values of userToAdd ', userToAdd);
+    this.userService.onSubmit(this.userForm.value);
+    console.log("kk");
+
   }
+
+
+
 }
 
