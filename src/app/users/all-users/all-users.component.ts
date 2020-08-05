@@ -46,8 +46,11 @@ export class AllUsersComponent implements OnInit {
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: '0px', y: '0px' };
 
+
+  userData: Array<User>;
+
   ngOnInit() {
-    this.loadData();
+     this.loadData();
   }
   refresh() {
     this.loadData();
@@ -164,22 +167,43 @@ export class AllUsersComponent implements OnInit {
     );
   }
   public loadData() {
-    this.exampleDatabase = new UserService(this.httpClient);
-    this.dataSource = new ExampleDataSource(
-      this.exampleDatabase,
-      this.paginator,
-      this.sort
-    );
-    fromEvent(this.filter.nativeElement, 'keyup')
-      // .debounceTime(150)
-      // .distinctUntilChanged()
-      .subscribe(() => {
-        if (!this.dataSource) {
-          return;
-        }
-        this.dataSource.filter = this.filter.nativeElement.value;
-      });
+    this.userService.getAllUsers().subscribe(
+      data =>
+        {
+          this.userData = data;
+          // this.dataSource = new ExampleDataSource(
+          //   this.exampleDatabase = data,
+          //   this.paginator,
+          //   this.sort
+          // );
+
+
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+
+
+
+    // this.exampleDatabase = new UserService(this.httpClient);
+    // this.dataSource = new ExampleDataSource(
+    //   this.exampleDatabase,
+    //   this.paginator,
+    //   this.sort
+    // );
+    // fromEvent(this.filter.nativeElement, 'keyup')
+    //   // .debounceTime(150)
+    //   // .distinctUntilChanged()
+    //   .subscribe(() => {
+    //     if (!this.dataSource) {
+    //       return;
+    //     }
+    //     this.dataSource.filter = this.filter.nativeElement.value;
+    //   });
   }
+
+
   showNotification(colorName, text, placementFrom, placementAlign) {
     this.snackBar.open(text, '', {
       duration: 2000,
@@ -226,7 +250,7 @@ export class ExampleDataSource extends DataSource<User> {
       this._filterChange,
       this._paginator.page
     ];
-    this._exampleDatabase.getAllUsers();
+    // this._exampleDatabase.getAllUsers();
     return merge(...displayDataChanges).pipe(
       map(() => {
         // Filter data

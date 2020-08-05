@@ -28,15 +28,17 @@ export class AddUserComponent {
       // uploadImg: ['']
     });
   }
+
+  resetForm(userForm?: NgForm){
+      this.userForm.reset();
+    }
+
   onSubmit() {
     // const userToAdd = this.userForm.value;
     // console.log('Values of userToAdd ', userToAdd);
     this.userService.onSubmit(this.userForm.value);
     console.log("kk");
-
   }
-
-
 
 }
 

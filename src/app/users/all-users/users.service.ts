@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject, pipe, throwError, Observable } from 'rxjs';
 import { User } from './users.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    // 'Content-Type':  'application/json',
-    // 'Accept': 'application/json'
     'Content-Type':'application/json; charset=utf-8;',
     'Accept':'*/*'
   })
@@ -16,7 +14,6 @@ const httpOptions = {
 
 @Injectable()
 export class UserService {
-  // private readonly API_URL = 'assets/data/users.json';
   private readonly API_URL = "http://localhost:50484/api";
 
   dataChange: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
@@ -26,6 +23,7 @@ export class UserService {
   // Temporarily stores data from dialogs
   dialogData: any;
   constructor(private httpClient: HttpClient) { }
+
   get data(): User[] {
     return this.dataChange.value;
   }
@@ -33,15 +31,30 @@ export class UserService {
     return this.dialogData;
   }
   /** CRUD METHODS */
-  getAllUsers(): void {
-    this.httpClient.get<User[]>(this.API_URL).subscribe(
-      data => {
-        this.dataChange.next(data);
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.name + ' ' + error.message);
-      }
+  getAllUsers() : Observable<User[]> {
+    return this.httpClient.get(this.API_URL + "/users").pipe(
+      map(data => {
+        const usersArray: Array<User> = [];
+        for (const id in data){
+          if(data.hasOwnProperty(id)){
+            usersArray.push(data[id]);
+          }
+        }
+        return usersArray;
+      })
     );
+
+    // this.httpClient.get<User[]>("http://localhost:50484/api/users").subscribe(
+    //   data =>
+    //   //{
+    //     console.log(data)
+    //    // this.dataChange.next(data);
+    //   //}
+    //   ,
+    //   (error: HttpErrorResponse) => {
+    //     console.log(error.name + ' ' + error.message);
+    //   }
+    // );
   }
 
   private handleError(error: HttpErrorResponse): any {
@@ -74,10 +87,11 @@ export class UserService {
     //     return this.handleError(new HttpErrorResponse({status:400}))
     //   })
     // );
-    this.httpClient.post("http://localhost:50484/api/users", user, httpOptions)
+    this.httpClient.post(this.API_URL + "/users", user, httpOptions)
       .subscribe(data  => {
-        console.log("POST Request is successful ", data);
+        console.log("ok");
       },
+
       error  => {
         console.log("Error", error);
       });
