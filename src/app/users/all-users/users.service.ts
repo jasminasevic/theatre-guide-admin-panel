@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject, pipe, throwError, Observable } from 'rxjs';
 import { User } from './users.model';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 
 const httpOptions = {
@@ -10,6 +10,13 @@ const httpOptions = {
     'Accept':'*/*'
   })
 };
+
+export interface IUserData {
+  data: User[],
+  pageNumber: number,
+  totalCount: number,
+  pagesCount: number
+}
 
 
 @Injectable()
@@ -25,36 +32,25 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   get data(): User[] {
+    console.log("data change is " + this.dataChange.value);
     return this.dataChange.value;
   }
   getDialogData() {
     return this.dialogData;
   }
   /** CRUD METHODS */
-  getAllUsers() : Observable<User[]> {
-    return this.httpClient.get(this.API_URL + "/users").pipe(
-      map(data => {
-        const usersArray: Array<User> = [];
-        for (const id in data){
-          if(data.hasOwnProperty(id)){
-            usersArray.push(data[id]);
-          }
-        }
-        return usersArray;
-      })
-    );
 
-    // this.httpClient.get<User[]>("http://localhost:50484/api/users").subscribe(
-    //   data =>
-    //   //{
-    //     console.log(data)
-    //    // this.dataChange.next(data);
-    //   //}
-    //   ,
-    //   (error: HttpErrorResponse) => {
-    //     console.log(error.name + ' ' + error.message);
-    //   }
-    // );
+  getAllUsers(perPage: number, pageNumber: number) : Observable<IUserData> {
+    let params = new HttpParams();
+
+    params = params.append('perPage', String(perPage));
+    params = params.append('pageNumber', String(pageNumber));
+
+    return this.httpClient.get<IUserData>(this.API_URL + '/users', { params })
+    .pipe(
+      map((userData: IUserData) => userData),
+      catchError(err => throwError(err)),
+    )
   }
 
   private handleError(error: HttpErrorResponse): any {
@@ -77,55 +73,13 @@ export class UserService {
 
   // DEMO ONLY, you can find working methods below
   onSubmit(user: User): any {
-
-    // const body = JSON.stringify(user);
-    // console.log("Prosledjujem mu body " + body + httpOptions);
-    // return this.httpClient.post<User>(this.API_URL + '/users', body, httpOptions)
-    // .pipe(
-    //   catchError(err => {
-    //       console.log("Err name je staaa " + err);
-    //     return this.handleError(new HttpErrorResponse({status:400}))
-    //   })
-    // );
     this.httpClient.post(this.API_URL + "/users", user, httpOptions)
       .subscribe(data  => {
         console.log("ok");
       },
-
       error  => {
         console.log("Error", error);
       });
-
-
-    // .subscribe(
-    //   data  => {
-    //     this.addUserData.next(data);
-    //   console.log("POST Request is successful ", data);
-    //   },
-    //   error  => {
-    //   console.log("Error", error);
-    //   }
-    // );
-
-
-    //  .pipe(
-    //   catchError(this.handleError(new HttpErrorResponse({status:400})
-    //   )))
-    //   .subscribe(() => {
-    //     console.log("ubicu se" + user);
-    //     return user;
-    //   });
-
-      // data => {
-      //   this.addUserData.next(data);
-      //   console.log('ajd pls');
-      // },
-      // (error: HttpErrorResponse) => {
-      //   console.log(error.name + ' ' + error.message);
-      //   console.log("nista ne valja");
-
-
-  // this.httpClient.post(this.API_URL + '/Users', user);
   }
   updateUser(user: User): void {
     this.dialogData = user;

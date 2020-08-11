@@ -173,6 +173,7 @@ export class AllstaffComponent implements OnInit {
       this.paginator,
       this.sort
     );
+    console.log("kjscnskjnsd" + this.exampleDatabase);
     fromEvent(this.filter.nativeElement, 'keyup')
       // .debounceTime(150)
       // .distinctUntilChanged()

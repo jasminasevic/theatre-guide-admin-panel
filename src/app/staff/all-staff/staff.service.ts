@@ -11,6 +11,7 @@ export class StaffService {
   constructor(private httpClient: HttpClient) { }
   get data(): Staff[] {
     return this.dataChange.value;
+
   }
   getDialogData() {
     return this.dialogData;

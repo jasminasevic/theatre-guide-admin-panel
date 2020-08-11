@@ -7,9 +7,10 @@ export class User {
   Email: string;
   Password: string;
   RoleId: number;
+  RoleName: string;
   constructor(user) {
     {
-      this.Id = 0;
+      this.Id = user.Id;
       //this.Id = user.Id || this.getRandomID();
       // this.img = user.avatar || 'assets/images/user/user1.jpg';
       this.FirstName = user.FirstName || '';
@@ -17,6 +18,7 @@ export class User {
       this.Email = user.Email || '';
       this.Password = user.Password || '';
       this.RoleId = user.RoleId || '';
+      this.RoleName = user.RoleName || '';
     }
   }
   public getRandomID(): string {

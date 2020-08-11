@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { UserService } from './users.service';
+import { UserService, IUserData } from './users.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -10,12 +10,12 @@ import { FormDialogComponent } from './dialog/form-dialog/form-dialog.component'
 import { DeleteDialogComponent } from './dialog/delete/delete.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
-  selector: 'app-all-users',
+  selector: 'app-all-staff',
   templateUrl: './all-users.component.html',
   styleUrls: ['./all-users.component.sass']
 })
@@ -23,11 +23,15 @@ import { SelectionModel } from '@angular/cdk/collections';
 export class AllUsersComponent implements OnInit {
   displayedColumns = [
     'select',
-    // 'img',
     'firstName',
+    'lastName',
     'email',
     'actions'
   ];
+
+  usersDatabase: IUserData | null;
+  userDataSource: User[] | null;
+
   exampleDatabase: UserService | null;
   dataSource: ExampleDataSource | null;
   selection = new SelectionModel<User>(true, []);
@@ -46,11 +50,8 @@ export class AllUsersComponent implements OnInit {
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: '0px', y: '0px' };
 
-
-  userData: Array<User>;
-
   ngOnInit() {
-     this.loadData();
+    this.loadData();
   }
   refresh() {
     this.loadData();
@@ -166,44 +167,44 @@ export class AllUsersComponent implements OnInit {
       'center'
     );
   }
+
+  pageSize = 5;
+  pageIndex = 1;
+  userData: User[];
+  totalRows: number;
+
   public loadData() {
-    this.userService.getAllUsers().subscribe(
+    this.userService.getAllUsers(this.pageSize, this.pageIndex).subscribe(
       data =>
-        {
-          this.userData = data;
-          // this.dataSource = new ExampleDataSource(
-          //   this.exampleDatabase = data,
-          //   this.paginator,
-          //   this.sort
-          // );
+          {
+            this.userDataSource = data.data;
+            this.totalRows = data.totalCount;
+            this.paginator,
+            this.sort,
+            console.log("Vrednosti u userData su: " + data.totalCount);
+          },
+          error => {
+            console.log(error);
+          });
 
-
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        });
-
-
-
-    // this.exampleDatabase = new UserService(this.httpClient);
-    // this.dataSource = new ExampleDataSource(
-    //   this.exampleDatabase,
-    //   this.paginator,
-    //   this.sort
-    // );
-    // fromEvent(this.filter.nativeElement, 'keyup')
-    //   // .debounceTime(150)
-    //   // .distinctUntilChanged()
-    //   .subscribe(() => {
-    //     if (!this.dataSource) {
-    //       return;
-    //     }
-    //     this.dataSource.filter = this.filter.nativeElement.value;
-    //   });
+    this.exampleDatabase = new UserService(this.httpClient);
+    this.dataSource = new ExampleDataSource(
+      this.exampleDatabase,
+      this.paginator,
+      this.sort
+    );
+    fromEvent(this.filter.nativeElement, 'keyup')
+    .pipe(
+      debounceTime(150),
+      distinctUntilChanged()
+    )
+      .subscribe(() => {
+        if (!this.dataSource) {
+          return;
+        }
+        this.dataSource.filter = this.filter.nativeElement.value;
+      });
   }
-
-
   showNotification(colorName, text, placementFrom, placementAlign) {
     this.snackBar.open(text, '', {
       duration: 2000,
@@ -222,6 +223,8 @@ export class AllUsersComponent implements OnInit {
     this.contextMenu.openMenu();
   }
 }
+
+
 export class ExampleDataSource extends DataSource<User> {
   _filterChange = new BehaviorSubject('');
   get filter(): string {
@@ -241,6 +244,8 @@ export class ExampleDataSource extends DataSource<User> {
     // Reset to the first page when the user changes the filter.
     this._filterChange.subscribe(() => (this._paginator.pageIndex = 0));
   }
+
+
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<User[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
@@ -250,7 +255,7 @@ export class ExampleDataSource extends DataSource<User> {
       this._filterChange,
       this._paginator.page
     ];
-    // this._exampleDatabase.getAllUsers();
+    this._exampleDatabase.getAllUsers(this._paginator.pageSize, this._paginator.pageIndex);
     return merge(...displayDataChanges).pipe(
       map(() => {
         // Filter data
@@ -260,8 +265,7 @@ export class ExampleDataSource extends DataSource<User> {
             const searchStr = (
               user.FirstName +
               user.LastName +
-              user.Email +
-              user.Password
+              user.Email
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
