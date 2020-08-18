@@ -14,6 +14,7 @@ import { map, debounceTime, distinctUntilChanged, finalize, tap } from 'rxjs/ope
 import { MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
+import { SortDirection } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-all-staff',
@@ -27,12 +28,14 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   user: User;
   dataSource: UserDataSource;
   displayedColumns = [
+    'id',
     'firstName',
     'lastName',
     'email'
   ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   onRowClicked(row) {
     console.log('Row clicked: ', row);
@@ -69,8 +72,10 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
 
 
   ngAfterViewInit() {
-    // this.paginator.pageIndex += 1;
-    this.paginator.page
+    // reset the paginator after sorting
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+     merge(this.paginator.page, this.sort.sortChange)
         .pipe(
             tap(() => this.loadUsersPage())
         )
@@ -82,7 +87,10 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   loadUsersPage() {
     this.dataSource.loadUsers(
       this.paginator.pageSize,
-      this.paginator.pageIndex);
+      this.paginator.pageIndex,
+      this.sort.active,
+      this.sort.direction
+       );
   }
 
 
@@ -279,11 +287,11 @@ export class UserDataSource implements DataSource<User> {
   }
 
   totalCount: number;
-  loadUsers(pageSize = 5, pageIndex = 0) {
+  loadUsers(pageSize = 5, pageIndex = 0, sortOrder = '', sortDirection = '') {
 
       this.loadingSubject.next(true);
 
-      this.userService.getAllUsers(pageSize, pageIndex += 1)
+      this.userService.getAllUsers(pageSize, pageIndex += 1, sortOrder + '_' + sortDirection)
       .pipe(
          // Error(() => of([])),
           finalize(() => this.loadingSubject.next(false))
@@ -293,7 +301,8 @@ export class UserDataSource implements DataSource<User> {
           this.usersSubject.next(users.data),
           this.totalCount = users.totalCount
         });
-      console.log(this.totalCount);
+      console.log("Sort order je " + sortOrder + " a sort Direction " + sortDirection);
+
   }
 }
 

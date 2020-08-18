@@ -40,11 +40,14 @@ export class UserService {
   }
   /** CRUD METHODS */
 
-  getAllUsers(perPage: number, pageNumber: number) : Observable<IUserData> {
+  getAllUsers(perPage: number, pageNumber: number, sortOrder: string) : Observable<IUserData> {
     let params = new HttpParams();
 
     params = params.append('perPage', String(perPage));
     params = params.append('pageNumber', String(pageNumber));
+    params = params.append('sortOrder', String(sortOrder));
+
+    console.log(params);
 
     return this.httpClient.get<IUserData>(this.API_URL + '/users', { params })
     .pipe(
