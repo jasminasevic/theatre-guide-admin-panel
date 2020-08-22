@@ -15,6 +15,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ActivatedRoute } from '@angular/router';
 import { SortDirection } from '@swimlane/ngx-datatable';
+import { MatInputModule } from '@angular/material/input/input-module';
 
 @Component({
   selector: 'app-all-staff',
@@ -28,7 +29,6 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   user: User;
   dataSource: UserDataSource;
   displayedColumns = [
-    'id',
     'firstName',
     'lastName',
     'email'
@@ -36,6 +36,7 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('input') input: ElementRef;
 
   onRowClicked(row) {
     console.log('Row clicked: ', row);
@@ -72,9 +73,24 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
 
 
   ngAfterViewInit() {
+
+    // server-side search
+    fromEvent(this.input.nativeElement,'keyup')
+    .pipe(
+        debounceTime(150),
+        distinctUntilChanged(),
+        tap(() => {
+          console.log(this.input.nativeElement.value);
+            this.paginator.pageIndex = 0;
+            this.loadUsersPage();
+        })
+    )
+    .subscribe();
+
     // reset the paginator after sorting
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
+    // on sort or paginate events, load a new page
      merge(this.paginator.page, this.sort.sortChange)
         .pipe(
             tap(() => this.loadUsersPage())
@@ -89,7 +105,8 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
       this.paginator.pageSize,
       this.paginator.pageIndex,
       this.sort.active,
-      this.sort.direction
+      this.sort.direction,
+      this.input.nativeElement.value
        );
   }
 
@@ -97,9 +114,10 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   // ngOnInit() {
   //   this.loadData();
   // }
-  // refresh() {
-  //   this.loadData();
-  // }
+  refresh() {
+    this.dataSource = new UserDataSource(this.usersService);
+    this.dataSource.loadUsers();
+  }
   // addNew() {
   //   const dialogRef = this.dialog.open(FormDialogComponent, {
   //     data: {
@@ -287,11 +305,11 @@ export class UserDataSource implements DataSource<User> {
   }
 
   totalCount: number;
-  loadUsers(pageSize = 5, pageIndex = 0, sortOrder = '', sortDirection = '') {
+  loadUsers(pageSize = 5, pageIndex = 0, sortOrder = '', sortDirection = '', searchQuery = '') {
 
       this.loadingSubject.next(true);
 
-      this.userService.getAllUsers(pageSize, pageIndex += 1, sortOrder + '_' + sortDirection)
+      this.userService.getAllUsers(pageSize, pageIndex += 1, sortOrder + '_' + sortDirection, searchQuery)
       .pipe(
          // Error(() => of([])),
           finalize(() => this.loadingSubject.next(false))
@@ -301,7 +319,8 @@ export class UserDataSource implements DataSource<User> {
           this.usersSubject.next(users.data),
           this.totalCount = users.totalCount
         });
-      console.log("Sort order je " + sortOrder + " a sort Direction " + sortDirection);
+      console.log("Sort order je " + sortOrder + " a sort Direction " + sortDirection
+        + " a searchQuery je " + searchQuery);
 
   }
 }
