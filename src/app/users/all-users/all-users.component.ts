@@ -31,7 +31,8 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   displayedColumns = [
     'firstName',
     'lastName',
-    'email'
+    'email',
+    'roleName'
   ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -80,7 +81,6 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
         debounceTime(150),
         distinctUntilChanged(),
         tap(() => {
-          console.log(this.input.nativeElement.value);
             this.paginator.pageIndex = 0;
             this.loadUsersPage();
         })
@@ -116,6 +116,9 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   // }
   refresh() {
     this.dataSource = new UserDataSource(this.usersService);
+    this.input.nativeElement.value = '';
+    this.paginator.pageSize = 10;
+    this.paginator.pageIndex = 0;
     this.dataSource.loadUsers();
   }
   // addNew() {
@@ -305,7 +308,7 @@ export class UserDataSource implements DataSource<User> {
   }
 
   totalCount: number;
-  loadUsers(pageSize = 5, pageIndex = 0, sortOrder = '', sortDirection = '', searchQuery = '') {
+  loadUsers(pageSize = 10, pageIndex = 0, sortOrder = '', sortDirection = '', searchQuery = '') {
 
       this.loadingSubject.next(true);
 
@@ -318,10 +321,8 @@ export class UserDataSource implements DataSource<User> {
         {
           this.usersSubject.next(users.data),
           this.totalCount = users.totalCount
+          console.log(sortOrder);
         });
-      console.log("Sort order je " + sortOrder + " a sort Direction " + sortDirection
-        + " a searchQuery je " + searchQuery);
-
   }
 }
 
