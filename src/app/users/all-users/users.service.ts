@@ -40,15 +40,14 @@ export class UserService {
   }
   /** CRUD METHODS */
 
-  getAllUsers(perPage: number, pageNumber: number, sortOrder: string, SearchQuery: string) : Observable<IUserData> {
+  getAllUsers(perPage: number, pageNumber: number, sortOrder: string, searchQuery: string) : Observable<IUserData> {
     let params = new HttpParams();
 
     params = params.append('perPage', String(perPage));
     params = params.append('pageNumber', String(pageNumber));
     params = params.append('sortOrder', String(sortOrder));
-    params = params.append('searchQuery', String(SearchQuery));
+    params = params.append('searchQuery', String(searchQuery));
 
-    console.log(params);
 
     return this.httpClient.get<IUserData>(this.API_URL + '/users', { params })
     .pipe(
@@ -73,7 +72,15 @@ export class UserService {
       'Something bad happened; please try again later.');
   }
 
+  getOneUser(user) : Observable<User> {
 
+    return this.httpClient.get<User>(this.API_URL + '/users/' + user)
+    .pipe(
+      map((userData: User) => userData),
+      catchError(err => throwError(err)),
+    )
+
+  }
 
   // DEMO ONLY, you can find working methods below
   onSubmit(user: User): any {
@@ -88,7 +95,13 @@ export class UserService {
   updateUser(user: User): void {
     this.dialogData = user;
   }
-  deleteUser(id: number): void {
-    console.log(id);
+  deleteUser(id: number) {
+    return this.httpClient.delete<any>(this.API_URL + "/users/" + id )
+    .subscribe(data  => {
+      console.log("ok");
+    },
+    error  => {
+      console.log("Error", error);
+    });
   }
 }

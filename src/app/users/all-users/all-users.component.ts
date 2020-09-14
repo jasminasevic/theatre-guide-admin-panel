@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { UserService, IUserData } from './users.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
@@ -32,7 +32,8 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
     'firstName',
     'lastName',
     'email',
-    'roleName'
+    'roleName',
+    'actions'
   ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -55,9 +56,10 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
     // public httpClient: HttpClient,
     // public dialog: MatDialog,
     // public userService: UserService,
-    // private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
     private usersService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) { }
   // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   // @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -110,10 +112,6 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
        );
   }
 
-
-  // ngOnInit() {
-  //   this.loadData();
-  // }
   refresh() {
     this.dataSource = new UserDataSource(this.usersService);
     this.input.nativeElement.value = '';
@@ -174,6 +172,47 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   //     }
   //   });
   // }
+
+  deleteItem(row) {
+    console.log(row);
+    this.usersService.getOneUser(row)
+    .pipe(
+   )
+   .subscribe(user =>
+     {
+      const dialogRef = this.dialog.open(DeleteDialogComponent, {
+           data: user
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          this.refresh();
+          this.showNotification(
+            'snackbar-danger',
+            'Record Deleted Successfully!',
+            'bottom',
+            'center'
+          );
+        });
+     });
+}
+
+  confirmDelete(row){
+    this.usersService.deleteUser(row);
+  };
+
+  editCall(row){
+    console.log("Id ovog usera je " + row);
+  }
+
+  showNotification(colorName, text, placementFrom, placementAlign) {
+    this.snackBar.open(text, '', {
+      duration: 2000,
+      verticalPosition: placementFrom,
+      horizontalPosition: placementAlign,
+      panelClass: colorName
+    });
+  }
+}
+
   // deleteItem(row) {
   //   this.id = row.id;
   //   const dialogRef = this.dialog.open(DeleteDialogComponent, {
@@ -198,7 +237,7 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   // }
   // private refreshTable() {
   //   this.paginator._changePageSize(this.paginator.pageSize);
-  }
+
   /** Whether the number of selected elements matches the total number of rows. */
   // isAllSelected() {
   //   const numSelected = this.selection.selected.length;
@@ -233,10 +272,6 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   //   );
   // }
 
-  // pageSize = 5;
-  // pageIndex = 1;
-  // userData: User[];
-  // totalRows: number;
 
   // public loadData() {
   //   this.userService.getAllUsers(this.pageSize, this.pageIndex).subscribe(
@@ -270,14 +305,8 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   //       this.dataSource.filter = this.filter.nativeElement.value;
   //     });
   // }
-  // showNotification(colorName, text, placementFrom, placementAlign) {
-  //   this.snackBar.open(text, '', {
-  //     duration: 2000,
-  //     verticalPosition: placementFrom,
-  //     horizontalPosition: placementAlign,
-  //     panelClass: colorName
-  //   });
-  // }
+
+
   // // context menu
   // onContextMenu(event: MouseEvent, item: User) {
   //   event.preventDefault();
@@ -326,93 +355,3 @@ export class UserDataSource implements DataSource<User> {
   }
 }
 
-
-
-
-// export class ExampleDataSource extends DataSource<User> {
-//   _filterChange = new BehaviorSubject('');
-//   get filter(): string {
-//     return this._filterChange.value;
-//   }
-//   set filter(filter: string) {
-//     this._filterChange.next(filter);
-//   }
-//   filteredData: User[] = [];
-//   renderedData: User[] = [];
-//   constructor(
-//     public _exampleDatabase: UserService,
-//     public _paginator: MatPaginator,
-//     public _sort: MatSort
-//   ) {
-//     super();
-//     // Reset to the first page when the user changes the filter.
-//     this._filterChange.subscribe(() => (this._paginator.pageIndex = 0));
-//   }
-
-
-//   /** Connect function called by the table to retrieve one stream containing the data to render. */
-//   connect(): Observable<User[]> {
-//     // Listen for any changes in the base data, sorting, filtering, or pagination
-//     const displayDataChanges = [
-//       this._exampleDatabase.dataChange,
-//       this._sort.sortChange,
-//       this._filterChange,
-//       this._paginator.page
-//     ];
-//     this._exampleDatabase.getAllUsers(this._paginator.pageSize, this._paginator.pageIndex);
-//     return merge(...displayDataChanges).pipe(
-//       map(() => {
-//         // Filter data
-//         this.filteredData = this._exampleDatabase.data
-//           .slice()
-//           .filter((user: User) => {
-//             const searchStr = (
-//               user.FirstName +
-//               user.LastName +
-//               user.Email
-//             ).toLowerCase();
-//             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
-//           });
-//         // Sort filtered data
-//         const sortedData = this.sortData(this.filteredData.slice());
-//         // Grab the page's slice of the filtered sorted data.
-//         const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-//         this.renderedData = sortedData.splice(
-//           startIndex,
-//           this._paginator.pageSize
-//         );
-//         return this.renderedData;
-//       })
-//     );
-//   }
-//   disconnect() { }
-//   /** Returns a sorted copy of the database data. */
-//   sortData(data: User[]): User[] {
-//     if (!this._sort.active || this._sort.direction === '') {
-//       return data;
-//     }
-//     return data.sort((a, b) => {
-//       let propertyA: number | string = '';
-//       let propertyB: number | string = '';
-//       switch (this._sort.active) {
-//         case 'id':
-//           [propertyA, propertyB] = [a.Id, b.Id];
-//           break;
-//         case 'firstName':
-//           [propertyA, propertyB] = [a.FirstName, b.FirstName];
-//           break;
-//         case 'email':
-//           [propertyA, propertyB] = [a.Email, b.Email];
-//           break;
-//         case 'lastName':
-//           [propertyA, propertyB] = [a.LastName, b.LastName];
-//           break;
-//       }
-//       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-//       const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
-//       return (
-//         (valueA < valueB ? -1 : 1) * (this._sort.direction === 'asc' ? 1 : -1)
-//       );
-//     });
-//   }
-// }
