@@ -73,7 +73,6 @@ export class UserService {
   }
 
   getOneUser(user) : Observable<User> {
-
     return this.httpClient.get<User>(this.API_URL + '/users/' + user)
     .pipe(
       map((userData: User) => userData),
@@ -92,9 +91,18 @@ export class UserService {
         console.log("Error", error);
       });
   }
-  updateUser(user: User): void {
-    this.dialogData = user;
+
+  updateUser(id: number, user : User) {
+    // this.dialogData = user;
+    return this.httpClient.put<User>(this.API_URL + "/users/edit-user/" + id, user)
+    .subscribe(data  => {
+      console.log("ok");
+    },
+    error  => {
+      console.log("Error", error);
+    });
   }
+
   deleteUser(id: number) {
     return this.httpClient.delete<any>(this.API_URL + "/users/" + id )
     .subscribe(data  => {

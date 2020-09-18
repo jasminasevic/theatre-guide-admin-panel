@@ -13,7 +13,7 @@ import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, finalize, tap } from 'rxjs/operators';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SortDirection } from '@swimlane/ngx-datatable';
 import { MatInputModule } from '@angular/material/input/input-module';
 
@@ -28,6 +28,7 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
 
   user: User;
   dataSource: UserDataSource;
+  userDetail: User;
   displayedColumns = [
     'firstName',
     'lastName',
@@ -59,7 +60,8 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
     private snackBar: MatSnackBar,
     private usersService: UserService,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) { }
   // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   // @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -174,7 +176,6 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   // }
 
   deleteItem(row) {
-    console.log(row);
     this.usersService.getOneUser(row)
     .pipe(
    )
@@ -184,13 +185,14 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
            data: user
         });
         dialogRef.afterClosed().subscribe(result => {
+         if (result === 1) {
           this.refresh();
           this.showNotification(
             'snackbar-danger',
             'Record Deleted Successfully!',
             'bottom',
             'center'
-          );
+          )};
         });
      });
 }
@@ -200,7 +202,7 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   };
 
   editCall(row){
-    console.log("Id ovog usera je " + row);
+    console.log("Klik na " + row);
   }
 
   showNotification(colorName, text, placementFrom, placementAlign) {
@@ -350,7 +352,6 @@ export class UserDataSource implements DataSource<User> {
         {
           this.usersSubject.next(users.data),
           this.totalCount = users.totalCount
-          console.log(sortOrder);
         });
   }
 }
