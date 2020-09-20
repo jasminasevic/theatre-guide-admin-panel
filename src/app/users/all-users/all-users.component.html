@@ -12,7 +12,7 @@
                 <i class="fas fa-home"></i> Home</a>
             </li>
             <li class="breadcrumb-item bcrumb-2">
-              <a href="#" onClick="return false;">Users</a>
+              <a href="#" [routerLink]="['/users/all-users']" onClick="return false;">Users</a>
             </li>
             <li class="breadcrumb-item active">All</li>
           </ul>
@@ -79,9 +79,9 @@
                 </div>
               </div>
 
-              <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+              <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
                 <mat-spinner></mat-spinner>
-              </div>
+              </div> -->
 
               <mat-table class="users-table mat-elevation-z8" [dataSource]="dataSource" matSort>
 
@@ -117,11 +117,11 @@
                 <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
                 <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
-                  <button mat-icon-button color="accent" class="btn-tbl-edit" (click)="$event.stopPropagation()"
-                    (click)="editCall(row.id)" [routerLink]="['../edit-user', row.id]">
+                  <button mat-icon-button color="accent" class="btn-tbl-edit"
+                     [routerLink]="['../edit-user', row.id]">
                     <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
                   </button>
-                  <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                  <button mat-icon-button color="accent" class="btn-tbl-delete"
                     (click)="deleteItem(row.id)">
                     <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
                   </button>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject, pipe, throwError, Observable } from 'rxjs';
 import { User } from './users.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -94,13 +94,10 @@ export class UserService {
 
   updateUser(id: number, user : User) {
     // this.dialogData = user;
-    return this.httpClient.put<User>(this.API_URL + "/users/edit-user/" + id, user)
-    .subscribe(data  => {
-      console.log("ok");
-    },
-    error  => {
-      console.log("Error", error);
-    });
+    return this.httpClient.put<User>(this.API_URL + "/users/" + id, user)
+    .pipe(
+      map((user: User) => user),
+      catchError(err => throwError(err)));
   }
 
   deleteUser(id: number) {

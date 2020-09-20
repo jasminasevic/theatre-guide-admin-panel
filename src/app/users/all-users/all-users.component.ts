@@ -45,14 +45,6 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
     console.log('Row clicked: ', row);
 }
 
-  // usersDatabase: IUserData | null;
-  // userDataSource: User[] | null;
-
-  // exampleDatabase: UserService | null;
-
-  // selection = new SelectionModel<User>(true, []);
-  // id: number;
-  // user: User | null;
   constructor(
     // public httpClient: HttpClient,
     // public dialog: MatDialog,
@@ -71,7 +63,7 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   // contextMenuPosition = { x: '0px', y: '0px' };
 
   ngOnInit() {
-    this.user = this.route.snapshot.data["user"];
+   // this.user = this.route.snapshot.data["user"];
     this.dataSource = new UserDataSource(this.usersService);
     this.dataSource.loadUsers();
 }
@@ -323,9 +315,9 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
 export class UserDataSource implements DataSource<User> {
 
   private usersSubject = new BehaviorSubject<User[]>([]);
-  private loadingSubject = new BehaviorSubject<boolean>(false);
+  // private loadingSubject = new BehaviorSubject<boolean>(false);
 
-  public loading$ = this.loadingSubject.asObservable();
+  // public loading$ = this.loadingSubject.asObservable();
 
   constructor(private userService: UserService) {}
 
@@ -335,23 +327,23 @@ export class UserDataSource implements DataSource<User> {
 
   disconnect(collectionViewer: CollectionViewer): void {
       this.usersSubject.complete();
-      this.loadingSubject.complete();
+    //  this.loadingSubject.complete();
   }
 
   totalCount: number;
   loadUsers(pageSize = 10, pageIndex = 0, sortOrder = '', sortDirection = '', searchQuery = '') {
 
-      this.loadingSubject.next(true);
-
+    //  this.loadingSubject.next(true);
       this.userService.getAllUsers(pageSize, pageIndex += 1, sortOrder + '_' + sortDirection, searchQuery)
       .pipe(
          // Error(() => of([])),
-          finalize(() => this.loadingSubject.next(false))
+          // finalize(() => this.loadingSubject.next(false))
       )
       .subscribe(users =>
         {
           this.usersSubject.next(users.data),
           this.totalCount = users.totalCount
+
         });
   }
 }

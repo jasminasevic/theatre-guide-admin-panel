@@ -3,11 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../all-users/users.model';
 import { UserService } from '../all-users/users.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.sass']
 })
+
 export class EditUserComponent {
   userForm: FormGroup;
   userDetail: any;
@@ -22,8 +25,9 @@ export class EditUserComponent {
 
   constructor(private fb: FormBuilder, private router: Router,
     private activatedRoute: ActivatedRoute,
-    private usersService: UserService) {
-      this.userForm = this.createContactForm();
+    private usersService: UserService,
+    private snackBar: MatSnackBar) {
+    this.userForm = this.createUserForm();
   }
 
   ngOnInit(){
@@ -32,20 +36,30 @@ export class EditUserComponent {
        .subscribe(user =>
         {
           this.userDetail = user;
-          console.log(this.userDetail);
           this.userForm.patchValue({
             firstName: this.userDetail.firstName,
             lastName: this.userDetail.lastName,
             email: this.userDetail.email,
             roleId: this.userDetail.roleId,
+            password: this.userDetail.Password
             });
         });
   }
 
   onSubmit() {
-    console.log('Form Value', this.userForm.value);
+    this.usersService.updateUser(this.userDetail.id, this.userForm.value)
+      .subscribe(() => {
+         this.showNotification(
+                  'snackbar-success',
+                  'Record Edited Successfully!',
+                  'bottom',
+                  'center'
+                );
+        this.router.navigate(['/users/all-users']);
+        });
   }
-  createContactForm(): FormGroup {
+
+  createUserForm(): FormGroup {
     return this.fb.group({
       firstName: [
         this.formdata.firstName,
@@ -60,5 +74,21 @@ export class EditUserComponent {
       ]
     });
   }
+
+  showNotification(colorName, text, placementFrom, placementAlign) {
+    this.snackBar.open(text, '', {
+      duration: 2000,
+      verticalPosition: placementFrom,
+      horizontalPosition: placementAlign,
+      panelClass: colorName
+    });
+  }
+
+  cancel(){
+    // console.log("Proradi danas molim te" + x);
+    this.router.navigate(['/users/all-users']);
+  }
+
 }
+
 
