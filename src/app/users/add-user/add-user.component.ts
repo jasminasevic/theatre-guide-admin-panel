@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { UserService } from '../all-users/users.service';
 import { MatDatetimePickerInputEvent } from '@angular-material-components/datetime-picker';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-user',
@@ -14,7 +15,8 @@ export class AddUserComponent {
   // @Output() userAdded = new EventEmitter();
   userForm: FormGroup;
   constructor(private fb: FormBuilder, private userService: UserService,
-    private router: Router, private activatedRoute: ActivatedRoute) {
+    private router: Router, private activatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar) {
     this.userForm = this.fb.group({
       Id: 0,
       FirstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
@@ -35,12 +37,28 @@ export class AddUserComponent {
     }
 
   onSubmit() {
-    // const userToAdd = this.userForm.value;
-    // console.log('Values of userToAdd ', userToAdd);
-    this.userService.onSubmit(this.userForm.value);
+    this.userService.addUser(this.userForm.value)
+    .subscribe(() => {
+      this.showNotification(
+               'snackbar-success',
+               'Record Added Successfully!',
+               'bottom',
+               'center'
+             );
     this.router.navigateByUrl('/SampleComponent', { skipLocationChange: true });
     this.router.navigate(['/users/all-users']);
+    });
 
+  }
+
+
+  showNotification(colorName, text, placementFrom, placementAlign) {
+    this.snackBar.open(text, '', {
+      duration: 2000,
+      verticalPosition: placementFrom,
+      horizontalPosition: placementAlign,
+      panelClass: colorName
+    });
   }
 
 }

@@ -180,7 +180,7 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
          if (result === 1) {
           this.refresh();
           this.showNotification(
-            'snackbar-danger',
+            'snackbar-success',
             'Record Deleted Successfully!',
             'bottom',
             'center'
@@ -194,7 +194,7 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   };
 
   editCall(row){
-    console.log("Klik na " + row);
+
   }
 
   showNotification(colorName, text, placementFrom, placementAlign) {

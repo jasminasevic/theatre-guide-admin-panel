@@ -82,14 +82,11 @@ export class UserService {
   }
 
   // DEMO ONLY, you can find working methods below
-  onSubmit(user: User): any {
-    this.httpClient.post(this.API_URL + "/users", user, httpOptions)
-      .subscribe(data  => {
-        console.log("ok");
-      },
-      error  => {
-        console.log("Error", error);
-      });
+  addUser(user: User): any {
+    return this.httpClient.post(this.API_URL + "/users", user, httpOptions)
+    .pipe(
+      map((user: User) => user),
+      catchError(err => throwError(err)));
   }
 
   updateUser(id: number, user : User) {

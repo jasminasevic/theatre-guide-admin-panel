@@ -67,6 +67,6 @@ export class FormDialogComponent {
     this.dialogRef.close();
   }
   public confirmAdd(): void {
-    this.userService.onSubmit(this.userForm.getRawValue());
+    this.userService.addUser(this.userForm.getRawValue());
   }
 }
