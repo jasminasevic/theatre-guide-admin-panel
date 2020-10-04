@@ -46,21 +46,12 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
 }
 
   constructor(
-    // public httpClient: HttpClient,
-    // public dialog: MatDialog,
-    // public userService: UserService,
     private snackBar: MatSnackBar,
     private usersService: UserService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private router: Router
   ) { }
-  // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  // @ViewChild(MatSort, { static: true }) sort: MatSort;
-  // @ViewChild('filter', { static: true }) filter: ElementRef;
-  // @ViewChild(MatMenuTrigger)
-  // contextMenu: MatMenuTrigger;
-  // contextMenuPosition = { x: '0px', y: '0px' };
 
   ngOnInit() {
    // this.user = this.route.snapshot.data["user"];
@@ -68,9 +59,7 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
     this.dataSource.loadUsers();
 }
 
-
   ngAfterViewInit() {
-
     // server-side search
     fromEvent(this.input.nativeElement,'keyup')
     .pipe(
@@ -94,8 +83,6 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
         .subscribe();
   }
 
-
-
   loadUsersPage() {
     this.dataSource.loadUsers(
       this.paginator.pageSize,
@@ -113,59 +100,6 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
     this.paginator.pageIndex = 0;
     this.dataSource.loadUsers();
   }
-  // addNew() {
-  //   const dialogRef = this.dialog.open(FormDialogComponent, {
-  //     data: {
-  //       user: this.user,
-  //       action: 'add'
-  //     }
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result === 1) {
-  //       // After dialog is closed we're doing frontend updates
-  //       // For add we're just pushing a new row inside DataService
-  //       this.exampleDatabase.dataChange.value.unshift(
-  //         this.userService.getDialogData()
-  //       );
-  //       this.refreshTable();
-  //       this.showNotification(
-  //         'snackbar-success',
-  //         'Add Record Successfully...!!!',
-  //         'bottom',
-  //         'center'
-  //       );
-  //     }
-  //   });
-  // }
-  // editCall(row) {
-  //   this.id = row.id;
-  //   const dialogRef = this.dialog.open(FormDialogComponent, {
-  //     data: {
-  //       user: row,
-  //       action: 'edit'
-  //     }
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result === 1) {
-  //       // When using an edit things are little different, firstly we find record inside DataService by id
-  //       const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-  //         x => x.Id === this.id
-  //       );
-  //       // Then you update that record using data from dialogData (values you enetered)
-  //       this.exampleDatabase.dataChange.value[
-  //         foundIndex
-  //       ] = this.userService.getDialogData();
-  //       // And lastly refresh table
-  //       this.refreshTable();
-  //       this.showNotification(
-  //         'black',
-  //         'Edit Record Successfully...!!!',
-  //         'bottom',
-  //         'center'
-  //       );
-  //     }
-  //   });
-  // }
 
   deleteItem(row) {
     this.usersService.getOneUser(row)
@@ -193,10 +127,6 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
     this.usersService.deleteUser(row);
   };
 
-  editCall(row){
-
-  }
-
   showNotification(colorName, text, placementFrom, placementAlign) {
     this.snackBar.open(text, '', {
       duration: 2000,
@@ -207,116 +137,10 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   }
 }
 
-  // deleteItem(row) {
-  //   this.id = row.id;
-  //   const dialogRef = this.dialog.open(DeleteDialogComponent, {
-  //     data: row
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result === 1) {
-  //       const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-  //         x => x.Id === this.id
-  //       );
-  //       // for delete we use splice in order to remove single object from DataService
-  //       this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-  //       this.refreshTable();
-  //       this.showNotification(
-  //         'snackbar-danger',
-  //         'Delete Record Successfully...!!!',
-  //         'bottom',
-  //         'center'
-  //       );
-  //     }
-  //   });
-  // }
-  // private refreshTable() {
-  //   this.paginator._changePageSize(this.paginator.pageSize);
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  // isAllSelected() {
-  //   const numSelected = this.selection.selected.length;
-  //   const numRows = this.dataSource.renderedData.length;
-  //   return numSelected === numRows;
-  // }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  // masterToggle() {
-  //   this.isAllSelected()
-  //     ? this.selection.clear()
-  //     : this.dataSource.renderedData.forEach((row) =>
-  //       this.selection.select(row)
-  //     );
-  // }
-  // removeSelectedRows() {
-  //   const totalSelect = this.selection.selected.length;
-  //   this.selection.selected.forEach((item) => {
-  //     const index: number = this.dataSource.renderedData.findIndex(
-  //       (d) => d === item
-  //     );
-  //     // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
-  //     this.exampleDatabase.dataChange.value.splice(index, 1);
-  //     this.refreshTable();
-  //     this.selection = new SelectionModel<User>(true, []);
-  //   });
-  //   this.showNotification(
-  //     'snackbar-danger',
-  //     totalSelect + ' Record Delete Successfully...!!!',
-  //     'bottom',
-  //     'center'
-  //   );
-  // }
-
-
-  // public loadData() {
-  //   this.userService.getAllUsers(this.pageSize, this.pageIndex).subscribe(
-  //     data =>
-  //         {
-  //           this.userDataSource = data.data;
-  //           this.totalRows = data.totalCount;
-  //           this.paginator,
-  //           this.sort,
-  //           console.log("Vrednosti u userData su: " + data.totalCount);
-  //         },
-  //         error => {
-  //           console.log(error);
-  //         });
-
-  //   this.exampleDatabase = new UserService(this.httpClient);
-  //   this.dataSource = new ExampleDataSource(
-  //     this.exampleDatabase,
-  //     this.paginator,
-  //     this.sort
-  //   );
-  //   fromEvent(this.filter.nativeElement, 'keyup')
-  //   .pipe(
-  //     debounceTime(150),
-  //     distinctUntilChanged()
-  //   )
-  //     .subscribe(() => {
-  //       if (!this.dataSource) {
-  //         return;
-  //       }
-  //       this.dataSource.filter = this.filter.nativeElement.value;
-  //     });
-  // }
-
-
-  // // context menu
-  // onContextMenu(event: MouseEvent, item: User) {
-  //   event.preventDefault();
-  //   this.contextMenuPosition.x = event.clientX + 'px';
-  //   this.contextMenuPosition.y = event.clientY + 'px';
-  //   this.contextMenu.menuData = { item: item };
-  //   this.contextMenu.menu.focusFirstItem('mouse');
-  //   this.contextMenu.openMenu();
-  // }
-//}
-
 export class UserDataSource implements DataSource<User> {
 
   private usersSubject = new BehaviorSubject<User[]>([]);
   // private loadingSubject = new BehaviorSubject<boolean>(false);
-
   // public loading$ = this.loadingSubject.asObservable();
 
   constructor(private userService: UserService) {}
@@ -343,7 +167,6 @@ export class UserDataSource implements DataSource<User> {
         {
           this.usersSubject.next(users.data),
           this.totalCount = users.totalCount
-
         });
   }
 }

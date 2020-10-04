@@ -80,7 +80,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '',
-    title: 'Theaters',
+    title: 'Theatres',
     iconType: 'material-icons-two-tone',
     icon: 'business',
     class: 'menu-toggle',
@@ -89,8 +89,8 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     submenu: [
       {
-        path: '/theaters/all-theaters',
-        title: 'All Theaters',
+        path: '/theatres/all-theatres',
+        title: 'All Theatres',
         iconType: '',
         icon: '',
         class: 'ml-menu',

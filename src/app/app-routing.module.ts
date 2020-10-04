@@ -12,8 +12,8 @@ const routes: Routes = [
     loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   },
   {
-    path: 'theaters',
-    loadChildren: () => import('./theaters/theaters.module').then(t => t.TheatersModule)
+    path: 'theatres',
+    loadChildren: () => import('./theatres/theatres.module').then(t => t.TheatresModule)
   },
   {
     path: 'email',

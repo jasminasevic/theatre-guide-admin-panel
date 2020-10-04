@@ -144,6 +144,30 @@
   }
 }
 
+.btn-tbl-detail {
+  background-color: #5ca89e;
+  height: 30px !important;
+  width: 30px !important;
+  margin: 2px !important;
+  line-height: 30px !important;
+  color: #fff;
+
+  // box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2) !important;
+  .material-icons {
+    font-size: 16px !important;
+  }
+
+  &:hover {
+    background-color: rgb(66, 104, 89);
+    color: $white;
+  }
+
+  &:focus {
+    background-color: #888;
+  }
+}
+
+
 .btn-tbl-delete {
   background-color: #ff944f;
   height: 30px !important;
@@ -158,7 +182,7 @@
   }
 
   &:hover {
-    background-color: #ff9600;
+    background-color: #a07334;
     color: $white;
   }
 
