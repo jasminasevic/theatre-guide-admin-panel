@@ -18,7 +18,7 @@ import { SortDirection } from '@swimlane/ngx-datatable';
 import { MatInputModule } from '@angular/material/input/input-module';
 
 @Component({
-  selector: 'app-all-staff',
+  selector: 'app-all-users',
   templateUrl: './all-users.component.html',
   styleUrls: ['./all-users.component.sass']
 })

@@ -80,6 +80,29 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '',
+    title: 'Theaters',
+    iconType: 'material-icons-two-tone',
+    icon: 'business',
+    class: 'menu-toggle',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [
+      {
+        path: '/theaters/all-theaters',
+        title: 'All Theaters',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        submenu: [],
+      }
+    ]
+  },
+  {
+    path: '',
     title: 'Booking',
     iconType: 'material-icons-two-tone',
     icon: 'person',

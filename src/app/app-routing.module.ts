@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   },
   {
+    path: 'theaters',
+    loadChildren: () => import('./theaters/theaters.module').then(t => t.TheatersModule)
+  },
+  {
     path: 'email',
     loadChildren: () => import('./email/email.module').then(m => m.EmailModule)
   },
