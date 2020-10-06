@@ -92,7 +92,7 @@
               </ng-container>
 
                 <ng-container matColumnDef="description">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
                     <mat-cell class="description-cell"
                               *matCellDef="let theatre">{{theatre.description}}</mat-cell>
                 </ng-container>
@@ -104,13 +104,13 @@
                 </ng-container>
 
                 <ng-container matColumnDef="telephone">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Telephone</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef>Telephone</mat-header-cell>
                   <mat-cell class="telephone-cell"
                             *matCellDef="let theatre">{{theatre.telephone}}</mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="address">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef>Address</mat-header-cell>
                   <mat-cell class="address-cell"
                             *matCellDef="let theatre">{{theatre.location}}</mat-cell>
                 </ng-container>

@@ -3,7 +3,7 @@ export class Theatre {
   Name: string;
   Description: string;
   Email: string;
-  //WorkingHours: string;
+  WorkingHours: string;
   Telephone: string;
   Location: string;
 
@@ -11,7 +11,7 @@ export class Theatre {
     this.Id = theatre.Id;
     this.Name = theatre.Name || '';
     this.Description = theatre.Description || '';
-  //  this.WorkingHours = theatre.WorkingHours || '';
+    this.WorkingHours = theatre.WorkingHours || '';
     this.Telephone = theatre.Telephone || '';
     this.Location = theatre.Location || '';
   }

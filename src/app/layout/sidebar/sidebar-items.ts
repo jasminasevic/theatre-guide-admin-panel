@@ -55,17 +55,6 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: '/users/edit-user',
-        title: 'Edit User',
-        iconType: '',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        badge: '',
-        badgeClass: '',
-        submenu: [],
-      },
-      {
         path: '/users/about-user',
         title: 'About User',
         iconType: '',
@@ -98,7 +87,18 @@ export const ROUTES: RouteInfo[] = [
         badge: '',
         badgeClass: '',
         submenu: [],
-      }
+      },
+      {
+        path: '/theatres/add-theatre',
+        title: 'Add Theatre',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        submenu: [],
+      },
     ]
   },
   {

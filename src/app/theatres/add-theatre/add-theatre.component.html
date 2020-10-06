@@ -1,3 +1,108 @@
-<p>
-  add-theatre works!
-</p>
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Add theatre</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/dashboard/main">
+                <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a [routerLink]="['/theatres/all-theatres']">Theatre</a>
+            </li>
+            <li class="breadcrumb-item active">Add</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2><strong> Theatre Information</strong></h2>
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="theatreForm" (ngSubmit)="onSubmit();">
+              <!-- <input type="hidden" formControlName="Id" [value]="service.userForm.Id"> -->
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="Name" required>
+                    <mat-error *ngIf="theatreForm.get('Name').hasError('required')">
+                      First name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="Email" required>
+                    <mat-error *ngIf="theatreForm.get('Email').hasError('required')">
+                      Email is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Working Hours</mat-label>
+                    <input matInput formControlName="WorkingHours" required>
+                    <!-- <mat-error *ngIf="theatreForm.get('WorkingHours').hasError('required')">
+                      First name is required
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Telephone</mat-label>
+                    <input matInput formControlName="Telephone" required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Description</mat-label>
+                    <input matInput formControlName="Description">
+                    <!-- <mat-error *ngIf="theatreForm.get('Name').hasError('required')">
+                      First name is required
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Location</mat-label>
+                    <input matInput formControlName="Location">
+                  </mat-form-field>
+                </div>
+              </div>
+             <!--  <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Image</mat-label>
+                    <input matInput formControlName="TheatreImage">
+                    <mat-error *ngIf="theatreForm.get('Name').hasError('required')">
+                      First name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div> -->
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="mr-3" [disabled]="!theatreForm.valid " mat-raised-button color="primary">Submit</button>
+                  <button type="button" mat-button (click)="resetForm();">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

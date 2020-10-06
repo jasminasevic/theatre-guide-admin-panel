@@ -1,17 +1,16 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Theatre } from './theatres.model';
+import { ITheatreData } from '../../shared/interfaces/ITheatreData';
 
-
-export interface ITheatreData {
-  data: Theatre[],
-  pageNumber: number,
-  totalCount: number,
-  pagesCount: number
-}
-
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':'application/json; charset=utf-8;',
+    'Accept':'*/*'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +21,6 @@ export class TheatreService {
   constructor(private httpClient: HttpClient) { }
 
   /** CRUD METHODS */
-
 
   getAllTheatres(perPage: number, pageNumber: number, sortOrder: string, searchQuery: string) : Observable<ITheatreData> {
     let params = new HttpParams();
@@ -55,5 +53,12 @@ export class TheatreService {
       'Something bad happened; please try again later.');
   }
 
+  addTheatre(theatre: Theatre) : any {
+    return this.httpClient.post(this.API_URL + "/theatres", theatre, httpOptions)
+      .pipe(
+        map((theatre: Theatre) => theatre),
+        catchError(err => throwError(err))
+      );
+  }
 
 }
