@@ -22,6 +22,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { DeleteDialogComponent } from './all-theatres/dialog/delete/delete.component';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   ],
   declarations: [
     AllTheatresComponent,
-    AddTheatreComponent
+    AddTheatreComponent,
+    DeleteDialogComponent
   ]
 })
 export class TheatresModule { }

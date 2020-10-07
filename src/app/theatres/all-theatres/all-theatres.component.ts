@@ -1,12 +1,15 @@
 import { CollectionViewer } from '@angular/cdk/collections';
 import { DataSource } from '@angular/cdk/table';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Theatre } from './theatres.model';
 import { TheatreService } from './theatres.service';
+import { DeleteDialogComponent } from 'src/app/theatres/all-theatres/dialog/delete/delete.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-all-theatres',
@@ -30,15 +33,17 @@ export class AllTheatresComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
 
-  constructor(private theatresService: TheatreService) { }
+  constructor(private theatreService: TheatreService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.dataSource = new TheatreDataSource(this.theatresService);
+    this.dataSource = new TheatreDataSource(this.theatreService);
     this.dataSource.loadTheatres();
   }
 
   refresh() {
-    this.dataSource = new TheatreDataSource(this.theatresService);
+    this.dataSource = new TheatreDataSource(this.theatreService);
     this.input.nativeElement.value = '';
     this.paginator.pageSize = 10;
     this.paginator.pageIndex = 0;
@@ -79,11 +84,37 @@ export class AllTheatresComponent implements OnInit {
        );
   }
 
-  deleteItem(id){
-    console.log(id);
+  deleteItem(theatre){
+    this.theatreService.getTheatre(theatre)
+    .pipe()
+    .subscribe(theatre => {
+      const dialogRef = this.dialog.open(DeleteDialogComponent, {
+        data: theatre
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if(result === 1){
+          this.refresh();
+          this.showNotification(
+            'snackbar-success',
+            'Record Deleted Successfully!',
+            'bottom',
+            'center'
+          )}
+      });
+    });
+  }
+
+  showNotification(colorName, text, placementFrom, placementAlign) {
+    this.snackBar.open(text, '', {
+      duration: 2000,
+      verticalPosition: placementFrom,
+      horizontalPosition: placementAlign,
+      panelClass: colorName
+    });
   }
 
 }
+
 
 export class TheatreDataSource implements DataSource<Theatre>{
   private theatreSubject = new BehaviorSubject<Theatre[]>([]);

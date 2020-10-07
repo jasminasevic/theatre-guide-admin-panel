@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Theatre } from './theatres.model';
 import { ITheatreData } from '../../shared/interfaces/ITheatreData';
@@ -18,7 +18,20 @@ const httpOptions = {
 export class TheatreService {
   private readonly API_URL = "http://localhost:50484/api";
 
+  dataChange: BehaviorSubject<Theatre[]> = new BehaviorSubject<Theatre[]>([]);
+
+  // Temporarily stores data from dialogs
+  dialogData: any;
+
   constructor(private httpClient: HttpClient) { }
+
+  get data(): Theatre[] {
+    console.log("data change is " + this.dataChange.value);
+    return this.dataChange.value;
+  }
+  getDialogData() {
+    return this.dialogData;
+  }
 
   /** CRUD METHODS */
 
@@ -59,6 +72,19 @@ export class TheatreService {
         map((theatre: Theatre) => theatre),
         catchError(err => throwError(err))
       );
+  }
+
+  getTheatre(id: number) : Observable<Theatre> {
+    return this.httpClient.get<Theatre>(this.API_URL + '/theatres/' + id)
+      .pipe(
+        map((theatre : Theatre) => theatre),
+        catchError(err => throwError(err))
+      );
+    }
+
+  deleteTheatre(id: number) {
+    return this.httpClient.delete<any>(this.API_URL + '/theatres/' + id)
+    .subscribe();
   }
 
 }
