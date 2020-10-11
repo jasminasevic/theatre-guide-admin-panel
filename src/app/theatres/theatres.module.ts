@@ -12,8 +12,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
-import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { RouterModule } from '@angular/router';
+
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 import { AllTheatresComponent } from './all-theatres/all-theatres.component';
 import { AddTheatreComponent } from './add-theatre/add-theatre.component';
@@ -23,6 +24,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DeleteDialogComponent } from './all-theatres/dialog/delete/delete.component';
+import { EditTheatreComponent} from './edit-theatre/edit-theatre.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   imports: [
@@ -44,15 +47,17 @@ import { DeleteDialogComponent } from './all-theatres/dialog/delete/delete.compo
     MatCheckboxModule,
     MatDatepickerModule,
     MatInputModule,
-    MaterialFileInputModule,
     MatProgressSpinnerModule,
     TheatresRoutingModule,
-    RouterModule
+    RouterModule,
+    NgxMatFileInputModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AllTheatresComponent,
     AddTheatreComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    EditTheatreComponent
   ]
 })
 export class TheatresModule { }

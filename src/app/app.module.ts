@@ -49,6 +49,8 @@ import { AgmCoreModule } from '@agm/core';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+
 import {
   NgxMatDatetimePickerModule,
   NgxMatNativeDateModule,
@@ -102,7 +104,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AgmCoreModule.forRoot({
       apiKey: 'YOUR API KEY',
     }),
-    MatSnackBarModule
+    MatSnackBarModule,
+    MaterialFileInputModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

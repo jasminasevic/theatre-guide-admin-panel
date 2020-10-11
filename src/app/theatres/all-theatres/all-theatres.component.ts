@@ -10,6 +10,7 @@ import { Theatre } from './theatres.model';
 import { TheatreService } from './theatres.service';
 import { DeleteDialogComponent } from 'src/app/theatres/all-theatres/dialog/delete/delete.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService} from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-all-theatres',
@@ -35,7 +36,8 @@ export class AllTheatresComponent implements OnInit {
 
   constructor(private theatreService: TheatreService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.dataSource = new TheatreDataSource(this.theatreService);
@@ -94,22 +96,13 @@ export class AllTheatresComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if(result === 1){
           this.refresh();
-          this.showNotification(
+          this.notificationService.showNotification(
             'snackbar-success',
             'Record Deleted Successfully!',
             'bottom',
             'center'
           )}
       });
-    });
-  }
-
-  showNotification(colorName, text, placementFrom, placementAlign) {
-    this.snackBar.open(text, '', {
-      duration: 2000,
-      verticalPosition: placementFrom,
-      horizontalPosition: placementAlign,
-      panelClass: colorName
     });
   }
 

@@ -6,6 +6,7 @@ export class Theatre {
   WorkingHours: string;
   Telephone: string;
   Location: string;
+  TheatreImage: string;
 
   constructor(theatre){
     this.Id = theatre.Id;
@@ -14,5 +15,6 @@ export class Theatre {
     this.WorkingHours = theatre.WorkingHours || '';
     this.Telephone = theatre.Telephone || '';
     this.Location = theatre.Location || '';
+    this.TheatreImage = theatre.TheatreImage || '';
   }
 }

@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { TheatreService } from '../all-theatres/theatres.service';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+// import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-add-theatre',
@@ -17,8 +18,9 @@ export class AddTheatreComponent {
   constructor(private fb: FormBuilder,
       private theatreService: TheatreService,
       private router: Router,
-      private snackBar: MatSnackBar,
-      private activatedRoute: ActivatedRoute) {
+      // private snackBar: MatSnackBar,
+      private activatedRoute: ActivatedRoute,
+      private notificationService: NotificationService ) {
         this.theatreForm = this.fb.group({
           Id: 0,
           Name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
@@ -30,32 +32,31 @@ export class AddTheatreComponent {
         });
       }
 
-
   resetForm(theatreForm?: NgForm){
     this.theatreForm.reset();
   }
 
   onSubmit(){
     this.theatreService.addTheatre(this.theatreForm.value)
-      .subscribe(
-        this.showNotification(
+      .subscribe(() => {
+        this.notificationService.showNotification(
           'snackbar-success',
           'Record Added Successfully!',
           'bottom',
           'center'
-        )
-      );
-    this.router.navigateByUrl('/SampleComponent', { skipLocationChange: true});
-    this.router.navigate(['theatres/all-theatres']);
-  }
+        ),
+        this.router.navigateByUrl('/SampleComponent', { skipLocationChange: true}),
+        this.router.navigate(['theatres/all-theatres']);
+        });
+      }
 
-  showNotification(colorName, text, placementFrom, placementAlign) {
-    this.snackBar.open(text, '', {
-      duration: 2000,
-      verticalPosition: placementFrom,
-      horizontalPosition: placementAlign,
-      panelClass: colorName
-    });
-  }
+  // showNotification(colorName, text, placementFrom, placementAlign) {
+  //   this.snackBar.open(text, '', {
+  //     duration: 2000,
+  //     verticalPosition: placementFrom,
+  //     horizontalPosition: placementAlign,
+  //     panelClass: colorName
+  //   });
+  // }
 
 }

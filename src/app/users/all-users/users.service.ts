@@ -89,7 +89,7 @@ export class UserService {
       catchError(err => throwError(err)));
   }
 
-  updateUser(id: number, user : User) {
+  editUser(id: number, user : User) {
     // this.dialogData = user;
     return this.httpClient.put<User>(this.API_URL + "/users/" + id, user)
     .pipe(

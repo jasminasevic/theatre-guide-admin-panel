@@ -47,7 +47,7 @@ export class EditUserComponent {
   }
 
   onSubmit() {
-    this.usersService.updateUser(this.userDetail.id, this.userForm.value)
+    this.usersService.editUser(this.userDetail.id, this.userForm.value)
       .subscribe(() => {
          this.showNotification(
                   'snackbar-success',
@@ -85,7 +85,6 @@ export class EditUserComponent {
   }
 
   cancel(){
-    // console.log("Proradi danas molim te" + x);
     this.router.navigate(['/users/all-users']);
   }
 

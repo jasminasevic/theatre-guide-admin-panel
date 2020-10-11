@@ -7,7 +7,14 @@ import { ITheatreData } from '../../shared/interfaces/ITheatreData';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':'application/json; charset=utf-8;',
+    'Content-Type':'application/json',
+    'Accept':'*/*'
+  })
+};
+
+const httpOptionsUpload = {
+  headers: new HttpHeaders({
+    'Content-Type':'multipart/form-data',
     'Accept':'*/*'
   })
 };
@@ -86,5 +93,15 @@ export class TheatreService {
     return this.httpClient.delete<any>(this.API_URL + '/theatres/' + id)
     .subscribe();
   }
+
+
+  editTheatre(id: number, theatre) : Observable<Theatre>{
+    return this.httpClient.put<any>(this.API_URL + '/theatres/' + id, theatre)
+      .pipe(
+        map((theatre: Theatre) => theatre),
+        catchError(err => throwError(err))
+      )
+  }
+
 
 }
