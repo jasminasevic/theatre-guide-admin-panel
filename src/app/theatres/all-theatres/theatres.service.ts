@@ -12,12 +12,6 @@ const httpOptions = {
   })
 };
 
-const httpOptionsUpload = {
-  headers: new HttpHeaders({
-    'Content-Type':'multipart/form-data',
-    'Accept':'*/*'
-  })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -73,8 +67,8 @@ export class TheatreService {
       'Something bad happened; please try again later.');
   }
 
-  addTheatre(theatre: Theatre) : any {
-    return this.httpClient.post(this.API_URL + "/theatres", theatre, httpOptions)
+  addTheatre(theatre) : any {
+    return this.httpClient.post(this.API_URL + "/theatres", theatre)
       .pipe(
         map((theatre: Theatre) => theatre),
         catchError(err => throwError(err))

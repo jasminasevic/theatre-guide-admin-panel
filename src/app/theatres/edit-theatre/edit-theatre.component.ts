@@ -35,7 +35,7 @@ export class EditTheatreComponent {
       this.theatreForm = this.createTheatreForm();
     }
 
-  ngOnInit() {    
+  ngOnInit() {
     let theatreId = this.activatedRoute.snapshot.params.id;
     this.theatreService.getTheatre(theatreId)
       .subscribe(theatre => {
@@ -63,6 +63,7 @@ export class EditTheatreComponent {
       ],
       WorkingHours: [this.formData.WorkingHours],
       Telephone: [this.formData.Telephone],
+      Location: [this.formData.Location],
       TheatreImage: [this.formData.TheatreImage]
     });
   }
@@ -72,15 +73,15 @@ export class EditTheatreComponent {
     console.log(theatreData);
 
     const formData = new FormData();
-    
+
     formData.append('Name', this.theatreForm.get('Name').value);
     formData.append("Description", this.theatreForm.get('Description').value);
     formData.append("Email", this.theatreForm.get('Email').value);
     formData.append("WorkingHours", this.theatreForm.get('WorkingHours').value);
-    formData.append("Email", this.theatreForm.get('Email').value);
     formData.append("Telephone", this.theatreForm.get('Telephone').value);
+    formData.append("Location", this.theatreForm.get('Location').value);
     formData.append("TheatreImage", this.theatreForm.get('TheatreImage').value);
-   
+
     this.theatreService.editTheatre(this.theatreDetails.id, formData)
       .subscribe(() => {
         this.notificationService.showNotification(

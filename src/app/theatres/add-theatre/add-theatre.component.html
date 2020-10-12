@@ -85,17 +85,13 @@
                   </mat-form-field>
                 </div>
               </div>
-             <!--  <div class="row">
+              <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Image</mat-label>
-                    <input matInput formControlName="TheatreImage">
-                    <mat-error *ngIf="theatreForm.get('Name').hasError('required')">
-                      First name is required
-                    </mat-error>
+                  <mat-form-field>
+                     <ngx-mat-file-input formControlName="TheatreImage" placeholder="Select Image" ></ngx-mat-file-input>
                   </mat-form-field>
                 </div>
-              </div> -->
+              </div>
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <button class="mr-3" [disabled]="!theatreForm.valid " mat-raised-button color="primary">Submit</button>

@@ -29,6 +29,7 @@ export class AddTheatreComponent {
           WorkingHours: [''],
           Location: [''],
           Telephone: [''],
+          TheatreImage: ['']
         });
       }
 
@@ -37,7 +38,20 @@ export class AddTheatreComponent {
   }
 
   onSubmit(){
-    this.theatreService.addTheatre(this.theatreForm.value)
+    const theatreData = this.theatreForm.getRawValue();
+    console.log(theatreData);
+
+    const formData = new FormData();
+
+    formData.append('Name', this.theatreForm.get('Name').value);
+    formData.append("Description", this.theatreForm.get('Description').value);
+    formData.append("Email", this.theatreForm.get('Email').value);
+    formData.append("WorkingHours", this.theatreForm.get('WorkingHours').value);
+    formData.append("Telephone", this.theatreForm.get('Telephone').value);
+    formData.append("Location", this.theatreForm.get('Location').value);
+    formData.append("TheatreImage", this.theatreForm.get('TheatreImage').value);
+
+    this.theatreService.addTheatre(formData)
       .subscribe(() => {
         this.notificationService.showNotification(
           'snackbar-success',
@@ -49,14 +63,5 @@ export class AddTheatreComponent {
         this.router.navigate(['theatres/all-theatres']);
         });
       }
-
-  // showNotification(colorName, text, placementFrom, placementAlign) {
-  //   this.snackBar.open(text, '', {
-  //     duration: 2000,
-  //     verticalPosition: placementFrom,
-  //     horizontalPosition: placementAlign,
-  //     panelClass: colorName
-  //   });
-  // }
 
 }
