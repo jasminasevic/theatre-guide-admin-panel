@@ -83,7 +83,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Description</mat-label>
-                    <input matInput formControlName="Description" required>
+                    <textarea matInput formControlName="Description" required></textarea>
                     <mat-error *ngIf="theatreForm.get('Description').hasError('required')">
                       Description is required
                     </mat-error>

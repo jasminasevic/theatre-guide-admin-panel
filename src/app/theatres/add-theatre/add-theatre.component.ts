@@ -23,12 +23,28 @@ export class AddTheatreComponent {
       private notificationService: NotificationService ) {
         this.theatreForm = this.fb.group({
           Id: 0,
-          Name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
+          Name: ['',
+            [
+              Validators.required,
+              Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
+            ]],
           Description: [''],
-          Email: ['', [Validators.required, Validators.email, Validators.minLength(5)]],
-          WorkingHours: [''],
+          Email: ['',
+          [
+            Validators.required,
+            Validators.email
+          ]],
+          WorkingHours: ['',
+            [
+            Validators.required,
+            Validators.pattern('^([2][0-4]|[0-1][0-9])[:]([2][0-4]|[0-1][0-9])-([2][0-4]|[0-1][0-9])[:]([2][0-4]|[0-1][0-9])$')
+          ]],
           Location: [''],
-          Telephone: [''],
+          Telephone: ['',
+          [
+            Validators.required,
+            Validators.pattern('^[\+]?[(]?[0-9\\s]{3,7}[)]?[-\\s\.]?[0-9]{3,5}[-\\s\.]?[0-9]{3,5}$')
+          ]],
           TheatreImage: ['']
         });
       }

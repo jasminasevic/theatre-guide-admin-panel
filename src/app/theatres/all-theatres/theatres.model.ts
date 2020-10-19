@@ -1,3 +1,5 @@
+import { IImage } from "../../shared/interfaces/IImage";
+
 export class Theatre {
   Id: number;
   Name: string;
@@ -6,7 +8,7 @@ export class Theatre {
   WorkingHours: string;
   Telephone: string;
   Location: string;
-  TheatreImage: [];
+  TheatreImage: IImage[];
 
   constructor(theatre){
     this.Id = theatre.Id;
