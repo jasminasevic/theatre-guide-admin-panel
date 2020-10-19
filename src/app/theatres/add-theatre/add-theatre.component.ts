@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { TheatreService } from '../all-theatres/theatres.service';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
-// import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
@@ -14,6 +13,7 @@ import { NotificationService } from '../../shared/services/notification.service'
 export class AddTheatreComponent {
 
   theatreForm: FormGroup;
+  // multiple: boolean = true;
 
   constructor(private fb: FormBuilder,
       private theatreService: TheatreService,
@@ -49,7 +49,12 @@ export class AddTheatreComponent {
     formData.append("WorkingHours", this.theatreForm.get('WorkingHours').value);
     formData.append("Telephone", this.theatreForm.get('Telephone').value);
     formData.append("Location", this.theatreForm.get('Location').value);
-    formData.append("TheatreImage", this.theatreForm.get('TheatreImage').value);
+
+    const images = this.theatreForm.get('TheatreImage').value;
+    for(var i=0; i<images.length; i++){
+      formData.append("TheatreImage", images[i]);
+    }
+
 
     this.theatreService.addTheatre(formData)
       .subscribe(() => {

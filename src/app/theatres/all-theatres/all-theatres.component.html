@@ -91,12 +91,6 @@
                             *matCellDef="let theatre">{{theatre.name}}</mat-cell>
               </ng-container>
 
-                <ng-container matColumnDef="description">
-                    <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-                    <mat-cell class="description-cell"
-                              *matCellDef="let theatre">{{theatre.description}}</mat-cell>
-                </ng-container>
-
                 <ng-container matColumnDef="email">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
                   <mat-cell class="email-cell"
@@ -107,6 +101,12 @@
                   <mat-header-cell *matHeaderCellDef>Telephone</mat-header-cell>
                   <mat-cell class="telephone-cell"
                             *matCellDef="let theatre">{{theatre.telephone}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="workingHours">
+                  <mat-header-cell *matHeaderCellDef>Working hours</mat-header-cell>
+                  <mat-cell class="description-cell"
+                            *matCellDef="let theatre">{{theatre.workingHours}}</mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="address">

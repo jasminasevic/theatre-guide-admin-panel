@@ -54,15 +54,31 @@ export class EditTheatreComponent {
 
   createTheatreForm() : FormGroup {
     return this.fb.group({
-      Name : [
-        this.formData.Name, [Validators.required, Validators.pattern('[a-zA-Z]+')]
+      Name : [this.formData.Name,
+        [
+          Validators.required,
+          Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
+        ]
       ],
       Description: [this.formData.Description],
-      Email: [
-        this.formData.Email, [Validators.required, Validators.email]
+      Email: [this.formData.Email,
+        [
+          Validators.required,
+          Validators.email
+        ]
       ],
-      WorkingHours: [this.formData.WorkingHours],
-      Telephone: [this.formData.Telephone],
+      WorkingHours: [this.formData.WorkingHours,
+        [
+          Validators.required,
+          Validators.pattern('^([2][0-4]|[0-1][0-9])[:]([2][0-4]|[0-1][0-9])-([2][0-4]|[0-1][0-9])[:]([2][0-4]|[0-1][0-9])$')
+        ]
+      ],
+      Telephone: [this.formData.Telephone,
+        [
+          Validators.required,
+          Validators.pattern('^[\+]?[(]?[0-9\\s]{3,7}[)]?[-\\s\.]?[0-9]{3,5}[-\\s\.]?[0-9]{3,5}$')
+        ]
+      ],
       Location: [this.formData.Location],
       TheatreImage: [this.formData.TheatreImage]
     });
@@ -80,7 +96,11 @@ export class EditTheatreComponent {
     formData.append("WorkingHours", this.theatreForm.get('WorkingHours').value);
     formData.append("Telephone", this.theatreForm.get('Telephone').value);
     formData.append("Location", this.theatreForm.get('Location').value);
-    formData.append("TheatreImage", this.theatreForm.get('TheatreImage').value);
+
+    const images = this.theatreForm.get('TheatreImage').value;
+    for(var i=0; i<images.length; i++){
+      formData.append("TheatreImage", images[i]);
+    }
 
     this.theatreService.editTheatre(this.theatreDetails.id, formData)
       .subscribe(() => {

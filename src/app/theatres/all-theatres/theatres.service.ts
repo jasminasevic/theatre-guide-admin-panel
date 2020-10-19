@@ -8,7 +8,9 @@ import { ITheatreData } from '../../shared/interfaces/ITheatreData';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':'application/json',
-    'Accept':'*/*'
+    'Accept':'*/*',
+    'Access-Control-Allow-Headers':'*',
+    'X-Requested-With':'XMLHttpRequest'
   })
 };
 
@@ -76,7 +78,7 @@ export class TheatreService {
   }
 
   getTheatre(id: number) : Observable<Theatre> {
-    return this.httpClient.get<Theatre>(this.API_URL + '/theatres/' + id)
+    return this.httpClient.get<Theatre>(this.API_URL + '/theatres/' + id, httpOptions)
       .pipe(
         map((theatre : Theatre) => theatre),
         catchError(err => throwError(err))

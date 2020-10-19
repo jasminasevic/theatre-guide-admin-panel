@@ -6,7 +6,7 @@ export class Theatre {
   WorkingHours: string;
   Telephone: string;
   Location: string;
-  TheatreImage: string;
+  TheatreImage: [];
 
   constructor(theatre){
     this.Id = theatre.Id;

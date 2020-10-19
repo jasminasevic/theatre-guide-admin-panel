@@ -35,6 +35,9 @@
                     <mat-error *ngIf="theatreForm.get('Name').hasError('required')">
                       Theatre name is required
                     </mat-error>
+                    <mat-error *ngIf="theatreForm.get('Name').hasError('pattern')">
+                      Wrong theatre name format
+                    </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
@@ -44,6 +47,9 @@
                     <mat-error *ngIf="theatreForm.get('Email').hasError('required')">
                       Email is required
                     </mat-error>
+                    <mat-error *ngIf="theatreForm.get('Email').hasError('email')">
+                      Wrong email format
+                    </mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -52,12 +58,24 @@
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Phone</mat-label>
                     <input matInput formControlName="Telephone">
+                    <mat-error *ngIf="theatreForm.get('Telephone').hasError('required')">
+                      Phone number is required
+                    </mat-error>
+                    <mat-error *ngIf="theatreForm.get('Telephone').hasError('pattern')">
+                      Wrong phone number format
+                    </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Working Hours</mat-label>
                     <input matInput formControlName="WorkingHours">
+                    <mat-error *ngIf="theatreForm.get('WorkingHours').hasError('required')">
+                      Working hours are required
+                    </mat-error>
+                    <mat-error *ngIf="theatreForm.get('WorkingHours').hasError('pattern')">
+                      Wrong working hours format
+                    </mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -84,7 +102,7 @@
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field>
-                     <ngx-mat-file-input formControlName="TheatreImage" placeholder="Select Image" ></ngx-mat-file-input>
+                     <ngx-mat-file-input formControlName="TheatreImage" placeholder="Select theatre image(s)" multiple></ngx-mat-file-input>
                   </mat-form-field>
                 </div>
               </div>

@@ -26,7 +26,7 @@ export class AllTheatresComponent implements OnInit {
     'email',
     'address',
     'telephone',
-    'description',
+    'workingHours',
     'actions'
   ];
 
