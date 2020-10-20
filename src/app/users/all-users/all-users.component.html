@@ -121,6 +121,10 @@
                      [routerLink]="['../edit-user', row.id]">
                     <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
                   </button>
+                  <button mat-icon-button color="accent" class="btn-tbl-detail"
+                     [routerLink]="['../about-user', row.id]">
+                    <mat-icon aria-label="details" class="col-white">details</mat-icon>
+                  </button>
                   <button mat-icon-button color="accent" class="btn-tbl-delete"
                     (click)="deleteItem(row.id)">
                     <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
