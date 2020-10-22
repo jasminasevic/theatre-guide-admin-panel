@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Theatre } from './theatres.model';
 import { ITheatreData } from '../../shared/interfaces/ITheatreData';
+import { API_URL } from '../../app.constants';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,8 +20,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TheatreService {
-  private readonly API_URL = "http://localhost:50484/api";
+  // private readonly API_URL = "http://localhost:50484/api";
 
+  private readonly API_URL = API_URL;
   dataChange: BehaviorSubject<Theatre[]> = new BehaviorSubject<Theatre[]>([]);
 
   // Temporarily stores data from dialogs

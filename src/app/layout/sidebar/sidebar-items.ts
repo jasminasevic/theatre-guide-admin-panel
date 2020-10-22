@@ -53,18 +53,7 @@ export const ROUTES: RouteInfo[] = [
         badge: '',
         badgeClass: '',
         submenu: [],
-      },
-      {
-        path: '/users/about-user',
-        title: 'About User',
-        iconType: '',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        badge: '',
-        badgeClass: '',
-        submenu: [],
-      },
+      }
     ],
   },
   {
@@ -100,6 +89,40 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
     ]
+  },
+  {
+    path: '',
+    title: 'Categories',
+    iconType: 'material-icons-two-tone',
+    icon: 'layers',
+    class: 'menu-toggle',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [
+      {
+        path: '/categories/all-categories',
+        title: 'All Categories',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        submenu: [],
+      },
+      {
+        path: '/categories/add-category',
+        title: 'Add Category',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        submenu: [],
+      }
+    ],
   },
   {
     path: '',

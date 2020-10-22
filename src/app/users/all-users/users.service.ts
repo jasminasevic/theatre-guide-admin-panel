@@ -3,6 +3,7 @@ import { BehaviorSubject, Subject, pipe, throwError, Observable } from 'rxjs';
 import { User } from './users.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { API_URL } from '../../app.constants';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,11 +22,9 @@ export interface IUserData {
 
 @Injectable()
 export class UserService {
-  private readonly API_URL = "http://localhost:50484/api";
+  private readonly API_URL = API_URL;
 
   dataChange: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
-  //addUserData: Subject<User> = new Subject<User>();
-  //addUserData: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
   // Temporarily stores data from dialogs
   dialogData: any;
@@ -78,10 +77,8 @@ export class UserService {
       map((userData: User) => userData),
       catchError(err => throwError(err)),
     )
-
   }
 
-  // DEMO ONLY, you can find working methods below
   addUser(user: User): any {
     return this.httpClient.post(this.API_URL + "/users", user, httpOptions)
     .pipe(
