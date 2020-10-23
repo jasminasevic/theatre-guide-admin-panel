@@ -1,28 +1,20 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Theatre } from './theatres.model';
 import { ITheatreData } from '../../shared/interfaces/ITheatreData';
-import { API_URL } from '../../app.constants';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':'application/json',
-    'Accept':'*/*',
-    'Access-Control-Allow-Headers':'*',
-    'X-Requested-With':'XMLHttpRequest'
-  })
-};
+import { API_URL, httpOptions } from '../../app.constants';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TheatreService {
-  // private readonly API_URL = "http://localhost:50484/api";
 
   private readonly API_URL = API_URL;
+  private readonly httpOptions = httpOptions;
+
   dataChange: BehaviorSubject<Theatre[]> = new BehaviorSubject<Theatre[]>([]);
 
   // Temporarily stores data from dialogs
@@ -92,7 +84,6 @@ export class TheatreService {
     .subscribe();
   }
 
-
   editTheatre(id: number, theatre) : Observable<Theatre>{
     return this.httpClient.put<any>(this.API_URL + '/theatres/' + id, theatre)
       .pipe(
@@ -100,6 +91,5 @@ export class TheatreService {
         catchError(err => throwError(err))
       )
   }
-
 
 }

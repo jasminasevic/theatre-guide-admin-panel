@@ -3,14 +3,8 @@ import { BehaviorSubject, Subject, pipe, throwError, Observable } from 'rxjs';
 import { User } from './users.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { API_URL } from '../../app.constants';
+import { API_URL, httpOptions } from '../../app.constants';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':'application/json; charset=utf-8;',
-    'Accept':'*/*'
-  })
-};
 
 export interface IUserData {
   data: User[],
@@ -23,6 +17,7 @@ export interface IUserData {
 @Injectable()
 export class UserService {
   private readonly API_URL = API_URL;
+  private readonly httpOptions = httpOptions;
 
   dataChange: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 

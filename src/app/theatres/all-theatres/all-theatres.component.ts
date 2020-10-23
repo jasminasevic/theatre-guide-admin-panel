@@ -123,7 +123,7 @@ export class TheatreDataSource implements DataSource<Theatre>{
 
   totalCount: number;
 
-  loadTheatres(pageSize = 10, pageIndex = 0, sortOrder = '', sortDirection = '', searchQuery = ''){
+  loadTheatres(pageSize = 10, pageIndex = 0, sortOrder = '', sortDirection = 'asc', searchQuery = ''){
     this.theatreService.getAllTheatres(pageSize, pageIndex += 1, sortOrder + '_' + sortDirection, searchQuery)
     // .pipe()
     .subscribe(
