@@ -105,11 +105,6 @@ export class CategoryDataSource implements DataSource<Category>{
         categories => {
           this.categorySubject.next(categories.data);
           this.totalCount = categories.totalCount;
-
-          for(let i: number; i<categories.data.length; i++){
-            this.rowNumber = i + 1;
-          }
-
         }
       )
   }
