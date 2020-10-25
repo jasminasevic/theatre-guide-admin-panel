@@ -54,6 +54,10 @@ export class CategoriesService {
       )
   }
 
+  deleteCategory(id: number){
+    return this.httpClient.delete<any>(this.API_URL + '/categories/' + id)
+      .subscribe();
+  }
 
 }
 

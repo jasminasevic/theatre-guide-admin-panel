@@ -2,12 +2,14 @@ import { CollectionViewer } from '@angular/cdk/collections';
 import { DataSource } from '@angular/cdk/table';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSlideToggleRequiredValidator } from '@angular/material/slide-toggle';
 import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { CategoriesService } from '../all-categories/categories.service';
 import { Category } from './categories.model';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../all-categories/dialog/delete/delete.component';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-all-categories',
@@ -29,7 +31,9 @@ export class AllCategoriesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private categoryService: CategoriesService) { }
+  constructor(private categoryService: CategoriesService,
+    private dialog: MatDialog,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.dataSource = new CategoryDataSource(this.categoryService);
@@ -45,6 +49,23 @@ export class AllCategoriesComponent implements OnInit {
   }
 
   deleteItem(categoryId){
+    this.categoryService.getCategory(categoryId)
+      .subscribe(category => {
+        const dialogRef = this.dialog.open(DeleteDialogComponent, {
+          data: category
+        });
+        dialogRef.afterClosed()
+          .subscribe(result =>{
+            if(result === 1){
+              this.refresh();
+              this.notificationService.showNotification(
+                'snackbar-success',
+                'Record Deleted Successfully!',
+                'bottom',
+                'center'
+              )};
+          });
+      });
   }
 
   ngAfterViewInit(){

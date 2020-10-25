@@ -1,21 +1,14 @@
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
-import { UserService, IUserData } from './users.service';
-import { HttpClient } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { UserService } from './users.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { User } from './users.model';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { FormDialogComponent } from './dialog/form-dialog/form-dialog.component';
 import { DeleteDialogComponent } from './dialog/delete/delete.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged, finalize, tap } from 'rxjs/operators';
-import { MatMenuTrigger } from '@angular/material/menu';
-import { SelectionModel } from '@angular/cdk/collections';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SortDirection } from '@swimlane/ngx-datatable';
-import { MatInputModule } from '@angular/material/input/input-module';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-all-users',
@@ -48,13 +41,9 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private usersService: UserService,
-    private route: ActivatedRoute,
-    public dialog: MatDialog,
-    private router: Router
-  ) { }
+    public dialog: MatDialog  ) { }
 
   ngOnInit() {
-   // this.user = this.route.snapshot.data["user"];
     this.dataSource = new UserDataSource(this.usersService);
     this.dataSource.loadUsers();
 }
