@@ -22,6 +22,7 @@ export class AllTheatresComponent implements OnInit {
   theatre: Theatre;
   dataSource: TheatreDataSource;
   displayedColumns = [
+    'no',
     'name',
     'email',
     'address',

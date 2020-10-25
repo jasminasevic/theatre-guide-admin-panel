@@ -44,12 +44,6 @@
                         </mat-form-field>
                       </li>
                       <li>
-                        <!-- <div class="icon-button-demo m-l-10" [hidden]=!selection.hasValue()>
-                          <button mat-mini-fab color="warn" (click)="removeSelectedRows()">
-                            <mat-icon class="col-white">delete
-                            </mat-icon>
-                          </button>
-                        </div> -->
                       </li>
                     </ul>
                   </div>
@@ -79,6 +73,13 @@
               </div> -->
 
               <mat-table class="users-table mat-elevation-z8" [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="no">
+                  <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+                  <mat-cell *matCellDef="let index = index">{{ this.paginator.pageIndex > 0
+                    ? index + 1 + this.paginator.pageIndex * this.paginator.pageSize
+                    : index + 1 }}</mat-cell>
+              </ng-container>
 
                 <ng-container matColumnDef="id">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>

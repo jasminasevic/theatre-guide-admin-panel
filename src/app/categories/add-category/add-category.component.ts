@@ -44,6 +44,10 @@ export class AddCategoryComponent {
   }
 
   resetForm(categoryForm?: NgForm){
+    this.categoryForm.reset();
+  }
+
+  cancel(){
     this.router.navigate(['/categories/all-categories']);
   }
 

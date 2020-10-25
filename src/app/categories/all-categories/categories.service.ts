@@ -9,6 +9,7 @@ import { Category } from './categories.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CategoriesService {
   private readonly API_URL = API_URL;
   private readonly httpOptions = httpOptions;

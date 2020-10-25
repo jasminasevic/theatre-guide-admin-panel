@@ -53,6 +53,10 @@ export class AddTheatreComponent {
     this.theatreForm.reset();
   }
 
+  cancel(){
+    this.router.navigate(['/theatres/all-theatres']);
+  }
+
   onSubmit(){
     const theatreData = this.theatreForm.getRawValue();
     console.log(theatreData);

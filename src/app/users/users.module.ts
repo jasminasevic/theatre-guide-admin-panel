@@ -23,7 +23,6 @@ import { AboutUserComponent } from './about-user/about-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { DeleteDialogComponent } from './all-users/dialog/delete/delete.component';
-import { FormDialogComponent } from './all-users/dialog/form-dialog/form-dialog.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
@@ -32,8 +31,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AboutUserComponent,
     EditUserComponent,
     AllUsersComponent,
-    DeleteDialogComponent,
-    FormDialogComponent
+    DeleteDialogComponent
   ],
   imports: [
     CommonModule,

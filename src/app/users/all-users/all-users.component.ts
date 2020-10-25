@@ -6,9 +6,9 @@ import { MatSort } from '@angular/material/sort';
 import { User } from './users.model';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { DeleteDialogComponent } from './dialog/delete/delete.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-all-users',
@@ -16,13 +16,13 @@ import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
   styleUrls: ['./all-users.component.sass']
 })
 
-
 export class AllUsersComponent implements AfterViewInit, OnInit {
 
   user: User;
   dataSource: UserDataSource;
   userDetail: User;
   displayedColumns = [
+    'number',
     'firstName',
     'lastName',
     'email',
@@ -39,9 +39,9 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
 }
 
   constructor(
-    private snackBar: MatSnackBar,
     private usersService: UserService,
-    public dialog: MatDialog  ) { }
+    private dialog: MatDialog,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.dataSource = new UserDataSource(this.usersService);
@@ -102,7 +102,7 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
         dialogRef.afterClosed().subscribe(result => {
          if (result === 1) {
           this.refresh();
-          this.showNotification(
+          this.notificationService.showNotification(
             'snackbar-success',
             'Record Deleted Successfully!',
             'bottom',
@@ -116,14 +116,6 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
     this.usersService.deleteUser(row);
   };
 
-  showNotification(colorName, text, placementFrom, placementAlign) {
-    this.snackBar.open(text, '', {
-      duration: 2000,
-      verticalPosition: placementFrom,
-      horizontalPosition: placementAlign,
-      panelClass: colorName
-    });
-  }
 }
 
 export class UserDataSource implements DataSource<User> {

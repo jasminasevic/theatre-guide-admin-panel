@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../all-users/users.model';
 import { UserService } from '../all-users/users.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -26,7 +27,8 @@ export class EditUserComponent {
   constructor(private fb: FormBuilder, private router: Router,
     private activatedRoute: ActivatedRoute,
     private usersService: UserService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private notificationService: NotificationService) {
     this.userForm = this.createUserForm();
   }
 
@@ -49,7 +51,7 @@ export class EditUserComponent {
   onSubmit() {
     this.usersService.editUser(this.userDetail.id, this.userForm.value)
       .subscribe(() => {
-         this.showNotification(
+         this.notificationService.showNotification(
                   'snackbar-success',
                   'Record Edited Successfully!',
                   'bottom',
@@ -72,15 +74,6 @@ export class EditUserComponent {
         this.formdata.email,
         [Validators.required, Validators.email, Validators.minLength(5)]
       ]
-    });
-  }
-
-  showNotification(colorName, text, placementFrom, placementAlign) {
-    this.snackBar.open(text, '', {
-      duration: 2000,
-      verticalPosition: placementFrom,
-      horizontalPosition: placementAlign,
-      panelClass: colorName
     });
   }
 

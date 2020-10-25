@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { UserService } from '../all-users/users.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-add-user',
@@ -12,9 +12,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class AddUserComponent {
   userForm: FormGroup;
-  constructor(private fb: FormBuilder, private userService: UserService,
-    private router: Router, private activatedRoute: ActivatedRoute,
-    private snackBar: MatSnackBar) {
+  constructor(private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router,
+    private notificationService: NotificationService) {
     this.userForm = this.fb.group({
       Id: 0,
       FirstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
@@ -30,14 +31,18 @@ export class AddUserComponent {
     });
   }
 
-  resetForm(userForm?: NgForm){
-      this.userForm.reset();
-    }
+  resetForm(){
+    this.userForm.reset();
+  }
+
+  cancel(){
+    this.router.navigate(['/users/all-users']);
+  }
 
   onSubmit() {
     this.userService.addUser(this.userForm.value)
     .subscribe(() => {
-      this.showNotification(
+      this.notificationService.showNotification(
                'snackbar-success',
                'Record Added Successfully!',
                'bottom',
@@ -49,15 +54,6 @@ export class AddUserComponent {
 
   }
 
-
-  showNotification(colorName, text, placementFrom, placementAlign) {
-    this.snackBar.open(text, '', {
-      duration: 2000,
-      verticalPosition: placementFrom,
-      horizontalPosition: placementAlign,
-      panelClass: colorName
-    });
-  }
 
 }
 

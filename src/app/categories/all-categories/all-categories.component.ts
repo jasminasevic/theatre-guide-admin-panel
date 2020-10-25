@@ -55,7 +55,7 @@ export class AllCategoriesComponent implements OnInit {
           data: category
         });
         dialogRef.afterClosed()
-          .subscribe(result =>{
+          .subscribe(result => {
             if(result === 1){
               this.refresh();
               this.notificationService.showNotification(
