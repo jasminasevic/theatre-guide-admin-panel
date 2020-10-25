@@ -18,6 +18,7 @@ import { RoomService } from '../app/rooms/all-rooms/rooms.service';
 import { DepartmentService } from '../app/departments/all-departments/department.service';
 import { StaffService } from './staff/all-staff/staff.service';
 import { UserService } from './users/all-users/users.service';
+import { ActorsService } from './actors/all-actors/actors.service';
 import { ContactsService } from './apps/contacts/contacts.service';
 import { RightSidebarService } from './shared/services/rightsidebar.service';
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -122,7 +123,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DepartmentService,
     StaffService,
     ContactsService,
-    UserService
+    UserService,
+    ActorsService
   ],
   entryComponents: [
     SimpleDialogComponent,

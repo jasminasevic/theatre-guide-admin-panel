@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./categories/categories.module').then(t => t.CategoriesModule)
   },
   {
+    path: 'actors',
+    loadChildren: () => import('./actors/actors.module').then(t => t.ActorsModule)
+  },
+  {
     path: 'email',
     loadChildren: () => import('./email/email.module').then(m => m.EmailModule)
   },

@@ -6,7 +6,6 @@ import { Theatre } from './theatres.model';
 import { ITheatreData } from '../../shared/interfaces/ITheatreData';
 import { API_URL, httpOptions } from '../../app.constants';
 
-
 @Injectable({
   providedIn: 'root'
 })
