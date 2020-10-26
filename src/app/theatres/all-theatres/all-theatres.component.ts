@@ -9,7 +9,6 @@ import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Theatre } from './theatres.model';
 import { TheatreService } from './theatres.service';
 import { DeleteDialogComponent } from 'src/app/theatres/all-theatres/dialog/delete/delete.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationService} from '../../shared/services/notification.service';
 
 @Component({
@@ -36,7 +35,6 @@ export class AllTheatresComponent implements OnInit {
 
   constructor(private theatreService: TheatreService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar,
     private notificationService: NotificationService) { }
 
   ngOnInit() {
