@@ -6,7 +6,7 @@ import { AddActorComponent } from './add-actor/add-actor.component';
 import { AboutActorComponent } from './about-actor/about-actor.component';
 import { EditActorComponent } from './edit-actor/edit-actor.component';
 import { DeleteDialogComponent } from './all-actors/dialog/delete/delete.component';
-import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
 import { RouterModule } from '@angular/router';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
@@ -42,7 +43,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatButtonModule,
     MatDialogModule,
     MatSortModule,
-    RouterModule
+    RouterModule,
+    NgxMatFileInputModule
   ]
 })
 export class ActorsModule { }

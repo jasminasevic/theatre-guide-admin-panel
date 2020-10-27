@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { API_URL, httpOptions } from 'src/app/app.constants';
 import { IActorData } from '../../shared/interfaces/IActorData';
+import { Actor } from './actors.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,14 @@ export class ActorsService {
     return this.httpClient.get<IActorData>(this.API_URL + '/actors/', { params })
       .pipe(
         map((actor: IActorData) => actor),
+        catchError(err => throwError(err))
+      )
+  }
+
+  addActor(actor) : Observable<Actor>{
+    return this.httpClient.post<Actor>(this.API_URL + '/actors', actor)
+      .pipe(
+        map((actor: Actor) => actor),
         catchError(err => throwError(err))
       )
   }

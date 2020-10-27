@@ -87,7 +87,7 @@
 
                 <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef class="pr-0 justify-end-header">Actions</mat-header-cell>
-                  <mat-cell *matCellDef="let row; let i=index;" class="pr-0" class="justify-end">
+                  <mat-cell *matCellDef="let row; let i=index;" class="pr-0 justify-end">
                     <button mat-icon-button color="accent" class="btn-tbl-edit"
                       [routerLink]="['../edit-category', row.id]">
                       <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>

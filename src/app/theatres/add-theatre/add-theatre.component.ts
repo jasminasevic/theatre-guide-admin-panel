@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { TheatreService } from '../all-theatres/theatres.service';
-import { MatInputModule } from '@angular/material/input';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
@@ -13,13 +12,10 @@ import { NotificationService } from '../../shared/services/notification.service'
 export class AddTheatreComponent {
 
   theatreForm: FormGroup;
-  // multiple: boolean = true;
 
   constructor(private fb: FormBuilder,
       private theatreService: TheatreService,
       private router: Router,
-      // private snackBar: MatSnackBar,
-      private activatedRoute: ActivatedRoute,
       private notificationService: NotificationService ) {
         this.theatreForm = this.fb.group({
           Id: 0,
@@ -49,7 +45,7 @@ export class AddTheatreComponent {
         });
       }
 
-  resetForm(theatreForm?: NgForm){
+  resetForm(){
     this.theatreForm.reset();
   }
 
@@ -58,8 +54,8 @@ export class AddTheatreComponent {
   }
 
   onSubmit(){
-    const theatreData = this.theatreForm.getRawValue();
-    console.log(theatreData);
+    // const theatreData = this.theatreForm.getRawValue();
+    // console.log(theatreData);
 
     const formData = new FormData();
 
