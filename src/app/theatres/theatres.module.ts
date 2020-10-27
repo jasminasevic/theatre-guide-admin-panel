@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TheatresRoutingModule } from './theatres-routing.module';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTable, MatTableModule } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort/sort';
+import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,14 +14,13 @@ import { MatSortModule } from '@angular/material/sort';
 import { RouterModule } from '@angular/router';
 
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
-
-import { AllTheatresComponent } from './all-theatres/all-theatres.component';
-import { AddTheatreComponent } from './add-theatre/add-theatre.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { AllTheatresComponent } from './all-theatres/all-theatres.component';
+import { AddTheatreComponent } from './add-theatre/add-theatre.component';
 import { DeleteDialogComponent } from './all-theatres/dialog/delete/delete.component';
 import { EditTheatreComponent } from './edit-theatre/edit-theatre.component';
 import { AboutTheatreComponent } from './about-theatre/about-theatre.component';

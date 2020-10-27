@@ -43,5 +43,21 @@ export class ActorsService {
       )
   }
 
+  editActor(id: number, actor) : Observable<Actor>{
+    return this.httpClient.put<Actor>(this.API_URL + '/actors/' + id, actor)
+      .pipe(
+        map((actor: Actor) => actor),
+        catchError(err => throwError(err))
+      )
+  }
+
+  getActor(id: number) : Observable<Actor>{
+    return this.httpClient.get<Actor>(this.API_URL + '/actors/' + id)
+      .pipe(
+        map((actor: Actor) => actor),
+        catchError(err => throwError(err))
+      )
+  }
+
 
 }
