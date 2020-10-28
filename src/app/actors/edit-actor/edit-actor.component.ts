@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { appendToElement } from '@fullcalendar/core';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { Actor } from '../all-actors/actors.model';
 import { ActorsService } from '../all-actors/actors.service';
 
 @Component({
@@ -64,8 +62,6 @@ export class EditActorComponent implements OnInit {
   }
 
   onSubmit(){
-    // const actor = this.actorForm.getRawValue();
-    // console.log(actor);
     const formData = new FormData();
 
     formData.append('ActorFirstName', this.actorForm.get('ActorFirstName').value);

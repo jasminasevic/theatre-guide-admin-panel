@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Actor } from '../all-actors/actors.model';
+import { ActorsService } from '../all-actors/actors.service';
+import { GetImagePathService } from '../../shared/services/get-image-path.service';
 
 @Component({
   selector: 'app-about-actor',
@@ -7,9 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutActorComponent implements OnInit {
 
-  constructor() { }
+  actor: any;
+  imgPath: string;
+
+  constructor(private actorService: ActorsService,
+    private activatedRoute: ActivatedRoute,
+    private imagePath: GetImagePathService) { }
 
   ngOnInit() {
+    let actorId = this.activatedRoute.snapshot.params['id'];
+
+    this.actorService.getActor(actorId)
+      .subscribe(data => {
+        this.actor = data;
+        this.imgPath = this.imagePath.createImagePath(
+          this.actor.showImageDto[0].path);
+      })
   }
 
 }
