@@ -19,6 +19,7 @@ import { DepartmentService } from '../app/departments/all-departments/department
 import { StaffService } from './staff/all-staff/staff.service';
 import { UserService } from './users/all-users/users.service';
 import { ActorsService } from './actors/all-actors/actors.service';
+import { DirectorsService } from './directors/all-directors/directors.service';
 import { ContactsService } from './apps/contacts/contacts.service';
 import { RightSidebarService } from './shared/services/rightsidebar.service';
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -57,6 +58,7 @@ import {
   NgxMatNativeDateModule,
   NgxMatTimepickerModule
 } from '@angular-material-components/datetime-picker';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -71,7 +73,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RightSidebarComponent,
     SimpleDialogComponent,
     DialogformComponent,
-    BottomSheetOverviewExampleSheet,
+    BottomSheetOverviewExampleSheet
   ],
   imports: [
     BrowserModule,
@@ -124,7 +126,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     StaffService,
     ContactsService,
     UserService,
-    ActorsService
+    ActorsService,
+    DirectorsService
   ],
   entryComponents: [
     SimpleDialogComponent,

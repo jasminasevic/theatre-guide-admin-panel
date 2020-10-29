@@ -24,6 +24,10 @@ const routes: Routes = [
     loadChildren: () => import('./actors/actors.module').then(t => t.ActorsModule)
   },
   {
+    path: 'directors',
+    loadChildren: () => import('./directors/directors.module').then(t => t.DirectorsModule)
+  },
+  {
     path: 'email',
     loadChildren: () => import('./email/email.module').then(m => m.EmailModule)
   },
