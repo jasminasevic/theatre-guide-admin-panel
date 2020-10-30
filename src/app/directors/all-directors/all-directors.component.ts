@@ -1,11 +1,14 @@
 import { CollectionViewer } from '@angular/cdk/collections';
 import { DataSource } from '@angular/cdk/table';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { Director } from '../all-directors/directors.model';
+import { DeleteDialogComponent } from './dialog/delete/delete.component';
 import { DirectorsService } from './directors.service';
 
 @Component({
@@ -26,7 +29,9 @@ export class AllDirectorsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
 
-  constructor(private directorService: DirectorsService) { }
+  constructor(private directorService: DirectorsService,
+    private dialog: MatDialog,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.dataSource = new DirectorDataSource(this.directorService);
@@ -75,7 +80,23 @@ export class AllDirectorsComponent implements OnInit {
     )
   }
 
-  deleteItem(){
+  deleteItem(directorId){
+    this.directorService.getDirector(directorId)
+      .subscribe(director => {
+          const dialogRef = this.dialog.open(DeleteDialogComponent, {
+            data: director
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            if(result === 1){
+              this.refresh();
+              this.notificationService.showNotification(
+              'snackbar-success',
+              'Record Deleted Successfully!',
+              'bottom',
+              'center'
+              )}
+          });
+      });
   }
 
 }

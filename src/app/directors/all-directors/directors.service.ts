@@ -32,5 +32,26 @@ export class DirectorsService {
         );
   }
 
+  getDirector(directorId) : Observable<Director>{
+    return this.httpClient.get<Director>(this.API_URL + '/directors/' + directorId)
+      .pipe(
+        map((director: Director) => director),
+        catchError(err => throwError(err))
+      )
+  }
+
+  addDirector(director) : Observable<Director>{
+    return this.httpClient.post<Director>(this.API_URL + '/directors/', director)
+      .pipe(
+        map((director: Director) => director),
+        catchError(err => throwError(err))
+      )
+  }
+
+  deleteDirector(directorId) : void{
+    this.httpClient.delete(this.API_URL + '/directors/' + directorId)
+      .subscribe();
+  }
+
 
 }
