@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Role } from './roles.model';
+import { RolesService } from './roles.service';
+import { DataSource } from '@angular/cdk/table';
+import { CollectionViewer } from '@angular/cdk/collections';
+import { BehaviorSubject, fromEvent, merge, Observable, pipe } from 'rxjs';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-all-roles',
@@ -7,9 +15,98 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllRolesComponent implements OnInit {
 
-  constructor() { }
+  role: Role;
+  dataSource: RoleDataSource;
+
+  displayedColumns = [
+    'no',
+    'role',
+    'actions'
+  ]
+
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('input') input: ElementRef;
+
+  constructor(private roleService: RolesService) { }
 
   ngOnInit() {
+    this.dataSource = new RoleDataSource(this.roleService);
+    this.dataSource.loadRoles();
   }
 
+  refresh(){
+    this.dataSource = new RoleDataSource(this.roleService);
+    this.input.nativeElement.value = '';
+    this.paginator.pageSize = 10;
+    this.paginator.pageIndex = 0;
+    this.dataSource.loadRoles();
+  }
+
+  ngAfterViewInit(){
+    //server-side search
+    fromEvent(this.input.nativeElement, 'keyup')
+      .pipe(
+        debounceTime(150),
+        distinctUntilChanged(),
+        tap(() => {
+          this.paginator.pageIndex = 0,
+          this.loadRolesPages()
+        })
+      )
+      .subscribe()
+
+    // reset the paginator after sorting
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+    // on sort or paginate events, load a new page
+    merge(this.paginator.page, this.sort.sortChange)
+      .pipe(
+        tap(() => this.loadRolesPages())
+      )
+      .subscribe();
+  }
+
+
+  loadRolesPages(){
+    this.dataSource.loadRoles(
+      this.paginator.pageSize = 10,
+      this.paginator.pageIndex = 0,
+      this.sort.active,
+      this.sort.direction,
+      this.input.nativeElement.value
+    )
+  }
+
+  deleteItem(role){
+
+  }
+
+}
+
+
+export class RoleDataSource implements DataSource<Role>{
+  private roleSubject = new BehaviorSubject<Role[]>([]);
+
+  constructor(private roleService: RolesService){}
+
+  connect(collectionViewer: CollectionViewer): Observable<Role[]> {
+    return this.roleSubject.asObservable();
+  }
+  disconnect(collectionViewer: CollectionViewer): void {
+    this.roleSubject.complete();
+  }
+
+  totalCount: number;
+  rowNumber: number;
+
+  loadRoles(pageSize = 10, pageIndex = 0, sortOrder = '', sortDirection = '', searchQuery = ''){
+    this.roleService.getAllRoles(pageSize, pageIndex += 1, sortOrder + '_' + sortDirection, searchQuery)
+      .subscribe(
+        roles => {
+          this.roleSubject.next(roles.data);
+          this.totalCount = roles.totalCount;
+        }
+      )
+  }
 }

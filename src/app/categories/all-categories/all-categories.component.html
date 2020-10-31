@@ -73,7 +73,7 @@
               <mat-table class="users-table mat-elevation-z8" [dataSource]="dataSource" matSort>
 
                 <ng-container matColumnDef="no">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>No.</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
                   <mat-cell *matCellDef="let index = index" >{{ this.paginator.pageIndex > 0
                     ? index + 1 + this.paginator.pageIndex * this.paginator.pageSize
                     : index + 1 }}</mat-cell>
