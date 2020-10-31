@@ -1,1 +1,71 @@
-<p>edit-director works!</p>
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Edit Director</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/dashboard/main">
+                <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a [routerLink]="['/directors/all-directors']">Directors</a>
+            </li>
+            <li class="breadcrumb-item active">Edit</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2><strong> Director Information</strong></h2>
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="directorForm" (ngSubmit)="onSubmit();">
+              <!-- <input type="hidden" formControlName="Id" [value]="service.userForm.Id"> -->
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="DirectorFirstName" required>
+                    <mat-error *ngIf="directorForm.get('DirectorFirstName').hasError('required')">
+                      First name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="DirectorLastName" required>
+                    <mat-error *ngIf="directorForm.get('DirectorLastName').hasError('required')">
+                      Last name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Biography</mat-label>
+                    <textarea matInput formControlName="DirectorBiography"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="mr-3" [disabled]="!directorForm.valid " mat-raised-button color="primary">Submit</button>
+                  <button type="button" mat-button (click)="cancel();">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

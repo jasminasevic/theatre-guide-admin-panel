@@ -48,6 +48,14 @@ export class DirectorsService {
       )
   }
 
+  editDirector(directorId, director) : Observable<Director>{
+    return this.httpClient.put<Director>(this.API_URL + '/directors/' + directorId, director)
+      .pipe(
+        map((director: Director) => director),
+        catchError(err => throwError(err))
+      )
+  }
+
   deleteDirector(directorId) : void{
     this.httpClient.delete(this.API_URL + '/directors/' + directorId)
       .subscribe();

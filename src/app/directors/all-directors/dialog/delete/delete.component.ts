@@ -15,7 +15,7 @@ export class DeleteDialogComponent {
     public directorService: DirectorsService
   ) { }
 
-  confirmDelete(directorId){
+  confirmDelete(){
     this.directorService.deleteDirector(this.data.id);
   }
 
