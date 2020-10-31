@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Director } from '../all-directors/directors.model';
+import { DirectorsService } from '../all-directors/directors.service';
 
 @Component({
   selector: 'app-about-director',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutDirectorComponent implements OnInit {
 
-  constructor() { }
+  director: any;
 
-  ngOnInit(): void {
+  constructor(private directorService: DirectorsService,
+    private activatedRoute: ActivatedRoute) { }
+
+  ngOnInit() {
+    let directorId = this.activatedRoute.snapshot.params['id'];
+
+    this.directorService.getDirector(directorId)
+      .subscribe(data => {
+        this.director = data
+    })
   }
 
 }
