@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { API_URL } from '../../app.constants';
 import { IRoleData } from '../../shared/interfaces/IRoleData';
+import { Role } from './roles.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,14 @@ export class RolesService {
     return this.httpClient.get(this.API_URL + '/roles', { params })
       .pipe(
         map((role: IRoleData) => role),
+        catchError(err => throwError(err))
+      )
+  }
+
+  addRole(role) : Observable<any>{
+    return this.httpClient.post(this.API_URL + '/roles', role)
+      .pipe(
+        map((role: Role) => role ),
         catchError(err => throwError(err))
       )
   }
