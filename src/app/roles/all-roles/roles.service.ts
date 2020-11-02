@@ -55,4 +55,9 @@ export class RolesService {
       )
   }
 
+  deleteRole(id: number) {
+    return this.httpClient.delete<any>(this.API_URL + '/roles/' + id)
+      .subscribe();
+  }
+
 }

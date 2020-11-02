@@ -19,7 +19,7 @@ const routes: Routes = [
     component: EditRoleComponent
   },
   {
-    path: 'adout-role/:id',
+    path: 'about-role/:id',
     component: AboutRoleComponent
   }
 ]

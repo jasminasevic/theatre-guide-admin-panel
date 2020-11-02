@@ -7,6 +7,9 @@ import { BehaviorSubject, fromEvent, merge, Observable, pipe } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from './dialog/delete/delete.component';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-all-roles',
@@ -28,7 +31,9 @@ export class AllRolesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('input') input: ElementRef;
 
-  constructor(private roleService: RolesService) { }
+  constructor(private roleService: RolesService,
+    private dialog: MatDialog,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.dataSource = new RoleDataSource(this.roleService);
@@ -78,8 +83,24 @@ export class AllRolesComponent implements OnInit {
     )
   }
 
-  deleteItem(role){
-
+  deleteItem(roleId){
+    this.roleService.getRole(roleId)
+      .subscribe(role => {
+        const dialogRef = this.dialog.open(DeleteDialogComponent, {
+          data: role
+        });
+        dialogRef.afterClosed()
+          .subscribe(result => {
+            if(result ===1){
+              this.refresh();
+              this.notificationService.showNotification(
+                'snackbar-success',
+                'Record Deleted Successfully!',
+                'bottom',
+                'center'
+              )}
+          });
+      });
   }
 
 }
