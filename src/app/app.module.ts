@@ -21,6 +21,7 @@ import { UserService } from './users/all-users/users.service';
 import { ActorsService } from './actors/all-actors/actors.service';
 import { DirectorsService } from './directors/all-directors/directors.service';
 import { RolesService } from './roles/all-roles/roles.service';
+import { ScenesService } from './scenes/all-scenes/scenes.service';
 import { ContactsService } from './apps/contacts/contacts.service';
 import { RightSidebarService } from './shared/services/rightsidebar.service';
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -129,7 +130,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     UserService,
     ActorsService,
     DirectorsService,
-    RolesService
+    RolesService,
+    ScenesService
   ],
   entryComponents: [
     SimpleDialogComponent,
