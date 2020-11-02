@@ -24,17 +24,33 @@ export class RolesService {
     params = params.append('sortOrder', String(sortOrder));
     params = params.append('searchQuery', String(searchQuery));
 
-    return this.httpClient.get(this.API_URL + '/roles', { params })
+    return this.httpClient.get<IRoleData>(this.API_URL + '/roles', { params })
       .pipe(
         map((role: IRoleData) => role),
         catchError(err => throwError(err))
       )
   }
 
-  addRole(role) : Observable<any>{
-    return this.httpClient.post(this.API_URL + '/roles', role)
+  addRole(role: Role) : Observable<Role>{
+    return this.httpClient.post<Role>(this.API_URL + '/roles', role)
       .pipe(
         map((role: Role) => role ),
+        catchError(err => throwError(err))
+      )
+  }
+
+  editRole(id: number, role: Role) : Observable<Role>{
+    return this.httpClient.put<Role>(this.API_URL + '/roles/' + id, role)
+      .pipe(
+        map((role: Role) => role),
+        catchError(err => throwError(err))
+      )
+  }
+
+  getRole(id: number) : Observable<Role>{
+    return this.httpClient.get<Role>(this.API_URL + '/roles/' + id)
+      .pipe(
+        map((role: Role) => role),
         catchError(err => throwError(err))
       )
   }
