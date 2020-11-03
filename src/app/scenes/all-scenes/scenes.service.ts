@@ -15,9 +15,9 @@ export class ScenesService {
   constructor(private httpClient: HttpClient) { }
 
   getAllScenes(perPage: number, pageNumber: number, sortOrder: String, searchQuery: String)
-    : Observable<ISceneData>
-  {let params = new HttpParams();
+    : Observable<ISceneData>{
 
+    let params = new HttpParams();
     params = params.append('perPage', String(perPage));
     params = params.append('pageNumber', String(pageNumber));
     params = params.append('sortOrder', String(sortOrder));
@@ -29,4 +29,13 @@ export class ScenesService {
         catchError(err => throwError(err))
       )
   }
+
+  getScene(id: number) : Observable<Scene>{
+    return this.httpClient.get<Scene>(this.API_URL + '/scenes/' + id)
+      .pipe(
+        map((scene: Scene) => scene),
+        catchError(err => throwError(err))
+      )
+  }
+
 }
