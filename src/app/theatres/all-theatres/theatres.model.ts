@@ -20,3 +20,14 @@ export class Theatre {
     this.TheatreImage = theatre.TheatreImage || '';
   }
 }
+
+export class TheatreBasic{
+  Id: number;
+  TheatreName: String;
+
+  constructor(theatre){
+    this.Id = theatre.Id;
+    this.TheatreName = theatre.Name || '';
+  }
+}
+

@@ -38,4 +38,12 @@ export class ScenesService {
       )
   }
 
+  addScene(scene: Scene) : Observable<Scene>{
+    return this.httpClient.post<Scene>(this.API_URL + '/scene', scene)
+      .pipe(
+        map((scene: Scene) => scene),
+        catchError(err => throwError(err))
+      )
+  }
+
 }

@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Theatre } from './theatres.model';
+import { Theatre, TheatreBasic } from './theatres.model';
 import { ITheatreData } from '../../shared/interfaces/ITheatreData';
 import { API_URL, httpOptions } from '../../app.constants';
 
@@ -32,6 +32,14 @@ export class TheatreService {
     return this.httpClient.get<ITheatreData>(this.API_URL + '/theatres', { params })
       .pipe(
         map((theatreData: ITheatreData) => theatreData),
+        catchError(err => throwError(err))
+      )
+  }
+
+  getTheatreList(): Observable<TheatreBasic>{
+    return this.httpClient.get<TheatreBasic>(this.API_URL + '/theatres')
+      .pipe(
+        map((theatreList: TheatreBasic) => theatreList),
         catchError(err => throwError(err))
       )
   }
