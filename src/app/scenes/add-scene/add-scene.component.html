@@ -53,35 +53,48 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div class="row">
-                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Sector</mat-label>
-                    <input matInput formControlName="SectorName" required>
-                    <mat-error *ngIf="sceneForm.get('SectorName').hasError('required')">
-                      Sector name is required
-                    </mat-error>
-                  </mat-form-field>
+              <div formArrayName="SectorRows">
+                <div class="row" *ngFor="let sectorRow of sectorControls; let i= index"
+                [formGroupName]='i'>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" >
+                    <mat-form-field class="example-full-width mb-3" appearance="fill">
+                      <mat-label>Sector</mat-label>
+                      <input matInput formControlName="SectorName" required>
+                      <mat-error *ngIf="sectorControls[i].get('SectorName').hasError('required')">
+                        Sector name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="fill">
+                      <mat-label>Seat Capacity</mat-label>
+                      <input matInput formControlName="SeatCapacity" required>
+                      <mat-error *ngIf="sectorControls[i].get('SeatCapacity').hasError('required')">
+                        Sector name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="fill">
+                      <mat-label>Rows Number</mat-label>
+                      <input matInput formControlName="RowsTotalNumber" required>
+                      <mat-error *ngIf="sectorControls[i].get('RowsTotalNumber').hasError('required')">
+                        Sector name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                    <button *ngIf="sceneForm.controls.SectorRows['controls'].length > 1" (click)="deleteSectorRow(i)"
+                      class="btn btn-danger">
+                      <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                    </button>
+                  </div>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Sector Seat Capacity</mat-label>
-                    <input matInput formControlName="SeatCapacity" required>
-                    <mat-error *ngIf="sceneForm.get('SeatCapacity').hasError('required')">
-                      Seat capacity is reqired
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
               <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Sector Row Number</mat-label>
-                    <input matInput formControlName="RowsTotalNumber" required>
-                    <mat-error *ngIf="sceneForm.get('RowsTotalNumber').hasError('required')">
-                      Number of rows is reqired
-                    </mat-error>
-                  </mat-form-field>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-5">
+                  <button type="button" (click)="addNewSector()" class="btn btn-primary">
+                    Add another sector <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                  </button>
                 </div>
               </div>
               <div class="row">
@@ -91,6 +104,7 @@
                   <button type="button" mat-button (click)="cancel();">Cancel</button>
                 </div>
               </div>
+            </div>
             </form>
           </div>
         </div>
