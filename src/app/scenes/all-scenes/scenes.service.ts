@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { ISceneData } from '../../shared/interfaces/ISceneData';
-import { API_URL } from '../../app.constants';
+import { API_URL, httpOptions } from '../../app.constants';
 import { catchError, map } from 'rxjs/operators';
 import { Scene } from './scenes.model';
 
@@ -38,8 +38,8 @@ export class ScenesService {
       )
   }
 
-  addScene(scene: Scene) : Observable<Scene>{
-    return this.httpClient.post<Scene>(this.API_URL + '/scene', scene)
+  addScene(scene) : Observable<Scene>{
+    return this.httpClient.post<Scene>(this.API_URL + '/scenes', scene)
       .pipe(
         map((scene: Scene) => scene),
         catchError(err => throwError(err))

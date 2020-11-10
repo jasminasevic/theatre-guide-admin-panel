@@ -12,6 +12,6 @@ export class Actor {
     this.ActorFirstName = actor.ActorFirstName || '';
     this.ActorLastName = actor.ActorLastName || '';
     this.ActorBiography = actor.ActorBiography || '';
-    this.ActorImage = actor.TheatreImage || '';
+    this.ActorImage = actor.ActorImage || '';
   }
 }

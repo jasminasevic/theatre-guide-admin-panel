@@ -27,18 +27,17 @@
           </div>
           <div class="body">
             <form class="m-4" [formGroup]="sceneForm" (ngSubmit)="onSubmit();">
-              <!-- <input type="hidden" formControlName="Id" [value]="service.userForm.Id"> -->
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3">
                     <mat-label>Theatre</mat-label>
-                    <mat-select formControlName="TheatreName" required>
+                    <mat-select formControlName="TheatreId" required>
                       <mat-option>--</mat-option>
                       <mat-option *ngFor="let item of theatreListing" [value]="item.id">
                         {{ item.theatreName }}
                       </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="sceneForm.get('TheatreName').hasError('required')">
+                    <mat-error *ngIf="sceneForm.get('TheatreId').hasError('required')">
                       Please choose a theatre
                     </mat-error>
                   </mat-form-field>
@@ -53,7 +52,7 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div formArrayName="SectorRows">
+              <div formArrayName="AddSectorDtos">
                 <div class="row" *ngFor="let sectorRow of sectorControls; let i= index"
                 [formGroupName]='i'>
                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" >
@@ -70,7 +69,7 @@
                       <mat-label>Seat Capacity</mat-label>
                       <input matInput formControlName="SeatCapacity" required>
                       <mat-error *ngIf="sectorControls[i].get('SeatCapacity').hasError('required')">
-                        Sector name is required
+                        Seat Capacity is required
                       </mat-error>
                     </mat-form-field>
                   </div>
@@ -79,12 +78,12 @@
                       <mat-label>Rows Number</mat-label>
                       <input matInput formControlName="RowsTotalNumber" required>
                       <mat-error *ngIf="sectorControls[i].get('RowsTotalNumber').hasError('required')">
-                        Sector name is required
+                        Rows number is required
                       </mat-error>
                     </mat-form-field>
                   </div>
                   <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
-                    <button *ngIf="sceneForm.controls.SectorRows['controls'].length > 1" (click)="deleteSectorRow(i)"
+                    <button *ngIf="sectorControls.length > 1" (click)="deleteSectorRow(i)"
                       class="btn btn-danger">
                       <i class="fa fa-minus-circle" aria-hidden="true"></i>
                     </button>

@@ -35,10 +35,10 @@ export class AddSceneComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
       ]],
-      TheatreName: [
+      TheatreId: [
         Validators.required,
       ],
-      SectorRows: this.fb.array([this.initalSectorRows()])
+      AddSectorDtos: this.fb.array([this.initalSectorRows()])
       });
   }
 
@@ -63,11 +63,11 @@ export class AddSceneComponent implements OnInit {
   }
 
   get formArr(){
-    return this.sceneForm.get('SectorRows') as FormArray;
+    return this.sceneForm.get('AddSectorDtos') as FormArray;
   }
 
   get sectorControls(){
-    return this.sceneForm.controls.SectorRows['controls'];
+    return this.sceneForm.controls.AddSectorDtos['controls'];
   }
 
   addNewSector(){
@@ -79,10 +79,30 @@ export class AddSceneComponent implements OnInit {
   }
 
   onSubmit(){
-    let data = this.sceneForm.value;
-    console.log(data);
-    let data2 = data.SectorRows[0].SectorName;
-    console.log(data2);
+
+    const formData = new FormData();
+
+    formData.append('SceneName', this.sceneForm.get('SceneName').value);
+    formData.append('TheatreId', this.sceneForm.get('TheatreId').value);
+
+    const sectors = this.sceneForm.get('AddSectorDtos').value;
+
+    for(let i = 0; i < sectors.length; i++){
+      formData.append('AddSectorDtos[' + i + '][SectorName]', sectors[i].SectorName);
+      formData.append('AddSectorDtos[' + i + '][RowsTotalNumber]', sectors[i].RowsTotalNumber);
+      formData.append('AddSectorDtos[' + i + '][SeatCapacity]', sectors[i].SeatCapacity);
+    }
+
+    this.sceneService.addScene(formData)
+      .subscribe(() => {
+        this.notificationService.showNotification(
+          'snackbar-success',
+          'Record Added Successfully!',
+          'bottom',
+          'center'
+        ),
+        this.router.navigate(['scenes/all-scenes']);
+        })
   }
 
   resetForm(){
@@ -93,4 +113,8 @@ export class AddSceneComponent implements OnInit {
     this.router.navigate(['scenes/all-scenes']);
   }
 
+
 }
+
+
+
