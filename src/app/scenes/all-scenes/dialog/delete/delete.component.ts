@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ScenesService } from '../../scenes.service';
 
 @Component({
   selector: 'app-delete',
@@ -6,11 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./delete.component.sass']
 })
 
-export class DeleteDialogComponent implements OnInit {
+export class DeleteDialogComponent {
 
-  constructor() { }
+  constructor(
+    private dialogRef: MatDialogRef<DeleteDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private sceneService: ScenesService
+  ) { }
 
-  ngOnInit(): void {
+  confirmDelete() : void {
+    this.sceneService.deleteScene(this.data.id);
+  }
+
+  onNoClick(){
+    this.dialogRef.close();
   }
 
 }

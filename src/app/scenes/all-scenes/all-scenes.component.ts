@@ -6,8 +6,11 @@ import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { DeleteDialogComponent } from './dialog/delete/delete.component';
 import { Scene } from './scenes.model';
 import { ScenesService } from './scenes.service';
+import { MatDialog } from '@angular/material/dialog';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-all-scenes',
@@ -31,7 +34,9 @@ export class AllScenesComponent implements OnInit {
   @ViewChild('input') input: ElementRef;
 
   constructor(private router: Router,
-    private sceneService: ScenesService) { }
+    private sceneService: ScenesService,
+    private dialog: MatDialog,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.dataSource = new SceneDataSource(this.sceneService);
@@ -72,18 +77,32 @@ export class AllScenesComponent implements OnInit {
 
   loadScenesPages(){
     this.dataSource.loadScenes(
-      this.paginator.pageSize = 10,
-      this.paginator.pageIndex = 0,
+      this.paginator.pageSize,
+      this.paginator.pageIndex,
       this.sort.active,
       this.sort.direction,
       this.input.nativeElement.value
     );
   }
 
-  deleteItem(){
-
+  deleteItem(id){
+    this.sceneService.getScene(id)
+      .subscribe(scene => {
+        const dialogRef = this.dialog.open(DeleteDialogComponent, {
+          data: scene
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if(result === 1){
+            this.refresh();
+            this.notificationService.showNotification(
+              'snackbar-success',
+              'Record Deleted Successfully!',
+              'bottom',
+              'center'
+            )}
+        });
+      });
   }
-
 }
 
 export class SceneDataSource implements DataSource<Scene>{
@@ -100,8 +119,8 @@ export class SceneDataSource implements DataSource<Scene>{
 
   totalCount: number;
 
-  loadScenes(perPage = 10, pageIndex = 0, sortOrder = '', sortDirection = '', searchQuery = ''){
-    this.sceneService.getAllScenes(perPage, pageIndex += 1, sortOrder + '_' + sortDirection, searchQuery)
+  loadScenes(pageSize = 10, pageIndex = 0, sortOrder = '', sortDirection = '', searchQuery = ''){
+    this.sceneService.getAllScenes(pageSize, pageIndex += 1, sortOrder + '_' + sortDirection, searchQuery)
       .subscribe(scenes => {
         this.sceneSubject.next(scenes.data),
         this.totalCount = scenes.totalCount

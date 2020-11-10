@@ -46,4 +46,10 @@ export class ScenesService {
       )
   }
 
+
+  deleteScene(id: number) {
+    return this.httpClient.delete<Scene>(this.API_URL + '/scenes/' + id)
+      .subscribe();
+  }
+
 }
