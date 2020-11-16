@@ -1,6 +1,5 @@
 export interface ISector {
-  Id: number;
-  SectorName: String;
-  RowsTotalNumber: number;
-  SeatCapacity: number;
+  SectorName: String,
+  SeatCapacity: number,
+  RowsTotalNumber: number
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Scene } from '../all-scenes/scenes.model';
 import { ScenesService } from '../all-scenes/scenes.service';
 
 @Component({
@@ -20,8 +19,7 @@ export class AboutSceneComponent implements OnInit {
 
     this.scene = this.sceneService.getScene(sceneId)
       .subscribe(data =>{
-        this.scene = data,
-        console.log(data);
+        this.scene = data
       })
   }
 

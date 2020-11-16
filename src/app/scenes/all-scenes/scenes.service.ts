@@ -46,10 +46,17 @@ export class ScenesService {
       )
   }
 
-
   deleteScene(id: number) {
-    return this.httpClient.delete<Scene>(this.API_URL + '/scenes/' + id)
+    return this.httpClient.delete<any>(this.API_URL + '/scenes/' + id)
       .subscribe();
+  }
+
+  editScene(id:number, scene: Scene){
+    return this.httpClient.put<void>(this.API_URL + '/scenes/' + id, scene)
+      .pipe(
+        map((scene) => scene),
+        catchError(err => throwError(err))
+      )
   }
 
 }

@@ -1,1 +1,112 @@
-<p>edit-scene works!</p>
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Edit scene</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/dashboard/main">
+                <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a [routerLink]="['/scenes/all-scenes']">Scenes</a>
+            </li>
+            <li class="breadcrumb-item active">Edit</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2><strong> Scene Information</strong></h2>
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="sceneForm" (ngSubmit)="onSubmit();">
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3">
+                    <mat-label>Theatre</mat-label>
+                    <mat-select formControlName="theatreId" required>
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let item of theatreListing" [value]="item.id">
+                        {{ item.theatreName }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="sceneForm.get('theatreId').hasError('required')">
+                      Please choose a theatre
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Scene Name</mat-label>
+                    <input matInput formControlName="sceneName" required>
+                    <mat-error *ngIf="sceneForm.get('sceneName').hasError('required')">
+                      Scene name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div formArrayName="addSectorDtos">
+                <div class="row" *ngFor="let sectorRow of sectorControls; let i= index"
+                [formArrayName]='i'>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" >
+                    <mat-form-field class="example-full-width mb-3" appearance="fill">
+                      <mat-label>Sector</mat-label>
+                      <input matInput formControlName="sectorName" required>
+                      <mat-error *ngIf="sectorControls[i].get('sectorName')?.hasError('required')">
+                        Sector name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="fill">
+                      <mat-label>Seat Capacity</mat-label>
+                      <input matInput formControlName="seatCapacity" required>
+                      <mat-error *ngIf="sectorControls[i].get('seatCapacity')?.hasError('required')">
+                        Seat Capacity is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="fill">
+                      <mat-label>Rows Number</mat-label>
+                      <input matInput formControlName="rowsTotalNumber" required>
+                      <mat-error *ngIf="sectorControls[i].get('rowsTotalNumber')?.hasError('required')">
+                        Rows number is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                    <button *ngIf="sectorControls.length > 1" (click)="deleteSectorRow(i)"
+                      class="btn btn-danger">
+                      <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-5">
+                  <button type="button" (click)="addNewSector()" class="btn btn-primary">
+                    Add another sector <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="mr-3" [disabled]="!sceneForm.valid " mat-raised-button color="primary">Submit</button>
+                  <button type="button" mat-button (click)="cancel();">Cancel</button>
+                </div>
+              </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,10 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Theatre } from '../all-theatres/theatres.model';
 import { TheatreService } from '../all-theatres/theatres.service';
 import { NotificationService } from '../../shared/services/notification.service';
-import { FileInput } from 'ngx-material-file-input';
 
 @Component({
   selector: 'app-edit-theatre',
