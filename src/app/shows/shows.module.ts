@@ -46,7 +46,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     AddShowComponent,
     EditShowComponent,
     AboutShowComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
   ],
 })
 export class ShowsModule { }
