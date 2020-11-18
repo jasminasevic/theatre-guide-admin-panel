@@ -3,7 +3,6 @@ import { DataSource } from '@angular/cdk/table';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Router } from '@angular/router';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { DeleteDialogComponent } from './dialog/delete/delete.component';
@@ -33,7 +32,7 @@ export class AllScenesComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
 
-  constructor(private router: Router,
+  constructor(
     private sceneService: ScenesService,
     private dialog: MatDialog,
     private notificationService: NotificationService) { }
