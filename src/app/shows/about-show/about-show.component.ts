@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { GetImagePathService } from 'src/app/shared/services/get-image-path.service';
+import { ShowsService } from '../all-shows/shows.service';
 
 @Component({
   selector: 'app-about-show',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutShowComponent implements OnInit {
 
-  constructor() { }
+  show: any;
+  imgPath: string;
 
-  ngOnInit(): void {
+  constructor(private showService: ShowsService,
+    private activatedRoute: ActivatedRoute,
+    private imagePath: GetImagePathService) { }
+
+  ngOnInit() {
+    let showId = this.activatedRoute.snapshot.params['id'];
+
+    this.show = this.showService.getShow(showId)
+      .subscribe(data => {
+        this.show = data,
+        console.log(data),
+        this.imgPath = this.imagePath.createImagePath(
+          this.show.showImageDtos[0].path);
+      })
   }
 
 }
