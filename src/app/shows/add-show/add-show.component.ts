@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-add-show',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-show.component.sass']
 })
 export class AddShowComponent implements OnInit {
+
+  showForm: FormGroup;
+  theatreListing: any = [];
 
   constructor() { }
 

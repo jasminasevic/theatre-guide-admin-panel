@@ -39,6 +39,14 @@ export class ShowsService {
       )
   }
 
+  addShow(show) : Observable<Show>{
+    return this.httpClient.post<Show>(this.API_URL + '/shows', show)
+      .pipe(
+        map((show: Show) => show),
+        catchError(err => throwError(err))
+      )
+  }
+
 
 
 }

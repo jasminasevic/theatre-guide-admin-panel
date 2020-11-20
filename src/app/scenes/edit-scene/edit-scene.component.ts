@@ -17,6 +17,8 @@ export class EditSceneComponent implements OnInit {
   sceneForm: FormGroup;
   sceneDetails: any;
   theatreListing: any = [];
+  selectedValue: number;
+  selectedTheatre: String;
 
   constructor(private activatedRoute: ActivatedRoute,
     private sceneService: ScenesService,
@@ -40,6 +42,7 @@ export class EditSceneComponent implements OnInit {
         (scene: Scene) => {
           this.editScene(scene),
           this.sceneDetails = scene;
+          this.selectedValue = scene.TheatreId;
         },
         (err: any) => console.log(err)
       );
