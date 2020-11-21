@@ -30,6 +30,14 @@ export class CategoriesService {
       )
   }
 
+  getCategoryList() : Observable<Category>{
+    return this.httpClient.get<Category>(this.API_URL + '/categories')
+      .pipe(
+        map((category: Category) => category),
+        catchError(err => throwError(err))
+      )
+  }
+
   addCategory(category) : any {
     return this.httpClient.post<Category>(this.API_URL + '/categories', category)
       .pipe(

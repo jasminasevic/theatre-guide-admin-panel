@@ -38,6 +38,17 @@ export class ScenesService {
       )
   }
 
+  getScenesInTheatre(theatreId: number) : Observable<Scene>{
+    let params = new HttpParams();
+    params = params.append('theatreId', String(theatreId));
+
+    return this.httpClient.get<Scene>(this.API_URL + '/scenes', { params })
+      .pipe(
+        map((scene: Scene) => scene),
+        catchError(err => throwError(err))
+      )
+  }
+
   addScene(scene) : Observable<Scene>{
     return this.httpClient.post<Scene>(this.API_URL + '/scenes', scene)
       .pipe(

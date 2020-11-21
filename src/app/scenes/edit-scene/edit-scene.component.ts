@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ScenesService } from '../all-scenes/scenes.service';
 import { TheatreService } from '../../theatres/all-theatres/theatres.service';
 import { Scene } from '../all-scenes/scenes.model';
-import { ISector } from 'src/app/shared/interfaces/ISector';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
