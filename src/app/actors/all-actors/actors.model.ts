@@ -15,3 +15,15 @@ export class Actor {
     this.ActorImage = actor.ActorImage || '';
   }
 }
+
+export class ActorBasic {
+  Id: number;
+  ActorFirstName: string;
+  ActorLastName: string;
+
+  constructor(actor){
+    this.Id = actor.Id;
+    this.ActorFirstName = actor.ActorFirstName || '';
+    this.ActorLastName = actor.ActorLastName || '';
+  }
+}

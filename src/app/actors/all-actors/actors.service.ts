@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { API_URL } from 'src/app/app.constants';
 import { IActorData } from '../../shared/interfaces/IActorData';
-import { Actor } from './actors.model';
+import { Actor, ActorBasic } from './actors.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,22 @@ export class ActorsService {
       )
   }
 
+  getActor(id: number) : Observable<Actor>{
+    return this.httpClient.get<Actor>(this.API_URL + '/actors/' + id)
+      .pipe(
+        map((actor: Actor) => actor),
+        catchError(err => throwError(err))
+      )
+  }
+
+  getActorList() : Observable<ActorBasic[]>{
+    return this.httpClient.get<ActorBasic[]>(this.API_URL + '/actors')
+      .pipe(
+        map((actors: ActorBasic[]) => actors),
+        catchError(err => throwError(err))
+      )
+  }
+
   addActor(actor) : Observable<Actor>{
     return this.httpClient.post<Actor>(this.API_URL + '/actors', actor)
       .pipe(
@@ -44,14 +60,6 @@ export class ActorsService {
 
   editActor(id: number, actor) : Observable<Actor>{
     return this.httpClient.put<Actor>(this.API_URL + '/actors/' + id, actor)
-      .pipe(
-        map((actor: Actor) => actor),
-        catchError(err => throwError(err))
-      )
-  }
-
-  getActor(id: number) : Observable<Actor>{
-    return this.httpClient.get<Actor>(this.API_URL + '/actors/' + id)
       .pipe(
         map((actor: Actor) => actor),
         catchError(err => throwError(err))

@@ -17,7 +17,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterModule } from '@angular/router';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
@@ -38,7 +40,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatDialogModule,
     MatSortModule,
     RouterModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    NgxMatFileInputModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
