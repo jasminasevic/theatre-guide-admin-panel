@@ -1,10 +1,13 @@
 import { CollectionViewer } from '@angular/cdk/collections';
 import { DataSource } from '@angular/cdk/table';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { DeleteDialogComponent } from './dialog/delete/delete.component';
 import { Show } from './shows.model';
 import { ShowsService } from './shows.service';
 
@@ -31,7 +34,9 @@ export class AllShowsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
 
-  constructor(private showService: ShowsService) { }
+  constructor(private showService: ShowsService,
+    private dialog: MatDialog,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.dataSource = new ShowDataSource(this.showService);
@@ -81,7 +86,22 @@ export class AllShowsComponent implements OnInit {
   }
 
   deleteItem(showId){
-
+    this.showService.getShow(showId)
+      .subscribe(show => {
+        const dialogRef = this.dialog.open(DeleteDialogComponent, {
+          data: show
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if(result === 1){
+            this.refresh();
+            this.notificationService.showNotification(
+              'snackbar-success',
+              'Record Deleted Successfully!',
+              'bottom',
+              'center'
+            )}
+        })
+      })
   }
 
 }

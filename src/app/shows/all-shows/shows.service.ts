@@ -55,6 +55,9 @@ export class ShowsService {
       )
   }
 
-
+  deleteShow(id: number) {
+    return this.httpClient.delete<any>(this.API_URL + '/shows/' + id)
+      .subscribe();
+  }
 
 }
