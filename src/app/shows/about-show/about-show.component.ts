@@ -26,9 +26,7 @@ export class AboutShowComponent implements OnInit {
     this.show = this.showService.getShow(showId)
       .subscribe(data => {
         this.show = data,
-        console.log(data),
         this.showDate = this.convertDateService.getDateFromDateTime(this.show.premiereDate);
-        console.log(this.showDate);
         this.imgPath = this.imagePath.createImagePath(
           this.show.showImageDtos[0].path);
       })

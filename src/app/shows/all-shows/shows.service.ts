@@ -47,6 +47,14 @@ export class ShowsService {
       )
   }
 
+  editShow(id: number, show) : Observable<void>{
+    return this.httpClient.put<void>(this.API_URL + '/shows/' + id, show)
+      .pipe(
+        map(show => show),
+        catchError(err => throwError(err))
+      )
+  }
+
 
 
 }

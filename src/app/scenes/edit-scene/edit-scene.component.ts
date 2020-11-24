@@ -18,6 +18,7 @@ export class EditSceneComponent implements OnInit {
   theatreListing: any = [];
   selectedValue: number;
   selectedTheatre: String;
+  scenesInTheatre: any = [];
 
   constructor(private activatedRoute: ActivatedRoute,
     private sceneService: ScenesService,
@@ -60,8 +61,8 @@ export class EditSceneComponent implements OnInit {
     sectorSets.forEach(s => {
       sectorFormArray.push(this.fb.group({
         sectorName: s.sectorName,
-        seatCapacity: s.seatCapacity,
-        rowsTotalNumber: s.rowsTotalNumber
+        seatCapacity: s.seatCapacity.toString(),
+        rowsTotalNumber: s.rowsTotalNumber.toString()
       }));
     });
     return sectorFormArray;
@@ -117,7 +118,6 @@ export class EditSceneComponent implements OnInit {
 
   onSubmit() : void {
     this.mapFormValuesToSceneModel();
-    console.log(this.sceneDetails);
     this.sceneService.editScene(this.sceneDetails.id, this.sceneDetails)
       .subscribe(
         () => {

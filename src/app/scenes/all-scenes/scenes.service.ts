@@ -62,10 +62,10 @@ export class ScenesService {
       .subscribe();
   }
 
-  editScene(id:number, scene: Scene){
+  editScene(id:number, scene: Scene) : Observable<void>{
     return this.httpClient.put<void>(this.API_URL + '/scenes/' + id, scene)
       .pipe(
-        map((scene) => scene),
+        map(scene => scene),
         catchError(err => throwError(err))
       )
   }

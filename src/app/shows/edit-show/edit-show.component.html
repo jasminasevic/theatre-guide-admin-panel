@@ -1,1 +1,210 @@
-<p>edit-show works!</p>
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Edit show</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/dashboard/main">
+                <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a [routerLink]="['/shows/all-shows']">Shows</a>
+            </li>
+            <li class="breadcrumb-item active">Edit</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2><strong> Show Information</strong></h2>
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="showForm" (ngSubmit)="onSubmit();">
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Title</mat-label>
+                    <input matInput formControlName="title" required>
+                    <mat-error *ngIf="showForm.get('title').hasError('required')">
+                      Title is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3">
+                    <mat-label>Category</mat-label>
+                    <mat-select formControlName="categoryId" required>
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let category of categoryListing" [value]="category.id">
+                        {{ category.categoryName }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="showForm.get('categoryId').hasError('required')">
+                      Please choose a category
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+               <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput formControlName="description"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3">
+                    <mat-label>Theatre</mat-label>
+                    <mat-select formControlName="theatreId" required
+                    (ngModelChange)="onChangeObj($event)" >
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let theatre of theatreListing" [value]="theatre.id">
+                        {{ theatre.theatreName }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="showForm.get('theatreId').hasError('required')">
+                      Please choose a theatre
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" >
+                  <mat-form-field class="example-full-width mb-3">
+                    <mat-label>Scene</mat-label>
+                    <mat-select formControlName="sceneId" required [(ngValue)]="selectedScene">
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let scene of scenesInTheatre" [value]="scene.id">
+                        {{ scene.sceneName }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="showForm.get('sceneId').hasError('required')">
+                      Please choose a scene
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Duration</mat-label>
+                    <input matInput formControlName="duration" required>
+                    <mat-error *ngIf="showForm.get('duration').hasError('required')">
+                      Duration is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Premiere Date</mat-label>
+                    <input matInput formControlName="premiereDate" [matDatepicker]="picker" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="showForm.get('premiereDate').hasError('required')">
+                      Premiere date is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+             <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Writer</mat-label>
+                    <input matInput formControlName="writer" required>
+                    <mat-error *ngIf="showForm.get('writer').hasError('required')">
+                      Writer is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3">
+                    <mat-label>Director</mat-label>
+                    <mat-select formControlName="directorId" required>
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let director of directorListing" [value]="director.id">
+                        {{ director.firstName + ' ' + director.lastName }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="showForm.get('directorId').hasError('required')">
+                      Please select director
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div formArrayName="actorShowDtos">
+                <div class="row" *ngFor="let actorRow of actorControls; let i= index"
+                [formGroupName]='i'>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" >
+                    <mat-form-field class="example-full-width mb-3" appearance="fill">
+                      <mat-label>Actor</mat-label>
+                      <mat-select formControlName="actorId" required>
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let actor of actorListing" [value]="actor.id">
+                          {{ actor.firstName + ' ' + actor.lastName }}
+                        </mat-option>
+                      </mat-select>
+                      <!-- <mat-error *ngIf="actorControls[i].get('actorId').hasError('required')">
+                        Please select actor
+                      </mat-error> -->
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="fill">
+                      <mat-label>Role Name</mat-label>
+                      <input matInput formControlName="actorRoleName" required>
+                      <!-- <mat-error *ngIf="actorControls[i].get('actorRoleName').hasError('required')">
+                        Role name is required
+                      </mat-error> -->
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="fill">
+                      <mat-label>Role Description</mat-label>
+                      <input matInput formControlName="actorRoleDescription" required>
+                      <!-- <mat-error *ngIf="actorControls[i].get('actorRoleDescription').hasError('required')">
+                        Role description is required
+                      </mat-error> -->
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-2 mb-2">
+                    <button type="button" (click)="addNewActor()" class="btn btn-primary">
+                      Add another actor <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div class="col-xl-3 col-lg-2 col-md-2 col-sm-2 mb-2">
+                    <button *ngIf="actorControls.length > 1" (click)="deleteActorRow(i)"
+                      class="btn btn-danger">
+                      <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                    </button>
+                  </div>
+              </div>
+            </div>
+           <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Upload Image(s)</mat-label>
+                  <ngx-mat-file-input formControlName="showImg" multiple>
+                  </ngx-mat-file-input>
+                </mat-form-field>
+              </div>
+            </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="mr-3" [disabled]="!showForm.valid " mat-raised-button color="primary">Submit</button>
+                  <button type="button" mat-button (click)="cancel();">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
