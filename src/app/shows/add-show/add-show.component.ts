@@ -149,8 +149,6 @@ export class AddShowComponent implements OnInit {
       formData.append("ShowImages", images[i]);
     }
 
-    console.log();
-
     this.showService.addShow(formData)
       .subscribe(() => {
         this.notificationService.showNotification(

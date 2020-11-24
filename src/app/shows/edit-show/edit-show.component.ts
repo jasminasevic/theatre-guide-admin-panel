@@ -5,9 +5,9 @@ import { ActorsService } from 'src/app/actors/all-actors/actors.service';
 import { CategoriesService } from 'src/app/categories/all-categories/categories.service';
 import { DirectorsService } from 'src/app/directors/all-directors/directors.service';
 import { ScenesService } from 'src/app/scenes/all-scenes/scenes.service';
+import { ConvertDateService } from 'src/app/shared/services/convert-date.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { TheatreService } from 'src/app/theatres/all-theatres/theatres.service';
-import { Show } from '../all-shows/shows.model';
 import { ShowsService } from '../all-shows/shows.service';
 
 @Component({
@@ -37,7 +37,8 @@ export class EditShowComponent implements OnInit {
     private directorService: DirectorsService,
     private actorService: ActorsService,
     private router: Router,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService,
+    private convertDateService: ConvertDateService) { }
 
   ngOnInit() {
     this.categoryService.getCategoryList()
@@ -153,9 +154,38 @@ export class EditShowComponent implements OnInit {
 
 
   onSubmit() : void{
-    this.mapFormValuesToShowModel();
-    console.log('posle mapiranja', this.showDetails);
-    this.showService.editShow(this.showDetails.id, this.showDetails)
+
+    var showDate = this.showForm.get('premiereDate').value;
+    var showDateTime = this.convertDateService.convertDate(showDate);
+
+    const formData = new FormData();
+
+    formData.append('Title', this.showForm.get('title').value);
+    formData.append('Description', this.showForm.get('description').value);
+    formData.append('Duration', this.showForm.get('duration').value);
+    formData.append('ContentAdvisory', 'False');
+    formData.append('PremiereDate', showDateTime);
+    formData.append('CategoryId', this.showForm.get('categoryId').value);
+    formData.append('Writer', this.showForm.get('writer').value);
+    formData.append('DirectorId', this.showForm.get('directorId').value);
+    formData.append('TheatreId', this.showForm.get('theatreId').value);
+    formData.append('SceneId', this.showForm.get('sceneId').value);
+
+    const actors = this.showForm.get('actorShowDtos').value;
+
+    for(let i = 0; i < actors.length; i++){
+      formData.append('ActorShowDtos[' + i + '][ActorId]', actors[i].actorId);
+      formData.append('ActorShowDtos[' + i + '][ActorRoleName]', actors[i].actorRoleName);
+      formData.append('ActorShowDtos[' + i + '][ActorRoleDescription]', actors[i].actorRoleDescription);
+    }
+
+    const images = this.showForm.get('showImg').value;
+
+    for(var i=0; i<images.length; i++){
+      formData.append("ShowImages", images[i]);
+    }
+
+    this.showService.editShow(this.showDetails.id, formData)
       .subscribe(() => {
         this.notificationService.showNotification(
           'snackbar-success',
@@ -163,23 +193,9 @@ export class EditShowComponent implements OnInit {
           'bottom',
           'center'
         ),
-        this.router.navigate(['/scenes/all-scenes'])
+        this.router.navigate(['/shows/all-shows'])
         }),
       (err: any) => console.log(err)
-  }
-
-  mapFormValuesToShowModel(){
-    this.showDetails.Title = this.showForm.value.title;
-    this.showDetails.CategoryId = this.showForm.value.categoryId;
-    this.showDetails.Description = this.showForm.value.description;
-    this.showDetails.TheatreId = this.showForm.value.theatreId;
-    this.showDetails.SceneId = this.showForm.value.sceneId;
-    this.showDetails.Duration = this.showForm.value.duration;
-    this.showDetails.PremiereDate = this.showForm.value.premiereDate;
-    this.showDetails.Writer = this.showForm.value.writer;
-    this.showDetails.DirectorId = this.showForm.value.directorId;
-    this.showDetails.ActorShowDtos = this.showForm.value.actorShowDtos;
-    this.showDetails.ShowImg = this.showForm.value.showImg;
   }
 
   cancel(){
