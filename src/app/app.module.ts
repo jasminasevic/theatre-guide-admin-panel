@@ -23,6 +23,7 @@ import { DirectorsService } from './directors/all-directors/directors.service';
 import { RolesService } from './roles/all-roles/roles.service';
 import { ScenesService } from './scenes/all-scenes/scenes.service';
 import { ShowsService } from './shows/all-shows/shows.service';
+import { RepertoiresService } from './repertoire/all-repertories/repertoires.service';
 import { ContactsService } from './apps/contacts/contacts.service';
 import { RightSidebarService } from './shared/services/rightsidebar.service';
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -76,7 +77,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RightSidebarComponent,
     SimpleDialogComponent,
     DialogformComponent,
-    BottomSheetOverviewExampleSheet
+    BottomSheetOverviewExampleSheet,
   ],
   imports: [
     BrowserModule,
@@ -133,7 +134,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DirectorsService,
     RolesService,
     ScenesService,
-    ShowsService
+    ShowsService,
+    RepertoiresService
   ],
   entryComponents: [
     SimpleDialogComponent,

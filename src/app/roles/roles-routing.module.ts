@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AllRolesComponent } from '../roles/all-roles/all-roles.component';
-import { AddRoleComponent } from '../roles/add-role/add-role.component';
-import { EditRoleComponent } from '../roles/edit-role/edit-role.component';
-import { AboutRoleComponent } from '../roles/about-role/about-role.component';
+import { AllRolesComponent } from './all-roles/all-roles.component';
+import { AddRoleComponent } from './add-role/add-role.component';
+import { EditRoleComponent } from './edit-role/edit-role.component';
+import { AboutRoleComponent } from './about-role/about-role.component';
 
 const routes: Routes = [
   {
