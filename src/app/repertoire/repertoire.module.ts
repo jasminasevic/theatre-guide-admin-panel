@@ -15,9 +15,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterModule } from '@angular/router';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -34,7 +40,12 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatButtonModule,
     MatDialogModule,
     MatSortModule,
-    RouterModule
+    MatSelectModule,
+    RouterModule,
+    NgxDatatableModule,
+    MatDatepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [

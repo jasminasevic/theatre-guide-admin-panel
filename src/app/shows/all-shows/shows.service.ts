@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { API_URL } from '../../app.constants';
 import { IShowData } from '../../shared/interfaces/IShowData';
-import { Show } from './shows.model';
+import { Show, ShowBaseInfo } from './shows.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,14 @@ export class ShowsService {
           catchError(err => throwError(err))
         )
     }
+
+  getShowList() : Observable<ShowBaseInfo>{
+    return this.httpClient.get<ShowBaseInfo>(this.API_URL + '/shows/')
+      .pipe(
+        map((show: ShowBaseInfo) => show),
+        catchError(err => throwError(err))
+      )
+  }
 
   getShow(showId: number) : Observable<Show>{
     return this.httpClient.get<Show>(this.API_URL + '/shows/' + showId)

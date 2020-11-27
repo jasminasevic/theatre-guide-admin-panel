@@ -35,3 +35,22 @@ export class Show {
     this.ActorShowDtos = show.ActorShowsDto || '';
   }
 }
+
+
+export class ShowBaseInfo {
+  Id: number;
+  Title: String;
+  Theatre: String;
+  TheatreId: number;
+  Scene: String;
+  SceneId: number;
+
+  constructor(show){
+    this.Id = show.Id;
+    this.Title = show.Title || '';
+    this.Theatre = show.Theatre || '';
+    this.TheatreId = show.TheatreId || '';
+    this.Scene = show.Scene || '';
+    this.SceneId = show.SceneId || '';
+  }
+}

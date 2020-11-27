@@ -56,6 +56,8 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import {
   NgxMatDatetimePickerModule,
@@ -112,7 +114,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       apiKey: 'YOUR API KEY',
     }),
     MatSnackBarModule,
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    FullCalendarModule,
+    NgxDatatableModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
