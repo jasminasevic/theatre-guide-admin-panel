@@ -22,7 +22,7 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   dataSource: UserDataSource;
   userDetail: User;
   displayedColumns = [
-    'number',
+    'no',
     'firstName',
     'lastName',
     'email',

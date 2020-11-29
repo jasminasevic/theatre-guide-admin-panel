@@ -20,7 +20,7 @@ export class AllDirectorsComponent implements OnInit {
 
   dataSource: DirectorDataSource;
   displayedColumns = [
-    'no',
+    'number',
     'directorFirstName',
     'actions'
   ]

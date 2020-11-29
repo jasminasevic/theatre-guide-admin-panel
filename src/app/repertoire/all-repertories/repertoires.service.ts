@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { API_URL } from 'src/app/app.constants';
 import { Repertoire } from './repertoires.model';
+import { IRepertoireData } from '../../shared/interfaces/IRepertoireData';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,21 @@ export class RepertoiresService {
   constructor(private httpClient: HttpClient) { }
 
   private API_URL = API_URL;
+
+  getAllRepertoires(perPage: number, pageNumber: number, sortOrder: String, searchQuery: String) : Observable<IRepertoireData>{
+    let params = new HttpParams();
+
+    params = params.append('perPage', String(perPage));
+    params = params.append('pageNumber', String(pageNumber));
+    params = params.append('sortOrder', String(sortOrder));
+    params = params.append('searchQuery', String(searchQuery));
+
+    return this.httpClient.get<IRepertoireData>(this.API_URL + '/repertoires', { params })
+      .pipe(
+        map((repertoire: IRepertoireData) => repertoire),
+        catchError(err => throwError(err))
+      )
+  }
 
   addRepertoire(repertoire) : Observable<Repertoire>{
     return this.httpClient.post<Repertoire>(this.API_URL + '/repertoires', repertoire)

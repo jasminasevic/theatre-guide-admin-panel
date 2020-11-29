@@ -22,7 +22,7 @@ export class AllCategoriesComponent implements OnInit {
   dataSource: CategoryDataSource;
 
   displayedColumns = [
-    'no',
+    'number',
     'category',
     'actions'
   ]

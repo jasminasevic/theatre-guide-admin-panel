@@ -22,7 +22,7 @@ export class AllActorsComponent implements OnInit {
   actor: Actor;
   dataSource: ActorDataSource;
   displayedColumns = [
-    'no',
+    'number',
     'actorFirstName',
     'actions'
   ]

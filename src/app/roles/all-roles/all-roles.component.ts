@@ -22,7 +22,7 @@ export class AllRolesComponent implements OnInit {
   dataSource: RoleDataSource;
 
   displayedColumns = [
-    'no',
+    'number',
     'role',
     'actions'
   ]
