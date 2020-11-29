@@ -12,9 +12,9 @@ constructor() { }
     mnth = ("0" + (date.getMonth() + 1)).slice(-2),
     day = ("0" + date.getDate()).slice(-2),
 
-    hrs = ("0" + date.getHours()),
-    mins = ("0" + date.getMinutes()),
-    secs = ("0" + date.getSeconds());
+    hrs = (date.getHours()),
+    mins = (date.getMinutes()),
+    secs = (date.getSeconds());
 
     var convertedDate = [date.getFullYear(), mnth, day].join("-");
     var convertedTime = [hrs, mins, secs].join(":");

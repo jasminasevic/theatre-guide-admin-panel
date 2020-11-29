@@ -1,56 +1,77 @@
+import { ISector } from 'src/app/shared/interfaces/ISector';
 import { IActorShow } from '../../shared/interfaces/IActorShow';
 
 export class Show {
-  Id: number;
-  Title: String;
-  Category: String;
-  CategoryId: number;
-  Description: String;
-  Theatre: String;
-  TheatreId: number;
-  Scene: String;
-  SceneId: number;
-  DirectorId: number;
-  Duration: number;
-  PremiereDate: Date;
-  Writer: String;
-  ShowImg: File;
-  ActorShowDtos: IActorShow;
+  id: number;
+  title: String;
+  category: String;
+  categoryId: number;
+  description: String;
+  theatre: String;
+  theatreId: number;
+  scene: String;
+  sceneId: number;
+  directorId: number;
+  duration: number;
+  premiereDate: Date;
+  writer: String;
+  showImg: File;
+  actorShowDtos: IActorShow;
 
   constructor(show){
-    this.Id = show.Id;
-    this.Title = show.Title || '';
-    this.Category = show.Category || '';
-    this.CategoryId = show.CategoryId || '';
-    this.Description = show.Description || '';
-    this.Theatre = show.Theatre || '';
-    this.TheatreId = show.TheatreId || '';
-    this.Scene = show.Scene || '';
-    this.SceneId = show.SceneId || '';
-    this.DirectorId = show.DirectorId || '';
-    this.Duration = show.Duration || '';
-    this.PremiereDate = show.PremiereDate || '';
-    this.Writer = show.Writer || '';
-    this.ShowImg = show.showImg || '';
-    this.ActorShowDtos = show.ActorShowsDto || '';
+    this.id = show.id;
+    this.title = show.title || '';
+    this.category = show.category || '';
+    this.categoryId = show.categoryId || '';
+    this.description = show.description || '';
+    this.theatre = show.theatre || '';
+    this.theatreId = show.theatreId || '';
+    this.scene = show.scene || '';
+    this.sceneId = show.sceneId || '';
+    this.directorId = show.directorId || '';
+    this.duration = show.duration || '';
+    this.premiereDate = show.premiereDate || '';
+    this.writer = show.writer || '';
+    this.showImg = show.showImg || '';
+    this.actorShowDtos = show.actorShowsDto || '';
   }
 }
 
 
 export class ShowBaseInfo {
-  Id: number;
-  Title: String;
-  Theatre: String;
-  TheatreId: number;
-  Scene: String;
-  SceneId: number;
+  id: number;
+  title: String;
+  theatreName: String;
+  theatreId: number;
+  scene: String;
+  sceneId: number;
 
   constructor(show){
-    this.Id = show.Id;
-    this.Title = show.Title || '';
-    this.Theatre = show.Theatre || '';
-    this.TheatreId = show.TheatreId || '';
-    this.Scene = show.Scene || '';
-    this.SceneId = show.SceneId || '';
+    this.id = show.id;
+    this.title = show.title || '';
+    this.theatreName = show.theatreName || '';
+    this.theatreId = show.theatreId || '';
+    this.scene = show.scene || '';
+    this.sceneId = show.sceneId || '';
+  }
+}
+
+export class ShowForRepertoire {
+  id: number;
+  title: String;
+  theatreName: String;
+  theatreId: number;
+  sceneName: String;
+  sceneId: number;
+  getSectorDtos: ISector;
+
+  constructor(show){
+    this.id = show.id;
+    this.title = show.title || '';
+    this.theatreName = show.theatreName || '';
+    this.theatreId = show.theatreId || '';
+    this.sceneName = show.scene || '';
+    this.sceneId = show.sceneId || '';
+    this.getSectorDtos = show.getSectorDtos || '';
   }
 }

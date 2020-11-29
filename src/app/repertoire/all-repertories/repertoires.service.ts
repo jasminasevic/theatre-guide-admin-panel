@@ -14,8 +14,8 @@ export class RepertoiresService {
 
   private API_URL = API_URL;
 
-  addRepertoire(repertoire: Repertoire) : Observable<Repertoire>{
-    return this.httpClient.post<Repertoire>(this.API_URL + '/repertoires/', repertoire)
+  addRepertoire(repertoire) : Observable<Repertoire>{
+    return this.httpClient.post<Repertoire>(this.API_URL + '/repertoires', repertoire)
       .pipe(
         map((repertoire:Repertoire) => repertoire),
         catchError(err => throwError(err))

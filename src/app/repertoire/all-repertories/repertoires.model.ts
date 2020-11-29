@@ -4,5 +4,5 @@ export class Repertoire {
   Id: number;
   ShowId: number;
   Date: Date;
-  Prices: IPrice[]
+  AddPriceDtos: IPrice[]
 }
