@@ -5,6 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { API_URL } from 'src/app/app.constants';
 import { Repertoire } from './repertoires.model';
 import { IRepertoireData } from '../../shared/interfaces/IRepertoireData';
+import { Play } from './plays.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +31,25 @@ export class RepertoiresService {
       )
   }
 
+  getRepertoire(id: number): Observable<Play>{
+    return this.httpClient.get<Play>(this.API_URL + '/repertoires/' + id)
+      .pipe(
+        map((repertoire: Play) => repertoire),
+        catchError(err => throwError(err))
+      )
+  }
+
   addRepertoire(repertoire) : Observable<Repertoire>{
     return this.httpClient.post<Repertoire>(this.API_URL + '/repertoires', repertoire)
       .pipe(
         map((repertoire:Repertoire) => repertoire),
         catchError(err => throwError(err))
-        )}
+      )
+    }
+
+
+  deleteRepertoire(id: number) {
+    return this.httpClient.delete<any>(this.API_URL + '/repertoires/' + id)
+      .subscribe()
+  }
 }

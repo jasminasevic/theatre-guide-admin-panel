@@ -8,6 +8,9 @@ import { DataSource } from '@angular/cdk/table';
 import { CollectionViewer } from '@angular/cdk/collections';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from './dialog/delete/delete.component';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-all-repertories',
@@ -34,7 +37,9 @@ export class AllRepertoriesComponent implements OnInit {
   @ViewChild('input') input: ElementRef;
 
   constructor(private repertoireService: RepertoiresService,
-    private router: Router) { }
+    private router: Router,
+    private dialog: MatDialog,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.dataSource = new RepertoireDataSource(this.repertoireService);
@@ -83,9 +88,24 @@ export class AllRepertoriesComponent implements OnInit {
     );
   }
 
-  deleteItem(id: number){
-
-  }
+  deleteItem(repertoireId){
+    this.repertoireService.getRepertoire(repertoireId)
+      .subscribe(repertoire => {
+        const dialogRef = this.dialog.open(DeleteDialogComponent, {
+          data: repertoire
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if(result === 1){
+            this.refresh();
+            this.notificationService.showNotification(
+              'snackbar-success',
+              'Record Deleted Successfully!',
+              'bottom',
+              'center'
+            )}
+          })
+        })
+      }
 }
 
 export class RepertoireDataSource implements DataSource<Play>{

@@ -5,6 +5,7 @@ import { AllRepertoriesComponent } from './all-repertories/all-repertories.compo
 import { AddRepertoireComponent } from './add-repertoire/add-repertoire.component';
 import { EditRepertoireComponent } from './edit-repertoire/edit-repertoire.component';
 import { AboutRepertoireComponent } from './about-repertoire/about-repertoire.component';
+import { DeleteDialogComponent } from './all-repertories/dialog/delete/delete.component';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,9 +22,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterModule } from '@angular/router';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -52,7 +50,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AboutRepertoireComponent,
     AllRepertoriesComponent,
     AddRepertoireComponent,
-    EditRepertoireComponent
+    EditRepertoireComponent,
+    DeleteDialogComponent
   ],
 })
 export class RepertoireModule { }
