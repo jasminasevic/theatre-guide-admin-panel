@@ -31,7 +31,7 @@ export class RepertoiresService {
       )
   }
 
-  getRepertoire(id: number): Observable<Play>{
+  getRepertoire(id): Observable<Play>{
     return this.httpClient.get<Play>(this.API_URL + '/repertoires/' + id)
       .pipe(
         map((repertoire: Play) => repertoire),

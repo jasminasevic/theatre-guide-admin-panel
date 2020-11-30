@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { RepertoiresService } from '../all-repertories/repertoires.service';
 
 @Component({
   selector: 'app-about-repertoire',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutRepertoireComponent implements OnInit {
 
-  constructor() { }
+  play: any;
 
-  ngOnInit(): void {
+  constructor(private activatedRoute: ActivatedRoute) {
+      this.play = this.activatedRoute.snapshot.data['aboutPlay'];
+    }
+
+  ngOnInit() {
   }
 
 }

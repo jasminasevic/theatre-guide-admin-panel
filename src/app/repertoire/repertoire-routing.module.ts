@@ -4,6 +4,7 @@ import { AllRepertoriesComponent } from './all-repertories/all-repertories.compo
 import { AddRepertoireComponent } from './add-repertoire/add-repertoire.component';
 import { EditRepertoireComponent } from './edit-repertoire/edit-repertoire.component';
 import { AboutRepertoireComponent } from './about-repertoire/about-repertoire.component';
+import { AboutRepertoireResolverService } from './about-repertoire/about-repertoire-resolver.service';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
   },
   {
     path: 'about-play/:id',
-    component: AboutRepertoireComponent
+    component: AboutRepertoireComponent,
+    resolve: { aboutPlay: AboutRepertoireResolverService }
   }
 ]
 

@@ -13,7 +13,7 @@ export class DeleteDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private repertoireService: RepertoiresService) { }
 
-  confirmDelete(repertoireId){
+  confirmDelete(){
     this.repertoireService.deleteRepertoire(this.data.id);
   }
 

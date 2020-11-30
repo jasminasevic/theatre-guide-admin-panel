@@ -22,6 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterModule } from '@angular/router';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AboutRepertoireResolverService } from './about-repertoire/about-repertoire-resolver.service';
 
 @NgModule({
   imports: [
@@ -53,5 +54,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     EditRepertoireComponent,
     DeleteDialogComponent
   ],
+  providers: [
+    AboutRepertoireResolverService
+  ]
 })
 export class RepertoireModule { }
