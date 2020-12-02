@@ -45,8 +45,7 @@ export class EditRepertoireComponent implements OnInit {
       .subscribe((repertoire: any) =>{
         this.editRepertoire(repertoire),
         this.repertoireDetails = repertoire,
-        this.selectedShow = repertoire.showId,
-        console.log('repertoire ', repertoire)
+        this.selectedShow = repertoire.showId
       }),
       (err: any) => console.log(err)
   }
@@ -108,7 +107,6 @@ export class EditRepertoireComponent implements OnInit {
    }
 
   displayShowData(data){
-    console.log(data),
     this.repertoireForm.patchValue({
       theatreName: data.theatre,
       sceneName: data.scene
@@ -133,7 +131,6 @@ export class EditRepertoireComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log('skk');
     const formData = new FormData();
 
     var showDate = this.repertoireForm.get('showDateTime').value;
@@ -149,7 +146,7 @@ export class EditRepertoireComponent implements OnInit {
       formData.append('AddPriceDtos[' + i + '][TicketPrice]', prices[i].ticketPrice);
     }
 
-    new Response(formData).text().then(console.log);
+  //  new Response(formData).text().then(console.log);
 
     this.repertoireService.editRepertoire(this.repertoireIdValue, formData)
       .subscribe(() => {

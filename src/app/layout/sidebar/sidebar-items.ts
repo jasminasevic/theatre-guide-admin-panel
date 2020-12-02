@@ -126,6 +126,29 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '',
+    title: 'Purchases',
+    iconType: 'material-icons-two-tone',
+    icon: 'shopping_cart',
+    class: 'menu-toggle',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [
+      {
+        path: '/purchases/all-purchases',
+        title: 'All Purchases',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        submenu: [],
+      }
+    ],
+  },
+  {
+    path: '',
     title: 'Theatres',
     iconType: 'material-icons-two-tone',
     icon: 'business',
