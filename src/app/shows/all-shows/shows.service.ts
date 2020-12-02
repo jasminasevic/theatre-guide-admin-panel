@@ -24,7 +24,7 @@ export class ShowsService {
       params = params.append('sortOrder', String(sortOrder));
       params = params.append('searchQuery', String(searchQuery));
 
-      return this.httpClient.get<IShowData>(this.API_URL + '/shows/', { params })
+      return this.httpClient.get<IShowData>(this.API_URL + '/shows', { params })
         .pipe(
           map((show: IShowData) => show),
           catchError(err => throwError(err))
@@ -32,7 +32,7 @@ export class ShowsService {
     }
 
   getShowList() : Observable<ShowBaseInfo>{
-    return this.httpClient.get<ShowBaseInfo>(this.API_URL + '/shows/')
+    return this.httpClient.get<ShowBaseInfo>(this.API_URL + '/shows')
       .pipe(
         map((show: ShowBaseInfo) => show),
         catchError(err => throwError(err))
@@ -43,6 +43,18 @@ export class ShowsService {
 
     let params = new HttpParams();
     params = params.append('type', 'repertoire');
+
+    return this.httpClient.get<ShowForRepertoire>(this.API_URL + '/shows/' + showId, { params })
+      .pipe(
+        map((showForRepertoire: ShowForRepertoire) => showForRepertoire),
+        catchError(err => throwError(err))
+      )
+  }
+
+  getShowsWithPricesForRepertoire(showId: number) : Observable<ShowForRepertoire>{
+
+    let params = new HttpParams();
+    params = params.append('type', 'ticketPrices');
 
     return this.httpClient.get<ShowForRepertoire>(this.API_URL + '/shows/' + showId, { params })
       .pipe(

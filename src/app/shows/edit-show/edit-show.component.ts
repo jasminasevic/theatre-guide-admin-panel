@@ -69,7 +69,6 @@ export class EditShowComponent implements OnInit {
       .subscribe((show: any) => {
         this.editShow(show),
         this.showDetails = show,
-        console.log(this.showDetails);
         this.selectedScene = show.sceneId,
         this.sceneName = show.scene
       },

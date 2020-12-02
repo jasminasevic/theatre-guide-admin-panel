@@ -47,6 +47,13 @@ export class RepertoiresService {
       )
     }
 
+  editRepertoire(id, repertoire) : Observable<Play>{
+    return this.httpClient.put<Play>(this.API_URL + '/repertoires/' + id, repertoire)
+      .pipe(
+        map((repertoire: Play) => repertoire),
+        catchError(err => throwError(err))
+      )
+  }
 
   deleteRepertoire(id: number) {
     return this.httpClient.delete<any>(this.API_URL + '/repertoires/' + id)
