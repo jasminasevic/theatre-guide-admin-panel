@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+// import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
@@ -35,7 +35,7 @@ import { AboutRepertoireResolverService } from './about-repertoire/about-reperto
     MatIconModule,
     MatPaginatorModule,
     MatInputModule,
-    MatSnackBarModule,
+  //  MatSnackBarModule,
     MatButtonModule,
     MatDialogModule,
     MatSortModule,
