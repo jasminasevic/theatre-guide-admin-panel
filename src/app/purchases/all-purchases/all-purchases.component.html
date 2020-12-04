@@ -90,6 +90,12 @@
                             *matCellDef="let purchase">{{purchase.date | date:'HH:mm'}}</mat-cell>
                 </ng-container>
 
+                <ng-container matColumnDef="price">
+                  <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+                  <mat-cell class="name-cell"
+                            *matCellDef="let purchase">{{purchase.getPriceBasicDtos[0].price }}</mat-cell>
+                </ng-container>
+
                 <ng-container matColumnDef="theatre">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Theatre</mat-header-cell>
                   <mat-cell class="name-cell"

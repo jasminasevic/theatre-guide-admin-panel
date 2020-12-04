@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Director } from '../all-directors/directors.model';
 import { DirectorsService } from '../all-directors/directors.service';
 
 @Component({

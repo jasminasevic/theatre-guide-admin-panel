@@ -1,5 +1,5 @@
 export interface IPrice {
-  Id: number;
-  SectorId: number;
-  TicketPrice: number
+  id: number;
+  sectorId: number;
+  price: number;
 }

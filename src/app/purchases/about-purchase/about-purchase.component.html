@@ -1,3 +1,163 @@
-<p>
-  about-purchase works!
-</p>
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Purchases</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/dashboard/main">
+                <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a [routerLink]="['/purchases/all-purchases']" onClick="return false;">Purchases</a>
+            </li>
+            <li class="breadcrumb-item active">Purchase</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Your content goes here  -->
+    <div class="row clearfix">
+      <div class="col-lg-4 col-md-12">
+        <div class="card">
+          <div class="m-b-20">
+            <div class="contact-grid">
+              <div class="profile-header bg-dark">
+                <a [routerLink]="['../../../shows/about-show', purchase.showId ]" >
+                  <h3 class="user-name">
+                    {{ purchase.showName }}
+                  </h3>
+                </a>
+              </div>
+              <div>
+                <img src="../../../assets/images/ticket.jpg" class="user-img" alt="calendar image">
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <h5>{{ purchase.date | date: 'd MMMM yyyy' }}</h5>
+                  <h5>{{ purchase.date | date: 'HH:mm' }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-12">
+        <div class="card">
+          <div class="profile-tab-box">
+            <div class="p-l-20">
+              <ul class="nav ">
+                <li class="nav-item tab-all">
+                  <a class="nav-link active show" href="#project" data-toggle="tab">Show</a>
+                </li>
+                <li class="nav-item tab-all p-l-20">
+                  <a class="nav-link" href="#location" data-toggle="tab">Location</a>
+                </li>
+                <li class="nav-item tab-all p-l-20">
+                  <a class="nav-link" href="#buyer" data-toggle="tab">Buyer</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="project" aria-expanded="true">
+            <div class="row clearfix">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card project_widget">
+                  <div class="body">
+                    <small class="text-muted">Title: </small>
+                    <p>
+                      <a [routerLink]="['../../../shows/about-show', purchase.showId ]" >
+                          {{ purchase.showName }}
+                      </a>
+                    </p>
+                    <hr>
+                    <small class="text-muted">Date and time: </small>
+                    <p>
+                      {{ purchase.date | date: 'd MMMM yyyy' }} | {{ purchase.date | date: 'HH:mm' }}
+                    </p>
+                    <hr>
+                    <small class="text-muted">Price: </small>
+                    <p>
+                      {{ purchase.getPriceBasicDtos[0].price }}
+                    </p>
+                    <hr>
+                    <small class="text-muted">Category: </small>
+                    <p>
+                      <a [routerLink]="['../../../categories/about-category', purchase.categoryId]" > {{ purchase.category }} </a>
+                    </p>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="location" aria-expanded="false">
+            <div class="row clearfix">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card project_widget">
+                  <div class="body">
+                    <small class="text-muted">Theatre: </small>
+                    <p>
+                      <a [routerLink]="['../../../theatres/about-theatre', purchase.theatreId]" >{{ purchase.theatreName }}</a>
+                    </p>
+                    <hr>
+                    <small class="text-muted">Scene: </small>
+                    <p>
+                      <a [routerLink]="['../../../scenes/about-scene', purchase.sceneId]" >{{ purchase.sceneName }}</a>
+                    </p>
+                    <hr>
+                    <small class="text-muted">Sector: </small>
+                    <p>
+                      {{ purchase.sectorName }}
+                    </p>
+                    <hr>
+                    <small class="text-muted">Row: </small>
+                    <p>
+                       {{ purchase.rowNumber }}
+                    </p>
+                    <hr>
+                    <small class="text-muted">Seat: </small>
+                    <p>
+                       {{ purchase.seatNumber }}
+                    </p>
+                    <hr>
+                    <small class="text-muted">Entrance: </small>
+                    <p>
+                       {{ purchase.entrance }}
+                    </p>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="buyer" aria-expanded="false">
+            <div class="row clearfix">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card project_widget">
+                  <div class="body">
+                    <small class="text-muted">User: </small>
+                    <p>
+                      <a [routerLink]="['../../../users/about-user', purchase.userId]" >{{ purchase.userName }}</a>
+                    </p>
+                    <hr>
+                    <small class="text-muted">Purchased at: </small>
+                    <p>
+                      {{ purchase.purchasedAt | date: 'd MMMM yyyy' }} | {{ purchase.purchasedAt | date: 'HH:mm' }}
+                    </p>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

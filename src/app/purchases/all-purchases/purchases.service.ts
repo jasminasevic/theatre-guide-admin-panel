@@ -4,6 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { API_URL } from '../../app.constants';
 import { IPurchaseData } from '../../shared/interfaces/IPurchaseData';
+import { Purchase } from './purchases.model';
+import { PurchaseWithDetails } from './purchaseWithDetails.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,14 @@ export class PurchasesService {
     return this.httpClient.get<IPurchaseData>(this.API_URL + '/purchases', { params })
       .pipe(
         map((purchases: IPurchaseData) => purchases),
+        catchError(err => throwError(err))
+      )
+  }
+
+  getPurchase(id: number) : Observable<PurchaseWithDetails>{
+    return this.httpClient.get<PurchaseWithDetails>(this.API_URL + '/purchases/' + id)
+      .pipe(
+        map((purchase: PurchaseWithDetails) => purchase),
         catchError(err => throwError(err))
       )
   }

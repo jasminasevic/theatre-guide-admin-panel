@@ -24,6 +24,7 @@ export class AllPurchasesComponent implements OnInit {
     'theatre',
     'date',
     'time',
+    'price',
     'user',
     'actions'
   ]
