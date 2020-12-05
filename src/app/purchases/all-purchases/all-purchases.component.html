@@ -93,7 +93,7 @@
                 <ng-container matColumnDef="price">
                   <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
                   <mat-cell class="name-cell"
-                            *matCellDef="let purchase">{{purchase.getPriceBasicDtos[0].price }}</mat-cell>
+                            *matCellDef="let purchase">{{purchase.getPriceBasicDtos[0].price }} {{purchase.getPriceBasicDtos[0].currencyName}}</mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="theatre">

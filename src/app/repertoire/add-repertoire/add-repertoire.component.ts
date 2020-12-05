@@ -48,7 +48,8 @@ export class AddRepertoireComponent implements OnInit {
     return this.fb.group({
         sectorId: [''],
         sectorName: [{ disabled: true }],
-        ticketPrice: ['']
+        ticketPrice: [''],
+        currencyId: ['']
       });
   }
 
@@ -74,7 +75,8 @@ export class AddRepertoireComponent implements OnInit {
       sectorFormArray.push(this.fb.group({
         sectorName: s.sectorName,
         sectorId: s.id,
-        ticketPrice: null
+        ticketPrice: null,
+        currencyId: null
       }));
     });
     return sectorFormArray;
@@ -98,7 +100,10 @@ export class AddRepertoireComponent implements OnInit {
     for(let i = 0; i < prices.length; i++){
       formData.append('AddPriceDtos[' + i + '][SectorId]', prices[i].sectorId);
       formData.append('AddPriceDtos[' + i + '][TicketPrice]', prices[i].ticketPrice);
+      formData.append('AddPriceDtos[' + i + '][CurrencyId]', prices[i].currencyId)
     }
+
+    new Response(formData).text().then(console.log);
 
     this.repertoireService.addRepertoire(formData)
       .subscribe(() => {
