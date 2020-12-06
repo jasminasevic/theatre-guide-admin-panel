@@ -8,44 +8,48 @@ const routes: Routes = [
       import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
-    path: 'users',
-    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
-  },
-  {
-    path: 'roles',
-    loadChildren: () => import('./roles/roles.module').then(m => m.RolesModule)
-  },
-  {
-    path: 'theatres',
-    loadChildren: () => import('./theatres/theatres.module').then(t => t.TheatresModule)
-  },
-  {
-    path: 'scenes',
-    loadChildren: () => import('./scenes/scenes.module').then(s => s.ScenesModule)
+    path: 'actors',
+    loadChildren: () => import('./actors/actors.module').then(t => t.ActorsModule)
   },
   {
     path: 'categories',
     loadChildren: () => import('./categories/categories.module').then(t => t.CategoriesModule)
   },
   {
-    path: 'shows',
-    loadChildren: () => import('./shows/shows.module').then(s => s.ShowsModule)
+    path: 'currencies',
+    loadChildren: () => import('./currencies/currencies.module').then(t => t.CurrenciesModule)
   },
   {
-    path: 'repertoire',
-    loadChildren: () => import('./repertoire/repertoire.module').then(r => r.RepertoireModule)
+    path: 'directors',
+    loadChildren: () => import('./directors/directors.module').then(t => t.DirectorsModule)
   },
   {
     path: 'purchases',
     loadChildren: () => import('./purchases/purchases.module').then(r => r.PurchasesModule)
   },
   {
-    path: 'actors',
-    loadChildren: () => import('./actors/actors.module').then(t => t.ActorsModule)
+    path: 'repertoire',
+    loadChildren: () => import('./repertoire/repertoire.module').then(r => r.RepertoireModule)
   },
   {
-    path: 'directors',
-    loadChildren: () => import('./directors/directors.module').then(t => t.DirectorsModule)
+    path: 'roles',
+    loadChildren: () => import('./roles/roles.module').then(m => m.RolesModule)
+  },
+  {
+    path: 'scenes',
+    loadChildren: () => import('./scenes/scenes.module').then(s => s.ScenesModule)
+  },
+  {
+    path: 'shows',
+    loadChildren: () => import('./shows/shows.module').then(s => s.ShowsModule)
+  },
+  {
+    path: 'theatres',
+    loadChildren: () => import('./theatres/theatres.module').then(t => t.TheatresModule)
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   },
   {
     path: 'email',
