@@ -15,7 +15,9 @@ export class CategoriesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllCategories(perPage: number, pageNumber: number, sortOrder: string, searchQuery: string){
+  getAllCategories(perPage: number, pageNumber: number, sortOrder: string, searchQuery: string)
+    : Observable<ICategoryData> {
+
     let params = new HttpParams;
 
     params = params.append('perPage', String(perPage));

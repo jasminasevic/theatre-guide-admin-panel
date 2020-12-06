@@ -48,26 +48,6 @@ export class AllCategoriesComponent implements OnInit {
     this.dataSource.loadCategories();
   }
 
-  deleteItem(categoryId){
-    this.categoryService.getCategory(categoryId)
-      .subscribe(category => {
-        const dialogRef = this.dialog.open(DeleteDialogComponent, {
-          data: category
-        });
-        dialogRef.afterClosed()
-          .subscribe(result => {
-            if(result === 1){
-              this.refresh();
-              this.notificationService.showNotification(
-                'snackbar-success',
-                'Record Deleted Successfully!',
-                'bottom',
-                'center'
-              )};
-          });
-      });
-  }
-
   ngAfterViewInit(){
     //server-side search
     fromEvent(this.input.nativeElement, 'keyup')
@@ -101,6 +81,27 @@ export class AllCategoriesComponent implements OnInit {
       this.sort.direction,
       this.input.nativeElement.value
     );
+  }
+
+
+  deleteItem(categoryId){
+    this.categoryService.getCategory(categoryId)
+      .subscribe(category => {
+        const dialogRef = this.dialog.open(DeleteDialogComponent, {
+          data: category
+        });
+        dialogRef.afterClosed()
+          .subscribe(result => {
+            if(result === 1){
+              this.refresh();
+              this.notificationService.showNotification(
+                'snackbar-success',
+                'Record Deleted Successfully!',
+                'bottom',
+                'center'
+              )};
+          });
+      });
   }
 }
 
