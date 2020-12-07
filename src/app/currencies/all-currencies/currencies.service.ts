@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { API_URL } from '../../app.constants';
 import { ICurrencyData } from '../../shared/interfaces/ICurrencyData';
+import { Currency } from './currencies.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,14 @@ export class CurrenciesService {
           map((currencies: ICurrencyData) => currencies),
           catchError(err => throwError(err))
         )
+  }
 
+  addCurrency(currency: Currency) : Observable<Currency>{
+    return this.httpClient.post<Currency>(this.API_URL + '/currencies', currency)
+      .pipe(
+        map((currency: Currency) => currency),
+        catchError(err => throwError(err))
+      )
   }
 
 }
