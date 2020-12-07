@@ -28,12 +28,9 @@ export class EditCategoryComponent implements OnInit {
 
   createCategoryForm() : FormGroup {
     return this.fb.group({
-      categoryName: [
-        this.formData.categoryName,
-          [
-            Validators.required,
-            Validators.pattern('^[A-Z][a-zA-Z0-9]{2,}([\\sa-zA-Z0-9-]{1,})*$')
-          ]
+      categoryName: [ this.formData.categoryName,
+          [ Validators.required,
+            Validators.pattern('^[A-Z][a-zA-Z0-9]{2,}([\\sa-zA-Z0-9-]{1,})*$')]
       ],
     });
   }

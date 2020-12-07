@@ -1,9 +1,9 @@
 export class Currency {
   id: number;
-  cattegoryName: String;
+  currencyName: String;
 
     constructor(currency){
       this.id = currency.id;
-      this.cattegoryName = currency.cattegoryName || '';
+      this.currencyName = currency.currencyName || '';
     }
 }

@@ -32,8 +32,24 @@ export class CurrenciesService {
         )
   }
 
+  getCurrency(id: number) : Observable<Currency>{
+    return this.httpClient.get<Currency>(this.API_URL + '/currencies/' + id)
+      .pipe(
+        map((currency: Currency) => currency),
+        catchError(err => throwError(err))
+      )
+  }
+
   addCurrency(currency: Currency) : Observable<Currency>{
     return this.httpClient.post<Currency>(this.API_URL + '/currencies', currency)
+      .pipe(
+        map((currency: Currency) => currency),
+        catchError(err => throwError(err))
+      )
+  }
+
+  editCurrency(id: number, currency: Currency) : Observable<Currency>{
+    return this.httpClient.put<Currency>(this.API_URL + '/currencies/' + id, currency)
       .pipe(
         map((currency: Currency) => currency),
         catchError(err => throwError(err))
