@@ -50,8 +50,8 @@ export class AllCurrenciesComponent implements OnInit {
         debounceTime(150),
         distinctUntilChanged(),
         tap(() => {
-          this.paginator.pageIndex = 0,
-          this.loadCurrenciesPage()
+          this.paginator.pageIndex = 0;
+          this.loadCurrenciesPage();
         })
       )
       .subscribe()
@@ -73,7 +73,7 @@ export class AllCurrenciesComponent implements OnInit {
       this.paginator.pageIndex,
       this.sort.active,
       this.sort.direction,
-      this.input.nativeElement.input
+      this.input.nativeElement.value
     )
   }
 
