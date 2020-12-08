@@ -32,6 +32,14 @@ export class CurrenciesService {
         )
   }
 
+  getCurrencyList(): Observable<Currency[]>{
+    return this.httpClient.get<Currency[]>(this.API_URL + '/currencies')
+      .pipe(
+        map((currency: Currency[]) => currency),
+        catchError(err => throwError(err))
+      )
+  }
+
   getCurrency(id: number) : Observable<Currency>{
     return this.httpClient.get<Currency>(this.API_URL + '/currencies/' + id)
       .pipe(
@@ -54,6 +62,11 @@ export class CurrenciesService {
         map((currency: Currency) => currency),
         catchError(err => throwError(err))
       )
+  }
+
+  deleteCurrency(id:number){
+    return this.httpClient.delete<Currency>(this.API_URL + '/currencies/' + id)
+      .subscribe()
   }
 
 }

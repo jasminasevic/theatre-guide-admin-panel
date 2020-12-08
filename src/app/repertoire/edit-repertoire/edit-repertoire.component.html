@@ -77,13 +77,23 @@
                         <input matInput formControlName="sectorName" readonly>
                       </mat-form-field>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 mb-2">
                       <mat-form-field class="example-full-width mb-3" appearance="fill">
                         <mat-label>Price</mat-label>
                         <input matInput formControlName="ticketPrice" required>
                         <mat-error *ngIf="repertoireForm.get('showId').hasError('required')">
                           Please add price
                         </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="fill">
+                          <mat-label>Currency</mat-label>
+                          <mat-select formControlName="currencyId" required>
+                            <mat-option *ngFor="let currency of currencyListing" [value]="currency.id">
+                              {{ currency.currencyName }}
+                            </mat-option>
+                          </mat-select>
                       </mat-form-field>
                     </div>
                   </div>

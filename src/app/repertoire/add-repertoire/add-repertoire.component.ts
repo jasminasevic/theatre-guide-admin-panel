@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CurrenciesService } from 'src/app/currencies/all-currencies/currencies.service';
 import { ConvertDateService } from 'src/app/shared/services/convert-date.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ShowForRepertoire } from 'src/app/shows/all-shows/shows.model';
@@ -20,18 +21,25 @@ export class AddRepertoireComponent implements OnInit {
   sectors: any = [];
   repertoireDetails: any;
   showId: number;
+  currencyListing: any = [];
 
   constructor(private showService: ShowsService,
     private fb: FormBuilder,
     private router: Router,
     private convertDateService: ConvertDateService,
     private repertoireService: RepertoiresService,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService,
+    private currencyService: CurrenciesService) { }
 
   ngOnInit() {
     this.showService.getShowList()
       .subscribe(data => {
         this.showListing = data
+      });
+
+    this.currencyService.getCurrencyList()
+      .subscribe(data => {
+        this.currencyListing = data
       });
 
     this.repertoireForm = this.fb.group({
@@ -76,7 +84,7 @@ export class AddRepertoireComponent implements OnInit {
         sectorName: s.sectorName,
         sectorId: s.id,
         ticketPrice: null,
-        currencyId: null
+        currencyId: 2
       }));
     });
     return sectorFormArray;

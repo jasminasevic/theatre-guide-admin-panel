@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Currency } from 'src/app/currencies/all-currencies/currencies.model';
+import { CurrenciesService } from 'src/app/currencies/all-currencies/currencies.service';
 import { ConvertDateService } from 'src/app/shared/services/convert-date.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ShowForRepertoire } from 'src/app/shows/all-shows/shows.model';
@@ -21,6 +23,7 @@ export class EditRepertoireComponent implements OnInit {
   repertoireDetails: any;
   showId: number;
   repertoireIdValue: number;
+  currencyListing: any = [];
 
   constructor(private fb: FormBuilder,
     private repertoireService: RepertoiresService,
@@ -28,12 +31,18 @@ export class EditRepertoireComponent implements OnInit {
     private showService: ShowsService,
     private activatedRoute: ActivatedRoute,
     private convertDateService: ConvertDateService,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService,
+    private currencyService: CurrenciesService) { }
 
   ngOnInit() {
     this.showService.getShowList()
       .subscribe(data => {
         this.showListing = data
+      })
+
+    this.currencyService.getCurrencyList()
+      .subscribe(data =>{
+        this.currencyListing = data
       })
 
     this.repertoireForm = this.createRepertoireForm();
@@ -67,7 +76,8 @@ export class EditRepertoireComponent implements OnInit {
       sectorPriceFormArray.push(this.fb.group({
         sectorId: s.sectorId,
         sectorName: s.sectorName,
-        ticketPrice: s.price
+        ticketPrice: s.price,
+        currencyId: s.currencyId
       }))
     });
     return sectorPriceFormArray;
@@ -88,7 +98,8 @@ export class EditRepertoireComponent implements OnInit {
     return this.fb.group({
       sectorId: [''],
       sectorName: [{ disabled: true }],
-      ticketPrice: ['']
+      ticketPrice: [''],
+      currencyId: ['']
     });
   }
 
@@ -120,7 +131,8 @@ export class EditRepertoireComponent implements OnInit {
       sectorFormArray.push(this.fb.group({
         sectorName: s.sectorName,
         sectorId: s.sectorId,
-        ticketPrice: null
+        ticketPrice: null,
+        currencyId: s.currencyId
       }));
     });
     return sectorFormArray;
@@ -144,6 +156,7 @@ export class EditRepertoireComponent implements OnInit {
     for(let i = 0; i < prices.length; i++){
       formData.append('AddPriceDtos[' + i + '][SectorId]', prices[i].sectorId);
       formData.append('AddPriceDtos[' + i + '][TicketPrice]', prices[i].ticketPrice);
+      formData.append('AddPriceDtos[' + i + '][CurrencyId]', prices[i].currencyId);
     }
 
   //  new Response(formData).text().then(console.log);
@@ -162,7 +175,7 @@ export class EditRepertoireComponent implements OnInit {
   }
 
   cancel(){
-    this.router.navigate(['repertoires/all-plays']);
+    this.router.navigate(['repertoire/all-plays']);
   }
 
 }

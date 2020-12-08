@@ -1,12 +1,15 @@
 import { CollectionViewer } from '@angular/cdk/collections';
 import { DataSource } from '@angular/cdk/table';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { Currency } from './currencies.model';
 import { CurrenciesService } from './currencies.service';
+import { DeleteDialogComponent } from './dialog/delete/delete.component';
 
 @Component({
   selector: 'app-all-currencies',
@@ -28,7 +31,9 @@ export class AllCurrenciesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private currencyService: CurrenciesService) { }
+  constructor(private currencyService: CurrenciesService,
+    private dialog: MatDialog,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.dataSource = new CurrencyDataSource(this.currencyService);
@@ -77,8 +82,24 @@ export class AllCurrenciesComponent implements OnInit {
     )
   }
 
-  deleteItem(id){
-
+  deleteItem(currencyId){
+    this.currencyService.getCurrency(currencyId)
+      .subscribe(currency => {
+        const dialogRef = this.dialog.open(DeleteDialogComponent, {
+          data: currency
+        });
+        dialogRef.afterClosed()
+          .subscribe(result => {
+            if(result === 1){
+              this.refresh();
+              this.notificationService.showNotification(
+                'snackbar-success',
+                'Record Deleted Successfully!',
+                'bottom',
+                'center'
+              )};
+          })
+      })
   }
 
 }
