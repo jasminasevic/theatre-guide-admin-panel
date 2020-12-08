@@ -31,6 +31,14 @@ export class RolesService {
       )
   }
 
+  getRoleList() : Observable<Role[]>{
+    return this.httpClient.get<Role[]>(this.API_URL + '/roles')
+      .pipe(
+        map((role: Role[]) => role ),
+        catchError(err => throwError(err))
+      )
+  }
+
   addRole(role: Role) : Observable<Role>{
     return this.httpClient.post<Role>(this.API_URL + '/roles', role)
       .pipe(

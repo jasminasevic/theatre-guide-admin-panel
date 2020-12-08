@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../all-users/users.model';
 import { UserService } from '../all-users/users.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationService } from '../../shared/services/notification.service';
+import { RolesService } from 'src/app/roles/all-roles/roles.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -15,6 +14,7 @@ import { NotificationService } from '../../shared/services/notification.service'
 export class EditUserComponent {
   userForm: FormGroup;
   userDetail: any;
+  roleListing: any = [];
 
   formdata = {
     firstName: '',
@@ -27,12 +27,17 @@ export class EditUserComponent {
   constructor(private fb: FormBuilder, private router: Router,
     private activatedRoute: ActivatedRoute,
     private usersService: UserService,
-    private snackBar: MatSnackBar,
-    private notificationService: NotificationService) {
+    private notificationService: NotificationService,
+    private roleService: RolesService) {
     this.userForm = this.createUserForm();
   }
 
   ngOnInit(){
+      this.roleService.getRoleList()
+        .subscribe(data => {
+          this.roleListing = data
+        })
+
        let userId = this.activatedRoute.snapshot.params.id;
        this.usersService.getOneUser(userId)
        .subscribe(user =>
