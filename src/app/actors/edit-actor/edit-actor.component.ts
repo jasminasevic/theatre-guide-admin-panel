@@ -15,11 +15,11 @@ export class EditActorComponent implements OnInit {
   actorDetails: any;
 
   formData = {
-    Id: 0,
-    ActorFirstName: '',
-    ActorLastName: '',
-    ActorBiography: '',
-    ActorImage: ''
+    id: 0,
+    actorFirstName: '',
+    actorLastName: '',
+    actorBiography: '',
+    actorImage: ''
   }
 
   constructor(private actorService: ActorsService,
@@ -36,42 +36,49 @@ export class EditActorComponent implements OnInit {
       .subscribe(actor => {
         this.actorDetails = actor;
         this.actorForm.patchValue({
-          ActorFirstName: this.actorDetails.actorFirstName,
-          ActorLastName: this.actorDetails.actorLastName,
-          ActorBiography: this.actorDetails.actorBiography
+          actorFirstName: this.actorDetails.actorFirstName,
+          actorLastName: this.actorDetails.actorLastName,
+          actorBiography: this.actorDetails.actorBiography
         });
       });
   }
 
   createActorForm() : FormGroup {
     return this.fb.group({
-      Id: 0,
-      ActorFirstName: [this.formData.ActorFirstName,
+      id: 0,
+      actorFirstName: [this.formData.actorFirstName,
       [
         Validators.required,
         Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
       ]],
-      ActorLastName: [this.formData.ActorLastName,
+      actorLastName: [this.formData.actorLastName,
       [
         Validators.required,
         Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
       ]],
-      ActorBiography: [this.formData.ActorBiography],
-      ActorImage: ['']
+      actorBiography: [this.formData.actorBiography],
+      actorImage: ['']
     });
   }
 
   onSubmit(){
     const formData = new FormData();
 
-    formData.append('ActorFirstName', this.actorForm.get('ActorFirstName').value);
-    formData.append('ActorLastName', this.actorForm.get('ActorLastName').value);
-    formData.append('ActorBiography', this.actorForm.get('ActorBiography').value);
+    formData.append('actorFirstName', this.actorForm.get('actorFirstName').value);
+    formData.append('actorLastName', this.actorForm.get('actorLastName').value);
+    formData.append('actorBiography', this.actorForm.get('actorBiography').value);
 
-    const images = this.actorForm.get('ActorImage').value;
-    images.forEach(element => {
-      formData.append('ActorImage', element);
-    });
+    const images = this.actorForm.get('actorImage').value;
+
+    if(images != ''){
+      images.forEach(element => {
+        formData.append('actorImage', element);
+      })
+    }
+    else
+    {
+      formData.append('actorImage', null);
+    }
 
     this.actorService.editActor(this.actorDetails.id, formData)
       .subscribe(() =>{

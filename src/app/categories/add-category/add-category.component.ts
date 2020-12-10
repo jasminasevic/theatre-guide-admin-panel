@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { CategoriesService } from '../all-categories/categories.service';
@@ -18,8 +18,8 @@ export class AddCategoryComponent {
     private notificationService: NotificationService,
     private router: Router) {
       this.categoryForm = this.fb.group({
-        Id: 0,
-        CategoryName: ['',
+        id: 0,
+        categoryName: ['',
         [
           Validators.required,
           Validators.pattern('^[A-Z][a-zA-Z0-9]{2,}([\\sa-zA-Z0-9-]{1,})*$')

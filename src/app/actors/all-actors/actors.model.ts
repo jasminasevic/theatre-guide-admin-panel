@@ -1,29 +1,20 @@
 import { IImage } from '../../shared/interfaces/IImage';
+import { ShowForActor } from '../../shows/all-shows/showForActor.model';
 
 export class Actor {
-  Id: number;
-  ActorFirstName: string;
-  ActorLastName: string;
-  ActorBiography: string;
-  ActorImage: IImage[];
+  id: number;
+  actorFirstName: string;
+  actorLastName: string;
+  actorBiography: string;
+  actorImage?: IImage[];
+  actorInShow: ShowForActor[]
 
   constructor(actor){
-    this.Id = actor.Id;
-    this.ActorFirstName = actor.ActorFirstName || '';
-    this.ActorLastName = actor.ActorLastName || '';
-    this.ActorBiography = actor.ActorBiography || '';
-    this.ActorImage = actor.ActorImage || '';
-  }
-}
-
-export class ActorBasic {
-  Id: number;
-  ActorFirstName: string;
-  ActorLastName: string;
-
-  constructor(actor){
-    this.Id = actor.Id;
-    this.ActorFirstName = actor.ActorFirstName || '';
-    this.ActorLastName = actor.ActorLastName || '';
+    this.id = actor.Id;
+    this.actorFirstName = actor.actorFirstName || '';
+    this.actorLastName = actor.actorLastName || '';
+    this.actorBiography = actor.actorBiography || '';
+    this.actorImage = actor.actorImage || undefined;
+    this.actorInShow = actor.actorInShow || '';
   }
 }

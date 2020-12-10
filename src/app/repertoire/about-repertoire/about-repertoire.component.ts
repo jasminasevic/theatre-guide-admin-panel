@@ -7,15 +7,12 @@ import { RepertoiresService } from '../all-repertories/repertoires.service';
   templateUrl: './about-repertoire.component.html',
   styleUrls: ['./about-repertoire.component.sass']
 })
-export class AboutRepertoireComponent implements OnInit {
+export class AboutRepertoireComponent {
 
   play: any;
 
   constructor(private activatedRoute: ActivatedRoute) {
       this.play = this.activatedRoute.snapshot.data['aboutPlay'];
     }
-
-  ngOnInit() {
-  }
 
 }

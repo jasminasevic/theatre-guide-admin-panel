@@ -18,11 +18,11 @@ export class AddRoleComponent {
     private roleService: RolesService,
     private notificationService: NotificationService) {
       this.roleForm = this.fb.group({
-       Id: 0,
-       RoleName: ['',
+       id: 0,
+       roleName: ['',
         [
           Validators.required,
-          Validators.pattern('^[A-Z][a-zA-Z0-9]{2,}([\\sa-zA-Z0-9-]{1,})*$')
+          Validators.pattern('^[A-Z][a-zA-Z]{2,}([\\sa-zA-Z-]{1,})*$')
         ]
       ]})
     }

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AllRolesComponent } from './all-roles/all-roles.component';
 import { AddRoleComponent } from './add-role/add-role.component';
 import { EditRoleComponent } from './edit-role/edit-role.component';
-import { AboutRoleComponent } from './about-role/about-role.component';
 
 const routes: Routes = [
   {
@@ -17,10 +16,6 @@ const routes: Routes = [
   {
     path: 'edit-role/:id',
     component: EditRoleComponent
-  },
-  {
-    path: 'about-role/:id',
-    component: AboutRoleComponent
   }
 ]
 

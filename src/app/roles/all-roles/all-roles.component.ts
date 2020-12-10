@@ -3,7 +3,7 @@ import { Role } from './roles.model';
 import { RolesService } from './roles.service';
 import { DataSource } from '@angular/cdk/table';
 import { CollectionViewer } from '@angular/cdk/collections';
-import { BehaviorSubject, fromEvent, merge, Observable, pipe } from 'rxjs';
+import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
@@ -91,7 +91,7 @@ export class AllRolesComponent implements OnInit {
         });
         dialogRef.afterClosed()
           .subscribe(result => {
-            if(result ===1){
+            if(result === 1){
               this.refresh();
               this.notificationService.showNotification(
                 'snackbar-success',

@@ -8,6 +8,7 @@ import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { DeleteDialogComponent } from 'src/app/actors/all-actors/dialog/delete/delete.component';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { ActorBasic } from './actorBasic.model';
 import { Actor } from './actors.model';
 import { ActorsService } from './actors.service';
 
@@ -107,12 +108,12 @@ export class AllActorsComponent implements OnInit {
 
 }
 
-export class ActorDataSource implements DataSource<Actor>{
+export class ActorDataSource implements DataSource<ActorBasic>{
 
-  private actorSubject = new BehaviorSubject<Actor[]>([]);
+  private actorSubject = new BehaviorSubject<ActorBasic[]>([]);
   constructor(private actorService: ActorsService){}
 
-  connect(collectionViewer: CollectionViewer): Observable<Actor[]> {
+  connect(collectionViewer: CollectionViewer): Observable<ActorBasic[]> {
     return this.actorSubject.asObservable();
   }
   disconnect(collectionViewer: CollectionViewer): void {

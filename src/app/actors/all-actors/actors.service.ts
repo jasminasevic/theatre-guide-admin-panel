@@ -4,7 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { API_URL } from 'src/app/app.constants';
 import { IActorData } from '../../shared/interfaces/IActorData';
-import { Actor, ActorBasic } from './actors.model';
+import { Actor } from './actors.model';
+import { ActorBasic } from './actorBasic.model';
 
 @Injectable({
   providedIn: 'root'

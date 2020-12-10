@@ -13,6 +13,7 @@ export class AboutActorComponent implements OnInit {
 
   actor: any;
   imgPath: string;
+  actorInShow: any;
 
   constructor(private actorService: ActorsService,
     private activatedRoute: ActivatedRoute,
@@ -23,7 +24,8 @@ export class AboutActorComponent implements OnInit {
 
     this.actorService.getActor(actorId)
       .subscribe(data => {
-        this.actor = data;
+        this.actor = data,
+        this.actorInShow = data.actorInShow,
         this.imgPath = this.imagePath.createImagePath(
           this.actor.showImageDto[0].path);
       })

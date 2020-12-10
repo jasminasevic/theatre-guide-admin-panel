@@ -32,8 +32,8 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>First Name</mat-label>
-                    <input matInput formControlName="ActorFirstName" required>
-                    <mat-error *ngIf="actorForm.get('ActorFirstName').hasError('required')">
+                    <input matInput formControlName="actorFirstName" required>
+                    <mat-error *ngIf="actorForm.get('actorFirstName').hasError('required')">
                       First name is required
                     </mat-error>
                   </mat-form-field>
@@ -41,8 +41,8 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="ActorLastName" required>
-                    <mat-error *ngIf="actorForm.get('ActorLastName').hasError('required')">
+                    <input matInput formControlName="actorLastName" required>
+                    <mat-error *ngIf="actorForm.get('actorLastName').hasError('required')">
                       Last name is required
                     </mat-error>
                   </mat-form-field>
@@ -52,14 +52,14 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Biography</mat-label>
-                    <textarea matInput formControlName="ActorBiography"></textarea>
+                    <textarea matInput formControlName="actorBiography"></textarea>
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
-                      <ngx-mat-file-input formControlName="ActorImage" placeholder="Select Actor Image" multiple></ngx-mat-file-input>
+                      <ngx-mat-file-input formControlName="actorImage" placeholder="Select Actor Image" multiple></ngx-mat-file-input>
                   </mat-form-field>
                 </div>
               </div>

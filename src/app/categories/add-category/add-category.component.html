@@ -27,13 +27,12 @@
           </div>
           <div class="body">
             <form class="m-4" [formGroup]="categoryForm" (ngSubmit)="onSubmit();">
-              <!-- <input type="hidden" formControlName="Id" [value]="service.userForm.Id"> -->
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Name</mat-label>
-                    <input matInput formControlName="CategoryName" required>
-                    <mat-error *ngIf="categoryForm.get('CategoryName').hasError('required')">
+                    <input matInput formControlName="categoryName" required>
+                    <mat-error *ngIf="categoryForm.get('categoryName').hasError('required')">
                       Category name is required
                     </mat-error>
                   </mat-form-field>

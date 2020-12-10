@@ -18,19 +18,19 @@ export class AddActorComponent {
     private notificationService: NotificationService,
     private router: Router) {
       this.actorForm = this.fb.group({
-        Id: 0,
-        ActorFirstName: ['',
+        id: 0,
+        actorFirstName: ['',
         [
           Validators.required,
           Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
         ]],
-        ActorLastName: ['',
+        actorLastName: ['',
         [
           Validators.required,
           Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
         ]],
-        ActorBiography: [''],
-        ActorImage: ['']
+        actorBiography: [''],
+        actorImage: ['']
       });
     }
 
@@ -38,13 +38,13 @@ export class AddActorComponent {
 
     const formData = new FormData();
 
-    formData.append('ActorFirstName', this.actorForm.get('ActorFirstName').value);
-    formData.append('ActorLastName', this.actorForm.get('ActorLastName').value);
-    formData.append('ActorBiography', this.actorForm.get('ActorBiography').value);
+    formData.append('actorFirstName', this.actorForm.get('actorFirstName').value);
+    formData.append('actorLastName', this.actorForm.get('actorLastName').value);
+    formData.append('actorBiography', this.actorForm.get('actorBiography').value);
 
-    const images = this.actorForm.get('ActorImage').value;
+    const images = this.actorForm.get('actorImage').value;
     images.forEach(element => {
-      formData.append('ActorImage', element);
+      formData.append('actorImage', element);
     });
 
     this.actorService.addActor(formData)
