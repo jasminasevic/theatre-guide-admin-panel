@@ -16,10 +16,10 @@ export class EditDirectorComponent implements OnInit {
   directorDetails: any;
 
   formData = {
-    Id: 0,
-    DirectorFirstName: '',
-    DirectorLastName: '',
-    DirectorBiography: '',
+    id: 0,
+    directorFirstName: '',
+    directorLastName: '',
+    directorBiography: '',
   }
 
   constructor(private directorService: DirectorsService,
@@ -36,27 +36,27 @@ export class EditDirectorComponent implements OnInit {
       .subscribe(actor => {
         this.directorDetails = actor;
         this.directorForm.patchValue({
-          DirectorFirstName: this.directorDetails.directorFirstName,
-          DirectorLastName: this.directorDetails.directorLastName,
-          DirectorBiography: this.directorDetails.directorBiography
+          directorFirstName: this.directorDetails.directorFirstName,
+          directorLastName: this.directorDetails.directorLastName,
+          directorBiography: this.directorDetails.directorBiography
         });
       });
   }
 
   createDirectorForm() : FormGroup {
     return this.fb.group({
-      Id: 0,
-      DirectorFirstName: [this.formData.DirectorFirstName,
+      id: 0,
+      directorFirstName: [this.formData.directorFirstName,
       [
         Validators.required,
         Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
       ]],
-      DirectorLastName: [this.formData.DirectorLastName,
+      directorLastName: [this.formData.directorLastName,
       [
         Validators.required,
         Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
       ]],
-      DirectorBiography: [this.formData.DirectorBiography]
+      directorBiography: [this.formData.directorBiography]
     });
   }
 

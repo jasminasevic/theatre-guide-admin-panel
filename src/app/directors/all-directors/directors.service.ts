@@ -4,7 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { API_URL } from 'src/app/app.constants';
 import { IDirectorData } from '../../shared/interfaces/IDirectorData';
-import { Director, DirectorBasic } from './directors.model';
+import { Director } from './directors.model';
+import { DirectorBasic } from './directorBasic.model';
 
 @Injectable({
   providedIn: 'root'

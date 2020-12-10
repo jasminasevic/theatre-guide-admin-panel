@@ -18,18 +18,18 @@ export class AddDirectorComponent {
     private notificationService: NotificationService,
     private router: Router) {
       this.directorForm = this.fb.group({
-        Id: 0,
-        DirectorFirstName: ['',
+        id: 0,
+        directorFirstName: ['',
         [
           Validators.required,
           Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
         ]],
-        DirectorLastName: ['',
+        directorLastName: ['',
         [
           Validators.required,
           Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
         ]],
-        DirectorBiography: [''],
+        directorBiography: [''],
       });
     }
 

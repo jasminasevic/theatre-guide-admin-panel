@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DirectorsService } from '../all-directors/directors.service';
+import { ShowForDirector } from '../../shows/all-shows/showForDirector.model'
 
 @Component({
   selector: 'app-about-director',
@@ -10,6 +11,7 @@ import { DirectorsService } from '../all-directors/directors.service';
 export class AboutDirectorComponent implements OnInit {
 
   director: any;
+  directorShow: ShowForDirector[];
 
   constructor(private directorService: DirectorsService,
     private activatedRoute: ActivatedRoute) { }
@@ -19,7 +21,9 @@ export class AboutDirectorComponent implements OnInit {
 
     this.directorService.getDirector(directorId)
       .subscribe(data => {
-        this.director = data
+        this.director = data,
+        this.directorShow = data.showBaseInfoDtos,
+        console.log(data)
     })
   }
 

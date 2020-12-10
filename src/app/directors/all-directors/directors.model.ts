@@ -1,25 +1,17 @@
+import { ShowForDirector } from '../../shows/all-shows/showForDirector.model';
+
 export class Director {
-  Id: number;
-  DirectorFirstName: string;
-  DirectorLastName: string;
-  DirectorBiography: string;
+  id: number;
+  directorFirstName: string;
+  directorLastName: string;
+  directorBiography: string;
+  showBaseInfoDtos: ShowForDirector[] | null;
 
   constructor(director){
-    this.Id = director.Id;
-    this.DirectorFirstName = director.DirectorFirstName || '';
-    this.DirectorLastName = director.DirectorLastName || '';
-    this.DirectorBiography = director.DirectorBiography || '';
-  }
-}
-
-export class DirectorBasic {
-  Id: number;
-  DirectorFirstName: string;
-  DirectorLastName: string;
-
-  constructor(director){
-    this.Id = director.Id;
-    this.DirectorFirstName = director.DirectorFirstName || '';
-    this.DirectorLastName = director.DirectorLastName || '';
+    this.id = director.Id;
+    this.directorFirstName = director.directorFirstName || '';
+    this.directorLastName = director.directorLastName || '';
+    this.directorBiography = director.directorBiography || '';
+    this.showBaseInfoDtos = director.ShowForDirector || null;
   }
 }
