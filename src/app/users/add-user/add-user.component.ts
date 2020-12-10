@@ -29,16 +29,14 @@ export class AddUserComponent implements OnInit {
       })
 
     this.userForm = this.fb.group({
-      Id: 0,
-      FirstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
-      LastName: [''],
-      Email: [
-        '',
-        [Validators.required, Validators.email, Validators.minLength(5)]
-      ],
-      Password: ['', [Validators.required]],
+      id: 0,
+      firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
+      lastName: [''],
+      email: ['',
+        [Validators.required, Validators.email, Validators.minLength(5)]],
+      password: ['', [Validators.required]],
       //ConfirmPassword: ['', [Validators.required]],
-      RoleId: ['', Validators.required],
+      roleId: ['', Validators.required],
       // uploadImg: ['']
     });
   }
@@ -59,13 +57,11 @@ export class AddUserComponent implements OnInit {
                'Record Added Successfully!',
                'bottom',
                'center'
-             );
-    this.router.navigateByUrl('/SampleComponent', { skipLocationChange: true });
-    this.router.navigate(['/users/all-users']);
+             ),
+      this.router.navigateByUrl('/SampleComponent', { skipLocationChange: true });
+      this.router.navigate(['/users/all-users']);
     });
-
   }
-
 
 }
 

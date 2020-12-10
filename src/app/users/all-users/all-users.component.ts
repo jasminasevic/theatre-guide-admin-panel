@@ -34,10 +34,6 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
 
-  onRowClicked(row) {
-    console.log('Row clicked: ', row);
-}
-
   constructor(
     private usersService: UserService,
     private dialog: MatDialog,
@@ -121,29 +117,19 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
 export class UserDataSource implements DataSource<User> {
 
   private usersSubject = new BehaviorSubject<User[]>([]);
-  // private loadingSubject = new BehaviorSubject<boolean>(false);
-  // public loading$ = this.loadingSubject.asObservable();
 
   constructor(private userService: UserService) {}
 
   connect(collectionViewer: CollectionViewer): Observable<User[]> {
-      return this.usersSubject.asObservable();
-  }
+      return this.usersSubject.asObservable();}
 
   disconnect(collectionViewer: CollectionViewer): void {
-      this.usersSubject.complete();
-    //  this.loadingSubject.complete();
-  }
+      this.usersSubject.complete();}
 
   totalCount: number;
-  loadUsers(pageSize = 10, pageIndex = 0, sortOrder = '', sortDirection = '', searchQuery = '') {
 
-    //  this.loadingSubject.next(true);
+  loadUsers(pageSize = 10, pageIndex = 0, sortOrder = '', sortDirection = '', searchQuery = '') {
       this.userService.getAllUsers(pageSize, pageIndex += 1, sortOrder + '_' + sortDirection, searchQuery)
-      .pipe(
-         // Error(() => of([])),
-          // finalize(() => this.loadingSubject.next(false))
-      )
       .subscribe(users =>
         {
           this.usersSubject.next(users.data),

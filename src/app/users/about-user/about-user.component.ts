@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PurchaseWithDetails } from 'src/app/purchases/all-purchases/purchaseWithDetails.model';
 import { UserService} from '../all-users/users.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { UserService} from '../all-users/users.service';
 export class AboutUserComponent implements OnInit {
 
   user: any;
+  getDetailedPurchaseDtos: PurchaseWithDetails[];
 
   constructor(private activatedRoute: ActivatedRoute,
     private userService: UserService) { }
@@ -19,7 +21,8 @@ export class AboutUserComponent implements OnInit {
 
     this.user = this.userService.getOneUser(userId)
       .subscribe(data=> {
-        this.user = data
+        this.user = data,
+        this.getDetailedPurchaseDtos = data.getDetailedPurchaseDtos
       });
   }
 }

@@ -33,7 +33,7 @@ export class UserService {
     )
   }
 
-  getOneUser(user) : Observable<User> {
+  getOneUser(user: number) : Observable<User> {
     return this.httpClient.get<User>(this.API_URL + '/users/' + user)
     .pipe(
       map((userData: User) => userData),
@@ -41,7 +41,7 @@ export class UserService {
     )
   }
 
-  addUser(user: User): any {
+  addUser(user: User): Observable<User> {
     return this.httpClient.post(this.API_URL + "/users", user, httpOptions)
     .pipe(
       map((user: User) => user),

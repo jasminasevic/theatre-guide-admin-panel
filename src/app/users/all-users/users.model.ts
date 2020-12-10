@@ -1,30 +1,28 @@
-// import { formatDate } from '@angular/common';
+import { PurchaseWithDetails } from 'src/app/purchases/all-purchases/purchaseWithDetails.model';
+
 export class User {
-  Id: number;
-  // img: string;
-  FirstName: string;
-  LastName: string;
-  Email: string;
-  Password: string;
-  RoleId: number;
-  RoleName: string;
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  roleId: number;
+  roleName: string;
+  getDetailedPurchaseDtos: PurchaseWithDetails[] | null;
+  showFollowing: number;
+
   constructor(user) {
     {
-      this.Id = user.Id;
-      //this.Id = user.Id || this.getRandomID();
-      // this.img = user.avatar || 'assets/images/user/user1.jpg';
-      this.FirstName = user.FirstName || '';
-      this.LastName = user.LastName || '';
-      this.Email = user.Email || '';
-      this.Password = user.Password || '';
-      this.RoleId = user.RoleId || '';
-      this.RoleName = user.RoleName || '';
+      this.id = user.id;
+      this.firstName = user.firstName || '';
+      this.lastName = user.lastName || '';
+      this.email = user.email || '';
+      this.password = user.password || '';
+      this.roleId = user.roleId || '';
+      this.roleName = user.roleName || '';
+      this.getDetailedPurchaseDtos = user.purchaseWithDetails || '';
+      this.showFollowing = user.showFollowing || '';
     }
   }
-  public getRandomID(): string {
-    const S4 = () => {
-      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    };
-    return S4() + S4();
-  }
+
 }
