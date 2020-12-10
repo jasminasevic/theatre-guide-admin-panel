@@ -1,3 +1,5 @@
+import { IPricePerSector } from '../../shared/interfaces/IPricePerSector';
+
 export class Play {
   id: number;
   title: String;
@@ -10,6 +12,7 @@ export class Play {
   sceneId: number;
   premiereDate: Date;
   description: String;
+  getPriceDtos: IPricePerSector[];
 
   constructor(play){
     this.id = play.id;
@@ -23,6 +26,7 @@ export class Play {
     this.sceneId = play.sceneId || '';
     this.premiereDate = play.premiereDate || '';
     this.description = play.description || '';
+    this.getPriceDtos = play.getPriceDtos || '';
   }
 
 }
