@@ -1,9 +1,9 @@
 export class TheatreBasic{
-  Id: number;
-  TheatreName: String;
+  id: number;
+  theatreName: String;
 
   constructor(theatre){
-    this.Id = theatre.Id;
-    this.TheatreName = theatre.Name || '';
+    this.id = theatre.id;
+    this.theatreName = theatre.name || '';
   }
 }

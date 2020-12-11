@@ -1,23 +1,23 @@
 import { IImage } from "../../shared/interfaces/IImage";
 
 export class Theatre {
-  Id: number;
-  Name: string;
-  Description: string;
-  Email: string;
-  WorkingHours: string;
-  Telephone: string;
-  Location: string;
-  TheatreImage: IImage[];
+  id: number;
+  name: string;
+  description: string;
+  email: string;
+  workingHours: string;
+  telephone: string;
+  location: string;
+  theatreImage: IImage[];
 
   constructor(theatre){
-    this.Id = theatre.Id;
-    this.Name = theatre.Name || '';
-    this.Description = theatre.Description || '';
-    this.WorkingHours = theatre.WorkingHours || '';
-    this.Telephone = theatre.Telephone || '';
-    this.Location = theatre.Location || '';
-    this.TheatreImage = theatre.TheatreImage || '';
+    this.id = theatre.id;
+    this.name = theatre.name || '';
+    this.description = theatre.description || '';
+    this.workingHours = theatre.workingHours || '';
+    this.telephone = theatre.telephone || '';
+    this.location = theatre.location || '';
+    this.theatreImage = theatre.theatreImage || '';
   }
 }
 

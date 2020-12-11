@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TheatreService } from '../all-theatres/theatres.service';
 import { GetImagePathService } from 'src/app/shared/services/get-image-path.service';
+import { SceneWithSectors } from 'src/app/scenes/all-scenes/sceneWithSectors.model';
+import { TheatreWithDetails } from '../all-theatres/theatreWithDetails.model';
+import { ShowForActor } from 'src/app/shows/all-shows/showForActor.model';
 
 @Component({
   selector: 'app-about-theatre',
@@ -10,8 +13,10 @@ import { GetImagePathService } from 'src/app/shared/services/get-image-path.serv
 })
 export class AboutTheatreComponent implements OnInit {
 
-  theatre: any;
+  theatre: TheatreWithDetails;
   imgPath: string;
+  getSceneWithSectorsDtos: SceneWithSectors[];
+  showBaseInfoDtos: ShowForActor[];
 
   constructor(private theatreService: TheatreService,
     private activatedRoute: ActivatedRoute,
@@ -24,6 +29,8 @@ export class AboutTheatreComponent implements OnInit {
         this.theatre = data;
         this.imgPath = this.imagePath.createImagePath(
           this.theatre.showImageDtos[0].path);
+        this.getSceneWithSectorsDtos = data.getSceneWithSectorsDtos;
+        this.showBaseInfoDtos = data.showBaseInfoDtos;
       })
   }
 

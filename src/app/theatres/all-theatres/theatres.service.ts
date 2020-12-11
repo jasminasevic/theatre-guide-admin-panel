@@ -5,7 +5,8 @@ import { catchError, map } from 'rxjs/operators';
 import { Theatre } from './theatres.model';
 import { ITheatreData } from '../../shared/interfaces/ITheatreData';
 import { API_URL, httpOptions } from '../../app.constants';
-import { TheatreBasic } from '../../theatres/all-theatres/theatreBasic.model';
+import { TheatreBasic } from './theatreBasic.model';
+import { TheatreWithDetails } from './theatreWithDetails.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,6 @@ import { TheatreBasic } from '../../theatres/all-theatres/theatreBasic.model';
 export class TheatreService {
 
   private readonly API_URL = API_URL;
-  private readonly httpOptions = httpOptions;
 
   dataChange: BehaviorSubject<Theatre[]> = new BehaviorSubject<Theatre[]>([]);
 
@@ -37,10 +37,10 @@ export class TheatreService {
       )
   }
 
-  getTheatreList(): Observable<TheatreBasic>{
-    return this.httpClient.get<TheatreBasic>(this.API_URL + '/theatres')
+  getTheatreList(): Observable<TheatreBasic[]>{
+    return this.httpClient.get<TheatreBasic[]>(this.API_URL + '/theatres')
       .pipe(
-        map((theatreList: TheatreBasic) => theatreList),
+        map((theatreList: TheatreBasic[]) => theatreList),
         catchError(err => throwError(err))
       )
   }
@@ -53,10 +53,10 @@ export class TheatreService {
       );
   }
 
-  getTheatre(id: number) : Observable<Theatre> {
-    return this.httpClient.get<Theatre>(this.API_URL + '/theatres/' + id, httpOptions)
+  getTheatre(id: number) : Observable<TheatreWithDetails> {
+    return this.httpClient.get<TheatreWithDetails>(this.API_URL + '/theatres/' + id)
       .pipe(
-        map((theatre : Theatre) => theatre),
+        map((theatre : TheatreWithDetails) => theatre),
         catchError(err => throwError(err))
       );
     }

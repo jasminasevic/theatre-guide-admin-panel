@@ -1,5 +1,5 @@
 export interface IImage {
-  Path: string;
-  Alt: string;
+  path: string;
+  alt: string;
 }
 

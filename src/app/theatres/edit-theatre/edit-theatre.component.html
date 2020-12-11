@@ -31,11 +31,11 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Name</mat-label>
-                    <input matInput formControlName="Name" name="Name" required>
-                    <mat-error *ngIf="theatreForm.get('Name').hasError('required')">
+                    <input matInput formControlName="name" required>
+                    <mat-error *ngIf="theatreForm.get('name').hasError('required')">
                       Theatre name is required
                     </mat-error>
-                    <mat-error *ngIf="theatreForm.get('Name').hasError('pattern')">
+                    <mat-error *ngIf="theatreForm.get('name').hasError('pattern')">
                       Wrong theatre name format
                     </mat-error>
                   </mat-form-field>
@@ -43,11 +43,11 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Email</mat-label>
-                    <input matInput formControlName="Email" required>
-                    <mat-error *ngIf="theatreForm.get('Email').hasError('required')">
+                    <input matInput formControlName="email" required>
+                    <mat-error *ngIf="theatreForm.get('email').hasError('required')">
                       Email is required
                     </mat-error>
-                    <mat-error *ngIf="theatreForm.get('Email').hasError('email')">
+                    <mat-error *ngIf="theatreForm.get('email').hasError('email')">
                       Wrong email format
                     </mat-error>
                   </mat-form-field>
@@ -57,11 +57,11 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Phone</mat-label>
-                    <input matInput formControlName="Telephone">
-                    <mat-error *ngIf="theatreForm.get('Telephone').hasError('required')">
+                    <input matInput formControlName="telephone">
+                    <mat-error *ngIf="theatreForm.get('telephone').hasError('required')">
                       Phone number is required
                     </mat-error>
-                    <mat-error *ngIf="theatreForm.get('Telephone').hasError('pattern')">
+                    <mat-error *ngIf="theatreForm.get('telephone').hasError('pattern')">
                       Wrong phone number format
                     </mat-error>
                   </mat-form-field>
@@ -69,11 +69,11 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Working Hours</mat-label>
-                    <input matInput formControlName="WorkingHours">
-                    <mat-error *ngIf="theatreForm.get('WorkingHours').hasError('required')">
+                    <input matInput formControlName="workingHours">
+                    <mat-error *ngIf="theatreForm.get('workingHours').hasError('required')">
                       Working hours are required
                     </mat-error>
-                    <mat-error *ngIf="theatreForm.get('WorkingHours').hasError('pattern')">
+                    <mat-error *ngIf="theatreForm.get('workingHours').hasError('pattern')">
                       Wrong working hours format
                     </mat-error>
                   </mat-form-field>
@@ -83,15 +83,15 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Location</mat-label>
-                    <input matInput formControlName="Location" required>
-                    <mat-error *ngIf="theatreForm.get('Location').hasError('required')">
+                    <input matInput formControlName="location" required>
+                    <mat-error *ngIf="theatreForm.get('location').hasError('required')">
                       Location is required
                     </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <ngx-mat-file-input formControlName="TheatreImage" placeholder="Select Theatre Image" multiple></ngx-mat-file-input>
+                    <ngx-mat-file-input formControlName="theatreImage" placeholder="Select Theatre Image" multiple></ngx-mat-file-input>
                   </mat-form-field>
                 </div>
               </div>
@@ -100,7 +100,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Description</mat-label>
-                    <textarea matInput formControlName="Description"></textarea>
+                    <textarea matInput formControlName="description"></textarea>
                   </mat-form-field>
                 </div>
               </div>
