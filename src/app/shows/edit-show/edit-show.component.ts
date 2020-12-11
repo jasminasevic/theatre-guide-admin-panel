@@ -152,36 +152,36 @@ export class EditShowComponent implements OnInit {
   }
 
 
-  onSubmit() : void{
+  onSubmit() : void {
 
     var showDate = this.showForm.get('premiereDate').value;
     var showDateTime = this.convertDateService.convertDate(showDate);
 
     const formData = new FormData();
 
-    formData.append('Title', this.showForm.get('title').value);
-    formData.append('Description', this.showForm.get('description').value);
-    formData.append('Duration', this.showForm.get('duration').value);
-    formData.append('ContentAdvisory', 'False');
-    formData.append('PremiereDate', showDateTime);
-    formData.append('CategoryId', this.showForm.get('categoryId').value);
-    formData.append('Writer', this.showForm.get('writer').value);
-    formData.append('DirectorId', this.showForm.get('directorId').value);
-    formData.append('TheatreId', this.showForm.get('theatreId').value);
-    formData.append('SceneId', this.showForm.get('sceneId').value);
+    formData.append('title', this.showForm.get('title').value);
+    formData.append('description', this.showForm.get('description').value);
+    formData.append('duration', this.showForm.get('duration').value);
+    formData.append('contentAdvisory', 'False');
+    formData.append('premiereDate', showDateTime);
+    formData.append('categoryId', this.showForm.get('categoryId').value);
+    formData.append('writer', this.showForm.get('writer').value);
+    formData.append('directorId', this.showForm.get('directorId').value);
+    formData.append('theatreId', this.showForm.get('theatreId').value);
+    formData.append('sceneId', this.showForm.get('sceneId').value);
 
     const actors = this.showForm.get('actorShowDtos').value;
 
     for(let i = 0; i < actors.length; i++){
-      formData.append('ActorShowDtos[' + i + '][ActorId]', actors[i].actorId);
-      formData.append('ActorShowDtos[' + i + '][ActorRoleName]', actors[i].actorRoleName);
-      formData.append('ActorShowDtos[' + i + '][ActorRoleDescription]', actors[i].actorRoleDescription);
+      formData.append('actorShowDtos[' + i + '][actorId]', actors[i].actorId);
+      formData.append('actorShowDtos[' + i + '][actorRoleName]', actors[i].actorRoleName);
+      formData.append('actorShowDtos[' + i + '][actorRoleDescription]', actors[i].actorRoleDescription);
     }
 
     const images = this.showForm.get('showImg').value;
 
     for(var i=0; i<images.length; i++){
-      formData.append("ShowImages", images[i]);
+      formData.append("showImages", images[i]);
     }
 
     this.showService.editShow(this.showDetails.id, formData)

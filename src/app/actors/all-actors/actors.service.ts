@@ -6,6 +6,7 @@ import { API_URL } from 'src/app/app.constants';
 import { IActorData } from '../../shared/interfaces/IActorData';
 import { Actor } from './actors.model';
 import { ActorBasic } from './actorBasic.model';
+import { ActorAllInfo } from './actorAllInfo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,10 +36,10 @@ export class ActorsService {
       )
   }
 
-  getActor(id: number) : Observable<Actor>{
-    return this.httpClient.get<Actor>(this.API_URL + '/actors/' + id)
+  getActor(id: number) : Observable<ActorAllInfo>{
+    return this.httpClient.get<ActorAllInfo>(this.API_URL + '/actors/' + id)
       .pipe(
-        map((actor: Actor) => actor),
+        map((actor: ActorAllInfo) => actor),
         catchError(err => throwError(err))
       )
   }

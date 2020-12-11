@@ -4,7 +4,9 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { API_URL } from '../../app.constants';
 import { IShowData } from '../../shared/interfaces/IShowData';
-import { Show, ShowBaseInfo, ShowForRepertoire } from './shows.model';
+import { Show } from './shows.model';
+import { ShowBaseInfo } from './showBaseInfo.model';
+import { ShowForRepertoire } from './showForRepertoire.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,26 +41,26 @@ export class ShowsService {
       )
   }
 
-  getShowsForRepertoire(showId: number) : Observable<ShowForRepertoire>{
+  getShowsForRepertoire(showId: number) : Observable<ShowForRepertoire[]>{
 
     let params = new HttpParams();
     params = params.append('type', 'repertoire');
 
-    return this.httpClient.get<ShowForRepertoire>(this.API_URL + '/shows/' + showId, { params })
+    return this.httpClient.get<ShowForRepertoire[]>(this.API_URL + '/shows/' + showId, { params })
       .pipe(
-        map((showForRepertoire: ShowForRepertoire) => showForRepertoire),
+        map((showForRepertoire: ShowForRepertoire[]) => showForRepertoire),
         catchError(err => throwError(err))
       )
   }
 
-  getShowsWithPricesForRepertoire(showId: number) : Observable<ShowForRepertoire>{
+  getShowsWithPricesForRepertoire(showId: number) : Observable<ShowForRepertoire[]>{
 
     let params = new HttpParams();
     params = params.append('type', 'ticketPrices');
 
-    return this.httpClient.get<ShowForRepertoire>(this.API_URL + '/shows/' + showId, { params })
+    return this.httpClient.get<ShowForRepertoire[]>(this.API_URL + '/shows/' + showId, { params })
       .pipe(
-        map((showForRepertoire: ShowForRepertoire) => showForRepertoire),
+        map((showForRepertoire: ShowForRepertoire[]) => showForRepertoire),
         catchError(err => throwError(err))
       )
   }

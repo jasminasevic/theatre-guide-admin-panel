@@ -34,6 +34,21 @@
             </div>
           </div>
         </div>
+        <div class="card">
+          <ul class="nav nav-tabs">
+            <li class="nav-item m-l-10">
+              <a class="nav-link active" data-toggle="tab" href="#theatres">Where to watch this artist?</a>
+            </li>
+          </ul>
+          <div class="tab-content" *ngIf='actor'>
+            <div class="tab-pane body active" id="theatres">
+              <p *ngFor="let theatre of actorInTheatre">
+                <a [routerLink]="['../../../theatres/about-theatre', theatre.id ]" >{{ theatre.theatreName }}</a>
+              </p>
+              <hr>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-lg-8 col-md-12">
         <div class="card">

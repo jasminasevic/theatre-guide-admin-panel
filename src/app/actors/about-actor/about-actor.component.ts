@@ -4,6 +4,7 @@ import { Actor } from '../all-actors/actors.model';
 import { ActorsService } from '../all-actors/actors.service';
 import { GetImagePathService } from '../../shared/services/get-image-path.service';
 
+
 @Component({
   selector: 'app-about-actor',
   templateUrl: './about-actor.component.html',
@@ -14,6 +15,7 @@ export class AboutActorComponent implements OnInit {
   actor: any;
   imgPath: string;
   actorInShow: any;
+  actorInTheatre: any;
 
   constructor(private actorService: ActorsService,
     private activatedRoute: ActivatedRoute,
@@ -26,6 +28,7 @@ export class AboutActorComponent implements OnInit {
       .subscribe(data => {
         this.actor = data,
         this.actorInShow = data.actorInShow,
+        this.actorInTheatre = data.theatreBasicDtos,
         this.imgPath = this.imagePath.createImagePath(
           this.actor.showImageDto[0].path);
       })

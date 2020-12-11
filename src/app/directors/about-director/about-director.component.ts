@@ -22,8 +22,7 @@ export class AboutDirectorComponent implements OnInit {
     this.directorService.getDirector(directorId)
       .subscribe(data => {
         this.director = data,
-        this.directorShow = data.showBaseInfoDtos,
-        console.log(data)
+        this.directorShow = data.showBaseInfoDtos
     })
   }
 

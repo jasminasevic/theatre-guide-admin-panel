@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Currency } from 'src/app/currencies/all-currencies/currencies.model';
 import { CurrenciesService } from 'src/app/currencies/all-currencies/currencies.service';
 import { ConvertDateService } from 'src/app/shared/services/convert-date.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { ShowForRepertoire } from 'src/app/shows/all-shows/shows.model';
+import { ShowForRepertoire } from 'src/app/shows/all-shows/showForRepertoire.model';
 import { ShowsService } from 'src/app/shows/all-shows/shows.service';
 import { RepertoiresService } from '../all-repertories/repertoires.service';
 
@@ -109,7 +108,7 @@ export class EditRepertoireComponent implements OnInit {
     if(this.counter > 1){
      this.showService.getShowsWithPricesForRepertoire($event)
       .subscribe(
-        (data: ShowForRepertoire) => {
+        (data: ShowForRepertoire[]) => {
           this.displayShowData(data),
           this.repertoireDetails = data
         }

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CurrenciesService } from 'src/app/currencies/all-currencies/currencies.service';
 import { ConvertDateService } from 'src/app/shared/services/convert-date.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { ShowForRepertoire } from 'src/app/shows/all-shows/shows.model';
+import { ShowForRepertoire } from 'src/app/shows/all-shows/showForRepertoire.model';
 import { ShowsService } from 'src/app/shows/all-shows/shows.service';
 import { RepertoiresService } from '../all-repertories/repertoires.service';
 
@@ -64,7 +64,7 @@ export class AddRepertoireComponent implements OnInit {
   onChangeObj($event){
     this.showService.getShowsForRepertoire($event)
       .subscribe(
-        (data: ShowForRepertoire) => {
+        (data: ShowForRepertoire[]) => {
         this.displayShowData(data),
         this.repertoireDetails = data
       })}

@@ -58,48 +58,48 @@ export class AddShowComponent implements OnInit {
       });
 
     this.showForm = this.fb.group({
-      Id: 0,
-      Title: [''],
-      TheatreId: ['', [
+      id: 0,
+      title: [''],
+      theatreId: ['', [
         Validators.required
       ]],
-      SceneId: ['', [
+      sceneId: ['', [
         // Validators.required
       ]],
-      CategoryId: ['', [
+      categoryId: ['', [
         // Validators.required
       ]],
-      ShowDescription: ['',[
+      showDescription: ['',[
         // Validators.required
       ]],
-      Duration: ['', [
+      duration: ['', [
         // Validators.required
       ]],
-      ContentAdvisory: [''],
-      PremiereDate: [''],
-      Writer: [''],
-      Director: ['', [
+      contentAdvisory: [''],
+      premiereDate: [''],
+      writer: [''],
+      director: ['', [
         // Validators.required
       ]],
-      ActorShowDtos: this.fb.array([this.initialActorRows()]),
-      ShowImg: ['']
+      actorShowDtos: this.fb.array([this.initialActorRows()]),
+      showImg: ['']
     });
   }
 
   initialActorRows(){
     return this.fb.group({
-      ActorId: [''],
-      ActorRoleName: [''],
-      ActorRoleDescription: ['']
+      actorId: [''],
+      actorRoleName: [''],
+      actorRoleDescription: ['']
     });
   }
 
   get formArr(){
-    return this.showForm.get('ActorShowDtos') as FormArray;
+    return this.showForm.get('actorShowDtos') as FormArray;
   }
 
   get actorControls(){
-    return this.showForm.controls.ActorShowDtos['controls'];
+    return this.showForm.controls.actorShowDtos['controls'];
   }
 
   addNewActor(){
@@ -119,34 +119,34 @@ export class AddShowComponent implements OnInit {
 
   onSubmit(){
 
-    var showDate = this.showForm.get('PremiereDate').value;
+    var showDate = this.showForm.get('premiereDate').value;
     var showDateTime = this.convertDateService.convertDate(showDate);
 
     const formData = new FormData();
 
-    formData.append('Title', this.showForm.get('Title').value);
-    formData.append('Description', this.showForm.get('ShowDescription').value);
-    formData.append('Duration', this.showForm.get('Duration').value);
-    formData.append('ContentAdvisory', 'False');
-    formData.append('PremiereDate', showDateTime);
-    formData.append('CategoryId', this.showForm.get('CategoryId').value);
-    formData.append('Writer', this.showForm.get('Writer').value);
-    formData.append('DirectorId', this.showForm.get('Director').value);
-    formData.append('TheatreId', this.showForm.get('TheatreId').value);
-    formData.append('SceneId', this.showForm.get('SceneId').value);
+    formData.append('title', this.showForm.get('title').value);
+    formData.append('description', this.showForm.get('showDescription').value);
+    formData.append('duration', this.showForm.get('duration').value);
+    formData.append('contentAdvisory', 'False');
+    formData.append('premiereDate', showDateTime);
+    formData.append('categoryId', this.showForm.get('categoryId').value);
+    formData.append('writer', this.showForm.get('writer').value);
+    formData.append('directorId', this.showForm.get('director').value);
+    formData.append('theatreId', this.showForm.get('theatreId').value);
+    formData.append('sceneId', this.showForm.get('sceneId').value);
 
-    const actors = this.showForm.get('ActorShowDtos').value;
+    const actors = this.showForm.get('actorShowDtos').value;
 
     for(let i = 0; i < actors.length; i++){
-      formData.append('ActorShowDtos[' + i + '][ActorId]', actors[i].ActorId);
-      formData.append('ActorShowDtos[' + i + '][ActorRoleName]', actors[i].ActorRoleName);
-      formData.append('ActorShowDtos[' + i + '][ActorRoleDescription]', actors[i].ActorRoleDescription);
+      formData.append('actorShowDtos[' + i + '][actorId]', actors[i].actorId);
+      formData.append('actorShowDtos[' + i + '][actorRoleName]', actors[i].actorRoleName);
+      formData.append('actorShowDtos[' + i + '][actorRoleDescription]', actors[i].actorRoleDescription);
     }
 
-    const images = this.showForm.get('ShowImg').value;
+    const images = this.showForm.get('showImg').value;
 
     for(var i=0; i<images.length; i++){
-      formData.append("ShowImages", images[i]);
+      formData.append("showImages", images[i]);
     }
 
     this.showService.addShow(formData)

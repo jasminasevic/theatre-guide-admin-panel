@@ -2,9 +2,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Theatre, TheatreBasic } from './theatres.model';
+import { Theatre } from './theatres.model';
 import { ITheatreData } from '../../shared/interfaces/ITheatreData';
 import { API_URL, httpOptions } from '../../app.constants';
+import { TheatreBasic } from '../../theatres/all-theatres/theatreBasic.model';
 
 @Injectable({
   providedIn: 'root'

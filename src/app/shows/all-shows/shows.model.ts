@@ -1,4 +1,3 @@
-import { ISector } from 'src/app/shared/interfaces/ISector';
 import { IActorShow } from '../../shared/interfaces/IActorShow';
 
 export class Show {
@@ -34,44 +33,5 @@ export class Show {
     this.writer = show.writer || '';
     this.showImg = show.showImg || '';
     this.actorShowDtos = show.actorShowsDto || '';
-  }
-}
-
-
-export class ShowBaseInfo {
-  id: number;
-  title: String;
-  theatreName: String;
-  theatreId: number;
-  scene: String;
-  sceneId: number;
-
-  constructor(show){
-    this.id = show.id;
-    this.title = show.title || '';
-    this.theatreName = show.theatreName || '';
-    this.theatreId = show.theatreId || '';
-    this.scene = show.scene || '';
-    this.sceneId = show.sceneId || '';
-  }
-}
-
-export class ShowForRepertoire {
-  id: number;
-  title: String;
-  theatreName: String;
-  theatreId: number;
-  sceneName: String;
-  sceneId: number;
-  getSectorDtos: ISector;
-
-  constructor(show){
-    this.id = show.id;
-    this.title = show.title || '';
-    this.theatreName = show.theatreName || '';
-    this.theatreId = show.theatreId || '';
-    this.sceneName = show.scene || '';
-    this.sceneId = show.sceneId || '';
-    this.getSectorDtos = show.getSectorDtos || '';
   }
 }
