@@ -31,13 +31,13 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3">
                     <mat-label>Theatre</mat-label>
-                    <mat-select formControlName="TheatreId" required>
+                    <mat-select formControlName="theatreId" required>
                       <mat-option>--</mat-option>
                       <mat-option *ngFor="let item of theatreListing" [value]="item.id">
                         {{ item.theatreName }}
                       </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="sceneForm.get('TheatreId').hasError('required')">
+                    <mat-error *ngIf="sceneForm.get('theatreId').hasError('required')">
                       Please choose a theatre
                     </mat-error>
                   </mat-form-field>
@@ -45,21 +45,21 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Scene Name</mat-label>
-                    <input matInput formControlName="SceneName" required>
-                    <mat-error *ngIf="sceneForm.get('SceneName').hasError('required')">
+                    <input matInput formControlName="sceneName" required>
+                    <mat-error *ngIf="sceneForm.get('sceneName').hasError('required')">
                       Scene name is required
                     </mat-error>
                   </mat-form-field>
                 </div>
               </div>
-              <div formArrayName="AddSectorDtos">
+              <div formArrayName="addSectorDtos">
                 <div class="row" *ngFor="let sectorRow of sectorControls; let i= index"
                 [formGroupName]='i'>
                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" >
                     <mat-form-field class="example-full-width mb-3" appearance="fill">
                       <mat-label>Sector</mat-label>
-                      <input matInput formControlName="SectorName" required>
-                      <mat-error *ngIf="sectorControls[i].get('SectorName').hasError('required')">
+                      <input matInput formControlName="sectorName" required>
+                      <mat-error *ngIf="sectorControls[i].get('sectorName').hasError('required')">
                         Sector name is required
                       </mat-error>
                     </mat-form-field>
@@ -67,8 +67,8 @@
                   <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                     <mat-form-field class="example-full-width mb-3" appearance="fill">
                       <mat-label>Seat Capacity</mat-label>
-                      <input matInput formControlName="SeatCapacity" required>
-                      <mat-error *ngIf="sectorControls[i].get('SeatCapacity').hasError('required')">
+                      <input matInput formControlName="seatCapacity" required>
+                      <mat-error *ngIf="sectorControls[i].get('seatCapacity').hasError('required')">
                         Seat Capacity is required
                       </mat-error>
                     </mat-form-field>
@@ -76,8 +76,8 @@
                   <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
                     <mat-form-field class="example-full-width mb-3" appearance="fill">
                       <mat-label>Rows Number</mat-label>
-                      <input matInput formControlName="RowsTotalNumber" required>
-                      <mat-error *ngIf="sectorControls[i].get('RowsTotalNumber').hasError('required')">
+                      <input matInput formControlName="rowsTotalNumber" required>
+                      <mat-error *ngIf="sectorControls[i].get('rowsTotalNumber').hasError('required')">
                         Rows number is required
                       </mat-error>
                     </mat-form-field>

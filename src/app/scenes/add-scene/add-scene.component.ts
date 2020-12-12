@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ScenesService } from '../all-scenes/scenes.service';
 import { TheatreService } from '../../theatres/all-theatres/theatres.service';
+import { TheatreBasic } from 'src/app/theatres/all-theatres/theatreBasic.model';
 
 @Component({
   selector: 'app-add-scene',
@@ -13,7 +14,7 @@ import { TheatreService } from '../../theatres/all-theatres/theatres.service';
 export class AddSceneComponent implements OnInit {
 
   sceneForm: FormGroup;
-  theatreListing: any = [];
+  theatreListing: TheatreBasic[];
 
   constructor(private sceneService: ScenesService,
     private notificationService: NotificationService,
@@ -29,32 +30,32 @@ export class AddSceneComponent implements OnInit {
       });
 
     this.sceneForm = this.fb.group({
-      Id: 0,
-      SceneName: ['',
+      id: 0,
+      sceneName: ['',
       [
         Validators.required,
         Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
       ]],
-      TheatreId: [
+      theatreId: [
         Validators.required,
       ],
-      AddSectorDtos: this.fb.array([this.initalSectorRows()])
+      addSectorDtos: this.fb.array([this.initalSectorRows()])
       });
   }
 
   initalSectorRows(){
     return this.fb.group({
-        SectorName: ['',
+        sectorName: ['',
         [
           Validators.required,
           Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
         ]],
-        SeatCapacity: ['',
+        seatCapacity: ['',
         [
           Validators.required,
           Validators.pattern('^[0-9][0-9]*$')
         ]],
-        RowsTotalNumber: ['',
+        rowsTotalNumber: ['',
         [
           Validators.required,
           Validators.pattern('^[0-9][0-9]*$')
@@ -63,11 +64,11 @@ export class AddSceneComponent implements OnInit {
   }
 
   get formArr(){
-    return this.sceneForm.get('AddSectorDtos') as FormArray;
+    return this.sceneForm.get('addSectorDtos') as FormArray;
   }
 
   get sectorControls(){
-    return this.sceneForm.controls.AddSectorDtos['controls'];
+    return this.sceneForm.controls.addSectorDtos['controls'];
   }
 
   addNewSector(){
@@ -82,16 +83,18 @@ export class AddSceneComponent implements OnInit {
 
     const formData = new FormData();
 
-    formData.append('SceneName', this.sceneForm.get('SceneName').value);
-    formData.append('TheatreId', this.sceneForm.get('TheatreId').value);
+    formData.append('sceneName', this.sceneForm.get('sceneName').value);
+    formData.append('theatreId', this.sceneForm.get('theatreId').value);
 
-    const sectors = this.sceneForm.get('AddSectorDtos').value;
+    const sectors = this.sceneForm.get('addSectorDtos').value;
 
     for(let i = 0; i < sectors.length; i++){
-      formData.append('AddSectorDtos[' + i + '][SectorName]', sectors[i].SectorName);
-      formData.append('AddSectorDtos[' + i + '][RowsTotalNumber]', sectors[i].RowsTotalNumber);
-      formData.append('AddSectorDtos[' + i + '][SeatCapacity]', sectors[i].SeatCapacity);
+      formData.append('addSectorDtos[' + i + '][sectorName]', sectors[i].sectorName);
+      formData.append('addSectorDtos[' + i + '][rowsTotalNumber]', sectors[i].rowsTotalNumber);
+      formData.append('addSectorDtos[' + i + '][seatCapacity]', sectors[i].seatCapacity);
     }
+
+    //new Response(formData).text().then(console.log);
 
     this.sceneService.addScene(formData)
       .subscribe(() => {

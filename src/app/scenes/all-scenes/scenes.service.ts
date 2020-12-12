@@ -38,13 +38,13 @@ export class ScenesService {
       )
   }
 
-  getScenesInTheatre(theatreId: number) : Observable<Scene>{
+  getScenesInTheatre(theatreId: number) : Observable<Scene[]>{
     let params = new HttpParams();
     params = params.append('theatreId', String(theatreId));
 
-    return this.httpClient.get<Scene>(this.API_URL + '/scenes', { params })
+    return this.httpClient.get<Scene[]>(this.API_URL + '/scenes', { params })
       .pipe(
-        map((scene: Scene) => scene),
+        map((scene: Scene[]) => scene),
         catchError(err => throwError(err))
       )
   }
@@ -57,17 +57,17 @@ export class ScenesService {
       )
   }
 
+  editScene(id:number, scene: Scene) : Observable<Scene>{
+    return this.httpClient.put<Scene>(this.API_URL + '/scenes/' + id, scene)
+      .pipe(
+        map((scene: Scene) => scene),
+        catchError(err => throwError(err))
+      )
+  }
+
   deleteScene(id: number) {
     return this.httpClient.delete<any>(this.API_URL + '/scenes/' + id)
       .subscribe();
-  }
-
-  editScene(id:number, scene: Scene) : Observable<void>{
-    return this.httpClient.put<void>(this.API_URL + '/scenes/' + id, scene)
-      .pipe(
-        map(scene => scene),
-        catchError(err => throwError(err))
-      )
   }
 
 }

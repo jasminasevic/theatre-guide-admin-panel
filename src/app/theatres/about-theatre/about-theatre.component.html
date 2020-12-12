@@ -97,7 +97,8 @@
               </div>
             </div>
           </div>
-          <div role="tabpanel" class="tab-pane" id="scenes" aria-expanded="false">
+          <div role="tabpanel" class="tab-pane" id="scenes" aria-expanded="false"
+            *ngIf="getSceneWithSectorsDtos?.length;else noScenes">
             <div class="row clearfix" *ngFor='let scene of getSceneWithSectorsDtos'>
               <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="card project_widget">
@@ -115,7 +116,18 @@
               </div>
             </div>
           </div>
-          <div role="tabpanel" class="tab-pane" id="shows" aria-expanded="false">
+          <ng-template #noScenes>
+            <div role="tabpanel" class="tab-pane" id="scenes" aria-expanded="false">
+              <div class='card'>
+                <div class="body">
+                  <h2>Scenes</h2>
+                  <p class="m-t-30"> No scene has been added yet. </p>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <div role="tabpanel" class="tab-pane" id="shows" aria-expanded="false"
+          *ngIf="showBaseInfoDtos?.length;else noShows">
             <div class="row clearfix">
               <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="card project_widget">
@@ -129,6 +141,16 @@
               </div>
             </div>
           </div>
+          <ng-template #noShows>
+            <div role="tabpanel" class="tab-pane" id="shows" aria-expanded="false">
+              <div class='card'>
+                <div class="body">
+                  <h2>Shows</h2>
+                  <p class="m-t-30"> No show has been added yet. </p>
+                </div>
+              </div>
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>

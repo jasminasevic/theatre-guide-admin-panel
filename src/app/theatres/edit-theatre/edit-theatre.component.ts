@@ -83,7 +83,7 @@ export class EditTheatreComponent {
   }
 
   onSubmit(){
-    const theatreData = this.theatreForm.getRawValue();
+    //const theatreData = this.theatreForm.getRawValue();
 
     const formData = new FormData();
 

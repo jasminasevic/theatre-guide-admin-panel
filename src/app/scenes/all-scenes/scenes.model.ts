@@ -1,15 +1,15 @@
-import { ISector } from '../../shared/interfaces/ISector';
+import { ISectorBaseInfo } from '../../shared/interfaces/ISectorBaseInfo';
 
 export class Scene {
-  Id: number;
-  SceneName: String;
-  TheatreId: number;
-  AddSectorDtos: ISector[];
+  id: number;
+  sceneName: String;
+  theatreId: number;
+  addSectorDtos: ISectorBaseInfo[];
 
   constructor(scene){
-    this.Id = scene.Id;
-    this.SceneName = scene.SceneName || '';
-    this.TheatreId = scene.TheatreId || '';
-    this.AddSectorDtos = scene.SectorRows || '';
+    this.id = scene.id;
+    this.sceneName = scene.sceneName || '';
+    this.theatreId = scene.theatreId || '';
+    this.addSectorDtos = scene.sectorRows || '';
   }
 }

@@ -111,7 +111,7 @@ export class AddRepertoireComponent implements OnInit {
       formData.append('AddPriceDtos[' + i + '][CurrencyId]', prices[i].currencyId)
     }
 
-    new Response(formData).text().then(console.log);
+    //new Response(formData).text().then(console.log);
 
     this.repertoireService.addRepertoire(formData)
       .subscribe(() => {

@@ -45,8 +45,8 @@ export class TheatreService {
       )
   }
 
-  addTheatre(theatre) : any {
-    return this.httpClient.post(this.API_URL + "/theatres", theatre)
+  addTheatre(theatre) : Observable<Theatre> {
+    return this.httpClient.post<Theatre>(this.API_URL + "/theatres", theatre)
       .pipe(
         map((theatre: Theatre) => theatre),
         catchError(err => throwError(err))
@@ -61,17 +61,17 @@ export class TheatreService {
       );
     }
 
+    editTheatre(id: number, theatre) : Observable<Theatre>{
+      return this.httpClient.put<Theatre>(this.API_URL + '/theatres/' + id, theatre)
+        .pipe(
+          map((theatre: Theatre) => theatre),
+          catchError(err => throwError(err))
+        )
+    }
+
   deleteTheatre(id: number) {
     return this.httpClient.delete<any>(this.API_URL + '/theatres/' + id)
     .subscribe();
-  }
-
-  editTheatre(id: number, theatre) : Observable<Theatre>{
-    return this.httpClient.put<any>(this.API_URL + '/theatres/' + id, theatre)
-      .pipe(
-        map((theatre: Theatre) => theatre),
-        catchError(err => throwError(err))
-      )
   }
 
 }

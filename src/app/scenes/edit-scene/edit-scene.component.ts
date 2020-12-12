@@ -5,6 +5,7 @@ import { ScenesService } from '../all-scenes/scenes.service';
 import { TheatreService } from '../../theatres/all-theatres/theatres.service';
 import { Scene } from '../all-scenes/scenes.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { TheatreBasic } from 'src/app/theatres/all-theatres/theatreBasic.model';
 
 @Component({
   selector: 'app-edit-scene',
@@ -14,10 +15,10 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 export class EditSceneComponent implements OnInit {
 
   sceneForm: FormGroup;
-  sceneDetails: any;
-  theatreListing: any = [];
+  sceneDetails: Scene;
+  theatreListing: TheatreBasic[];
   selectedValue: number;
-  selectedTheatre: String;
+//  selectedTheatre: String;
   scenesInTheatre: any = [];
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -42,7 +43,7 @@ export class EditSceneComponent implements OnInit {
         (scene: Scene) => {
           this.editScene(scene),
           this.sceneDetails = scene;
-          this.selectedValue = scene.TheatreId;
+          this.selectedValue = scene.theatreId;
         },
         (err: any) => console.log(err)
       );
@@ -116,8 +117,9 @@ export class EditSceneComponent implements OnInit {
     this.formArr.push(this.initialSectorRows());
   }
 
-  onSubmit() : void {
+  onSubmit() {
     this.mapFormValuesToSceneModel();
+
     this.sceneService.editScene(this.sceneDetails.id, this.sceneDetails)
       .subscribe(
         () => {
@@ -133,9 +135,9 @@ export class EditSceneComponent implements OnInit {
   }
 
   mapFormValuesToSceneModel(){
-    this.sceneDetails.SceneName = this.sceneForm.value.sceneName;
-    this.sceneDetails.TheatreId = this.sceneForm.value.theatreId;
-    this.sceneDetails.AddSectorDtos = this.sceneForm.value.addSectorDtos;
+    this.sceneDetails.sceneName = this.sceneForm.value.sceneName;
+    this.sceneDetails.theatreId = this.sceneForm.value.theatreId;
+    this.sceneDetails.addSectorDtos = this.sceneForm.value.addSectorDtos;
   }
 
   deleteSectorRow(index: number){

@@ -93,8 +93,6 @@
               </div>
             </div>
           </div>
-          <div role="tabpanel" class="tab-pane" id="timeline" aria-expanded="false">
-          </div>
           <div role="tabpanel" class="tab-pane" id="purchases" aria-expanded="false"
           *ngIf="getDetailedPurchaseDtos?.length;else noPurchase">
             <div class="card project_widget" *ngFor="let purchase of getDetailedPurchaseDtos">
@@ -196,12 +194,9 @@
                   <h2>Purchases</h2>
                   <p class="m-t-30"> No purchase has been made yet. </p>
                 </div>
-            </div>
+              </div>
             </div>
           </ng-template>
-
-          <div role="tabpanel" class="tab-pane" id="timeline" aria-expanded="false">
-          </div>
         </div>
       </div>
     </div>
