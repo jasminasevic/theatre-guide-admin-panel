@@ -18,8 +18,6 @@ export class EditSceneComponent implements OnInit {
   sceneDetails: Scene;
   theatreListing: TheatreBasic[];
   selectedValue: number;
-//  selectedTheatre: String;
-  scenesInTheatre: any = [];
 
   constructor(private activatedRoute: ActivatedRoute,
     private sceneService: ScenesService,

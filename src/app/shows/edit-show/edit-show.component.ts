@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ActorBasic } from 'src/app/actors/all-actors/actorBasic.model';
 import { ActorsService } from 'src/app/actors/all-actors/actors.service';
+import { Category } from 'src/app/categories/all-categories/categories.model';
 import { CategoriesService } from 'src/app/categories/all-categories/categories.service';
+import { DirectorBasic } from 'src/app/directors/all-directors/directorBasic.model';
 import { DirectorsService } from 'src/app/directors/all-directors/directors.service';
+import { Scene } from 'src/app/scenes/all-scenes/scenes.model';
 import { ScenesService } from 'src/app/scenes/all-scenes/scenes.service';
 import { ConvertDateService } from 'src/app/shared/services/convert-date.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { TheatreBasic } from 'src/app/theatres/all-theatres/theatreBasic.model';
 import { TheatreService } from 'src/app/theatres/all-theatres/theatres.service';
+import { Show } from '../all-shows/shows.model';
 import { ShowsService } from '../all-shows/shows.service';
 
 @Component({
@@ -18,15 +24,14 @@ import { ShowsService } from '../all-shows/shows.service';
 export class EditShowComponent implements OnInit {
 
   showForm: FormGroup;
-  categoryListing: any = [];
-  theatreListing: any = [];
-  selectedTheatre: any;
-  scenesInTheatre: any = [];
+  categoryListing: Category[];
+  theatreListing: TheatreBasic[];
+  scenesInTheatre: Scene[];
   selectedScene: number;
   sceneName: String;
-  directorListing: any = [];
-  actorListing: any = [];
-  showDetails: any;
+  directorListing: DirectorBasic[];
+  actorListing: ActorBasic[];
+  showDetails: Show;
 
   constructor(private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -66,7 +71,7 @@ export class EditShowComponent implements OnInit {
     let showId = this.activatedRoute.snapshot.params['id'];
 
     this.showService.getShow(showId)
-      .subscribe((show: any) => {
+      .subscribe((show: Show) => {
         this.editShow(show),
         this.showDetails = show,
         this.selectedScene = show.sceneId,

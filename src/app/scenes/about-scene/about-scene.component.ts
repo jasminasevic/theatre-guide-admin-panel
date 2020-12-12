@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ScenesService } from '../all-scenes/scenes.service';
+import { ShowForScene } from '../../shows/all-shows/showForScene.model';
 
 @Component({
   selector: 'app-about-scene',
@@ -10,6 +11,8 @@ import { ScenesService } from '../all-scenes/scenes.service';
 export class AboutSceneComponent implements OnInit {
 
   scene: any;
+  showsOnScene: ShowForScene[];
+  sectors: any;
 
   constructor(private sceneService: ScenesService,
     private activatedRoute: ActivatedRoute) { }
@@ -17,9 +20,12 @@ export class AboutSceneComponent implements OnInit {
   ngOnInit() {
     let sceneId = this.activatedRoute.snapshot.params['id'];
 
-    this.scene = this.sceneService.getScene(sceneId)
+    this.scene = this.sceneService.getSceneWithShows(sceneId)
       .subscribe(data =>{
-        this.scene = data
+        this.scene = data,
+        this.showsOnScene = data.showBaseInfoDtos,
+        this.sectors = data.getSectorDtos,
+        console.log(data)
       })
   }
 

@@ -1,11 +1,11 @@
 export class ActorBasic {
   id: number;
-  actorFirstName: string;
-  actorLastName: string;
+  firstName: string;
+  lastName: string;
 
   constructor(actor){
     this.id = actor.id;
-    this.actorFirstName = actor.actorFirstName || '';
-    this.actorLastName = actor.actorLastName || '';
+    this.firstName = actor.firstName || '';
+    this.lastName = actor.lastName || '';
   }
 }

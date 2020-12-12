@@ -41,12 +41,18 @@
             </li>
           </ul>
           <div class="tab-content" *ngIf='actor'>
-            <div class="tab-pane body active" id="theatres">
+            <div class="tab-pane body active" id="theatres"
+              *ngIf="actorInTheatre?.length;else noTheatres">
               <p *ngFor="let theatre of actorInTheatre">
                 <a [routerLink]="['../../../theatres/about-theatre', theatre.id ]" >{{ theatre.theatreName }}</a>
               </p>
               <hr>
             </div>
+            <ng-template #noTheatres>
+              <div class="tab-pane body active" id="theatres">
+                  <p> No show has been added yet. </p>
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>

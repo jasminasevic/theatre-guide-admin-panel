@@ -9,6 +9,11 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { TheatreService } from 'src/app/theatres/all-theatres/theatres.service';
 import { ShowsService } from '../all-shows/shows.service';
 import { ConvertDateService } from '../../shared/services/convert-date.service';
+import { TheatreBasic } from 'src/app/theatres/all-theatres/theatreBasic.model';
+import { Category } from 'src/app/categories/all-categories/categories.model';
+import { Scene } from 'src/app/scenes/all-scenes/scenes.model';
+import { DirectorBasic } from 'src/app/directors/all-directors/directorBasic.model';
+import { ActorBasic } from 'src/app/actors/all-actors/actorBasic.model';
 
 @Component({
   selector: 'app-add-show',
@@ -18,12 +23,12 @@ import { ConvertDateService } from '../../shared/services/convert-date.service';
 export class AddShowComponent implements OnInit {
 
   showForm: FormGroup;
-  theatreListing: any = [];
-  categoryListing: any = [];
-  scenesInTheatre: any = [];
-  selectedTheatre: any;
-  directorListing: any = [];
-  actorListing: any = [];
+  theatreListing: TheatreBasic[];
+  categoryListing: Category[];
+  scenesInTheatre: Scene[];
+  selectedTheatre: number;
+  directorListing: DirectorBasic[];
+  actorListing: ActorBasic[];
 
   constructor(private showService: ShowsService,
     private theatreService: TheatreService,

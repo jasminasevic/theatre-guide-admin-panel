@@ -5,6 +5,7 @@ import { ISceneData } from '../../shared/interfaces/ISceneData';
 import { API_URL } from '../../app.constants';
 import { catchError, map } from 'rxjs/operators';
 import { Scene } from './scenes.model';
+import { SceneWithShows } from './scenesWithShows.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,17 @@ export class ScenesService {
       )
   }
 
+  getScenesInTheatre(theatreId: number) : Observable<Scene[]>{
+    let params = new HttpParams();
+    params = params.append('theatreId', String(theatreId));
+
+    return this.httpClient.get<Scene[]>(this.API_URL + '/scenes', { params })
+      .pipe(
+        map((scene: Scene[]) => scene),
+        catchError(err => throwError(err))
+      )
+  }
+
   getScene(id: number) : Observable<Scene>{
     return this.httpClient.get<Scene>(this.API_URL + '/scenes/' + id)
       .pipe(
@@ -38,13 +50,13 @@ export class ScenesService {
       )
   }
 
-  getScenesInTheatre(theatreId: number) : Observable<Scene[]>{
+  getSceneWithShows(id: number) : Observable<SceneWithShows>{
     let params = new HttpParams();
-    params = params.append('theatreId', String(theatreId));
+    params = params.append('type', 'sceneWithShows');
 
-    return this.httpClient.get<Scene[]>(this.API_URL + '/scenes', { params })
+    return this.httpClient.get<SceneWithShows>(this.API_URL + '/scenes/' + id, { params })
       .pipe(
-        map((scene: Scene[]) => scene),
+        map((sceneWithShows: SceneWithShows) => sceneWithShows),
         catchError(err => throwError(err))
       )
   }

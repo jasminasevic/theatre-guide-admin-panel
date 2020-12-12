@@ -189,8 +189,11 @@
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                 <mat-form-field class="example-full-width mb-3" appearance="outline">
                   <mat-label>Upload Image(s)</mat-label>
-                  <ngx-mat-file-input formControlName="showImg" multiple>
+                  <ngx-mat-file-input formControlName="showImg" multiple required>
                   </ngx-mat-file-input>
+                  <mat-error *ngIf="showForm.get('showImg').hasError('required')">
+                    Please select director
+                  </mat-error>
                 </mat-form-field>
               </div>
             </div>

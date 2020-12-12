@@ -1,11 +1,11 @@
 export class DirectorBasic {
   id: number;
-  directorFirstName: string;
-  directorLastName: string;
+  firstName: string;
+  lastName: string;
 
   constructor(director){
     this.id = director.Id;
-    this.directorFirstName = director.directorFirstName || '';
-    this.directorLastName = director.directorLastName || '';
+    this.firstName = director.firstName || '';
+    this.lastName = director.lastName || '';
   }
 }
