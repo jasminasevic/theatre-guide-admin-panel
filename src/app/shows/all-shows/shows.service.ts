@@ -65,7 +65,7 @@ export class ShowsService {
       )
   }
 
-  getShow(showId: number) : Observable<Show>{
+  getShow(showId) : Observable<Show>{
 
     let params = new HttpParams();
     params = params.append('type', 'allInfo');

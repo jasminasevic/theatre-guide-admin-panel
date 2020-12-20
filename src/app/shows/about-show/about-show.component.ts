@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GetImagePathService } from 'src/app/shared/services/get-image-path.service';
+import { Show } from '../all-shows/shows.model';
 import { ShowsService } from '../all-shows/shows.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { ShowsService } from '../all-shows/shows.service';
 })
 export class AboutShowComponent implements OnInit {
 
-  show: any;
+  show: Show;
   imgPath: string;
   showDate: Date;
 
@@ -21,13 +22,13 @@ export class AboutShowComponent implements OnInit {
   ngOnInit() {
     let showId = this.activatedRoute.snapshot.params['id'];
 
-    this.show = this.showService.getShow(showId)
-      .subscribe(data => {
-        this.show = data,
-        this.showDate = data.premiereDate;
-        this.imgPath = this.imagePath.createImagePath(
-          this.show.showImageDtos[0].path);
-      })
+      this.showService.getShow(showId)
+        .subscribe(data => {
+          this.show = data,
+          this.showDate = data.premiereDate;
+          this.imgPath = this.imagePath.createImagePath(
+            this.show.showImageDtos[0].path);
+        })
   }
 
 }

@@ -6,7 +6,7 @@
       <ul class="list"
         [ngStyle]="{'position' : 'relative', 'max-height' : listMaxHeight+'px', 'max-width' : listMaxWidth+'px'}"
         [perfectScrollbar]>
-        <li class="sidebar-user-panel">
+        <!-- <li class="sidebar-user-panel">
           <div class="user-panel">
             <div class=" image">
               <img src="assets/images/usrbig.jpg" class="img-circle user-img-circle" alt="User Image" />
@@ -32,7 +32,7 @@
               <i class="material-icons-two-tone">lock</i>
             </a>
           </div>
-        </li>
+        </li> -->
         <!-- First level menu -->
         <li [class.active]="showMenu === sidebarItem.title" *ngFor="let sidebarItem of sidebarItems"
           [routerLinkActive]="sidebarItem.submenu.length != 0 ? '' : 'active'">

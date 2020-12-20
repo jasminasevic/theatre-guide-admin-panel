@@ -37,7 +37,12 @@
               <div class="row">
                 <div class="col-12">
                   <h5 *ngIf="show">{{ show.followersNumber }}</h5>
-                  <small>Followers</small>
+                  <span *ngIf="show.followersNumber != 1; else pluralFollowers"><small>Followers</small></span>
+                  <ng-template #pluralFollowers>
+                    <span>
+                        <small>follower</small>
+                    </span>
+                    </ng-template>
                 </div>
               </div>
             </div>
@@ -74,7 +79,7 @@
               <hr>
               <small class="text-muted">Director: </small>
               <p *ngIf="show">
-                <a [routerLink]="['../../../categories/about-category', show.categoryId]" >{{show.directorFirstName + ' ' + show.directorLastName}}</a>
+                <a [routerLink]="['../../../directors/about-director', show.directorId]" >{{show.directorFirstName + ' ' + show.directorLastName}}</a>
               </p>
               <hr>
             </div>
@@ -126,7 +131,12 @@
                         <a [routerLink]="['../../../actors/about-actor', actor.actorId]" >
                           {{ actor.actorFirstName + ' ' + actor.actorLastName }}
                         </a>
-                        - {{ actor.actorRoleName }} - {{ actor.actorRoleDescription }}
+                        - {{ actor.actorRoleName }}
+                        <span *ngIf="actor.actorRoleDescription; else noDescription">
+                        - {{ actor.actorRoleDescription }}
+                      </span>
+                      <ng-template #noDescription>
+                        </ng-template>
                       </p>
                     </div>
                   </div>

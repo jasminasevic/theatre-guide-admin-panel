@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Play } from '../all-repertories/plays.model';
 import { RepertoiresService } from '../all-repertories/repertoires.service';
 
 @Component({

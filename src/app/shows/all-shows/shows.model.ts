@@ -14,8 +14,11 @@ export class Show {
   duration: number;
   premiereDate: Date;
   writer: String;
-  showImg: File;
+  showImageDtos: File;
   actorShowDtos: IActorShow;
+  followersNumber: number;
+  directorFirstName: string;
+  directorLastName: string;
 
   constructor(show){
     this.id = show.id;
@@ -31,7 +34,10 @@ export class Show {
     this.duration = show.duration || '';
     this.premiereDate = show.premiereDate || '';
     this.writer = show.writer || '';
-    this.showImg = show.showImg || '';
+    this.showImageDtos = show.showImageDtos || '';
     this.actorShowDtos = show.actorShowsDto || '';
+    this.followersNumber = show.followersNumber || '';
+    this.directorFirstName = show.directorFirstName || '';
+    this.directorLastName = show.directorLastName || '';
   }
 }
