@@ -24,6 +24,16 @@ export class EditRepertoireComponent implements OnInit {
   repertoireIdValue: number;
   currencyListing: any = [];
 
+  isPremiere: any = [
+    {
+      id: false,
+      value: 'No'
+    },
+    {
+      id: true,
+      value: 'Yes'
+    }];
+
   constructor(private fb: FormBuilder,
     private repertoireService: RepertoiresService,
     private router: Router,
@@ -52,6 +62,7 @@ export class EditRepertoireComponent implements OnInit {
     this.repertoireService.getRepertoire(repertoireId)
       .subscribe((repertoire: any) =>{
         this.editRepertoire(repertoire),
+        console.log(repertoire),
         this.repertoireDetails = repertoire,
         this.selectedShow = repertoire.showId
       }),
@@ -64,7 +75,8 @@ export class EditRepertoireComponent implements OnInit {
       showName: repertoire.showName,
       showDateTime: repertoire.showDate,
       theatreName: repertoire.theatreName,
-      sceneName: repertoire.sceneName
+      sceneName: repertoire.sceneName,
+      isPremiere: repertoire.isPremiere
     }),
     this.repertoireForm.setControl('addPriceDtos', this.setExistingSectorsPrices(repertoire.getPriceDtos));
   }
@@ -89,6 +101,7 @@ export class EditRepertoireComponent implements OnInit {
       showDateTime: [''],
       theatreName: [''],
       sceneName: [''],
+      isPremiere: [''],
       addPriceDtos: this.fb.array([this.initalSectorRows()])
     });
   }
@@ -149,6 +162,7 @@ export class EditRepertoireComponent implements OnInit {
 
     formData.append('ShowId', this.repertoireForm.get('showId').value);
     formData.append('ShowDate', showDateTime);
+    formData.append('IsPremiere', this.repertoireForm.get('isPremiere').value);
 
     const prices = this.repertoireForm.get('addPriceDtos').value;
 

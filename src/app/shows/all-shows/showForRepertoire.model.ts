@@ -7,6 +7,7 @@ export class ShowForRepertoire {
   theatreId: number;
   sceneName: String;
   sceneId: number;
+  isPremiere: boolean;
   getSectorDtos: ISector;
 
   constructor(show){
@@ -16,6 +17,7 @@ export class ShowForRepertoire {
     this.theatreId = show.theatreId || '';
     this.sceneName = show.scene || '';
     this.sceneId = show.sceneId || '';
+    this.isPremiere = show.isPremiere || '';
     this.getSectorDtos = show.getSectorDtos || '';
   }
 }

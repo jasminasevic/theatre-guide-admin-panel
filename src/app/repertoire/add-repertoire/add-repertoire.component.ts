@@ -23,6 +23,16 @@ export class AddRepertoireComponent implements OnInit {
   showId: number;
   currencyListing: any = [];
 
+  isPremiere: any = [
+    {
+      id: false,
+      value: 'No'
+    },
+    {
+      id: true,
+      value: 'Yes'
+    }];
+
   constructor(private showService: ShowsService,
     private fb: FormBuilder,
     private router: Router,
@@ -48,6 +58,7 @@ export class AddRepertoireComponent implements OnInit {
       showDateTime: [''],
       theatreName: [''],
       sceneName: [''],
+      isPremiere: [''],
       addPriceDtos: this.fb.array([this.initalSectorRows()])
     })
   }
@@ -72,7 +83,8 @@ export class AddRepertoireComponent implements OnInit {
   displayShowData(data){
     this.repertoireForm.patchValue({
       theatreName: data.theatre,
-      sceneName: data.scene
+      sceneName: data.scene,
+      isPremiere: false,
     }),
     this.repertoireForm.setControl('addPriceDtos', this.setExistingSectors(data.getSectorDtos));
   }
@@ -102,6 +114,7 @@ export class AddRepertoireComponent implements OnInit {
 
     formData.append('ShowId', this.repertoireForm.get('showId').value);
     formData.append('ShowDate', showDateTime);
+    formData.append('IsPremiere', this.repertoireForm.get('isPremiere').value);
 
     const prices = this.repertoireForm.get('addPriceDtos').value;
 
@@ -111,7 +124,7 @@ export class AddRepertoireComponent implements OnInit {
       formData.append('AddPriceDtos[' + i + '][CurrencyId]', prices[i].currencyId)
     }
 
-    //new Response(formData).text().then(console.log);
+  //  new Response(formData).text().then(console.log);
 
     this.repertoireService.addRepertoire(formData)
       .subscribe(() => {

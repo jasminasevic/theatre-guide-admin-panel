@@ -69,12 +69,16 @@
             <div class="tab-pane body" id="about">
               <small class="text-muted">Category: </small>
               <p>
-                <a [routerLink]="['../../../categories/about-category', play.categoryId]" >
-                  {{ play.category }}
-                </a>
+                {{ play.category }}
               </p>
-              <small class="text-muted">Premiere Date: </small>
-              <p>{{ play.premiereDate | date: 'd MMMM yyyy' }}</p>
+              <div *ngIf="play.isPremiere; else premiereDate">
+                <small class="text-muted">Type: </small>
+                <p>Premiere</p>
+              </div>
+              <ng-template #premiereDate>
+                <small class="text-muted">Premiere Date: </small>
+                <p>{{ play.premiereDate | date: 'd MMMM yyyy' }}</p>
+              </ng-template>
               <hr>
             </div>
           </div>

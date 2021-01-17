@@ -12,6 +12,7 @@ export class Play {
   sceneId: number;
   premiereDate: Date;
   description: String;
+  isPremiere: boolean;
   getPriceDtos: IPricePerSector[];
 
   constructor(play){
@@ -26,6 +27,7 @@ export class Play {
     this.sceneId = play.sceneId || '';
     this.premiereDate = play.premiereDate || '';
     this.description = play.description || '';
+    this.isPremiere = play.isPremiere || '';
     this.getPriceDtos = play.getPriceDtos || '';
   }
 

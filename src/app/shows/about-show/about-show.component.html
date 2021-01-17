@@ -28,7 +28,7 @@
               <div class="profile-header bg-dark">
                 <div class="user-name" *ngIf='show'> {{ show.title }} </div>
                 <p *ngIf='show'>
-                  <a [routerLink]="['../../../categories/about-category', show.categoryId]" > {{ show.category }} </a>
+                  {{ show.category }}
                 </p>
               </div>
               <div>
