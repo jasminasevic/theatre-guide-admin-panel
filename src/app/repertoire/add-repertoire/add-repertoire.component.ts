@@ -56,6 +56,7 @@ export class AddRepertoireComponent implements OnInit {
       id: 0,
       showId: ['', [Validators.required]],
       showDateTime: [''],
+      theatreId: [''],
       theatreName: [''],
       sceneName: [''],
       isPremiere: [''],
@@ -77,12 +78,14 @@ export class AddRepertoireComponent implements OnInit {
       .subscribe(
         (data: ShowForRepertoire[]) => {
         this.displayShowData(data),
-        this.repertoireDetails = data
+        this.repertoireDetails = data,
+        console.log(this.repertoireDetails)
       })}
 
   displayShowData(data){
     this.repertoireForm.patchValue({
       theatreName: data.theatre,
+      theatreId: data.theatreId,
       sceneName: data.scene,
       isPremiere: false,
     }),
@@ -113,6 +116,7 @@ export class AddRepertoireComponent implements OnInit {
     var showDateTime = this.convertDateService.convertDate(showDate);
 
     formData.append('ShowId', this.repertoireForm.get('showId').value);
+    formData.append('TheatreId', this.repertoireForm.get('theatreId').value);
     formData.append('ShowDate', showDateTime);
     formData.append('IsPremiere', this.repertoireForm.get('isPremiere').value);
 
@@ -124,7 +128,7 @@ export class AddRepertoireComponent implements OnInit {
       formData.append('AddPriceDtos[' + i + '][CurrencyId]', prices[i].currencyId)
     }
 
-  //  new Response(formData).text().then(console.log);
+    new Response(formData).text().then(console.log);
 
     this.repertoireService.addRepertoire(formData)
       .subscribe(() => {

@@ -74,6 +74,7 @@ export class EditRepertoireComponent implements OnInit {
       showId: repertoire.showId,
       showName: repertoire.showName,
       showDateTime: repertoire.showDate,
+      theatreId: repertoire.theatreId,
       theatreName: repertoire.theatreName,
       sceneName: repertoire.sceneName,
       isPremiere: repertoire.isPremiere
@@ -99,6 +100,7 @@ export class EditRepertoireComponent implements OnInit {
       id: 0,
       showId: ['', [Validators.required]],
       showDateTime: [''],
+      theatreId: [''],
       theatreName: [''],
       sceneName: [''],
       isPremiere: [''],
@@ -131,6 +133,7 @@ export class EditRepertoireComponent implements OnInit {
 
   displayShowData(data){
     this.repertoireForm.patchValue({
+      theatreId: data.theatreId,
       theatreName: data.theatre,
       sceneName: data.scene
     }),
@@ -161,6 +164,7 @@ export class EditRepertoireComponent implements OnInit {
     var showDateTime = this.convertDateService.convertDate(showDate);
 
     formData.append('ShowId', this.repertoireForm.get('showId').value);
+    formData.append('TheatreId', this.repertoireForm.get('theatreId').value);
     formData.append('ShowDate', showDateTime);
     formData.append('IsPremiere', this.repertoireForm.get('isPremiere').value);
 
@@ -172,7 +176,7 @@ export class EditRepertoireComponent implements OnInit {
       formData.append('AddPriceDtos[' + i + '][CurrencyId]', prices[i].currencyId);
     }
 
-  //  new Response(formData).text().then(console.log);
+    new Response(formData).text().then(console.log);
 
     this.repertoireService.editRepertoire(this.repertoireIdValue, formData)
       .subscribe(() => {
