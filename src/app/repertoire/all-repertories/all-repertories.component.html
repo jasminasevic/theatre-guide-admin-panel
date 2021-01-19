@@ -97,6 +97,15 @@
                             *matCellDef="let play">{{play.showDate | date:'HH:mm'}}</mat-cell>
                 </ng-container>
 
+                <ng-container matColumnDef="isPremiere">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Premiere</mat-header-cell>
+                  <mat-cell class="name-cell"
+                            *matCellDef="let play">
+                            <span *ngIf="play.isPremiere">Yes</span>
+                            <span *ngIf="!play.isPremiere">No</span>
+                          </mat-cell>
+                </ng-container>
+
                 <ng-container matColumnDef="theatre">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Theatre</mat-header-cell>
                   <mat-cell class="name-cell"

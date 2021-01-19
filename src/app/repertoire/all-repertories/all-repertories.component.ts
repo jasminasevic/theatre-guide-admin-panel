@@ -29,6 +29,7 @@ export class AllRepertoriesComponent implements OnInit {
     'date',
     'time',
     'theatre',
+    'isPremiere',
     'actions'
   ]
 
