@@ -27,6 +27,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private dataService: RightSidebarService,
     private configService: ConfigService,
   ) { }
+
+  logOut(){
+    localStorage.removeItem("jwt");
+    console.log('ok');
+  }
+
   notifications: any[] = [
     {
       userImg: 'assets/images/user/user1.jpg',

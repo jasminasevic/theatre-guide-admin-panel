@@ -1,15 +1,22 @@
 <div class="limiter">
   <div class="container-login100">
     <div class="wrap-login100">
+      <div class="login100-more" style="background-image: url('assets/images/theatre-category.jpg');">
+      </div>
       <form class="login100-form validate-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <span class="login100-form-title pb-5">
           Login
         </span>
         <div class="row">
+          <div *ngIf="invalidLogin" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 alert alert-danger">
+            Invalid username or password.
+          </div>
+        </div>
+        <div class="row">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Username</mat-label>
-              <input matInput formControlName="username" />
+              <input matInput formControlName="username" required/>
               <mat-icon matSuffix>face</mat-icon>
             </mat-form-field>
           </div>
@@ -18,12 +25,12 @@
           <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Password</mat-label>
-              <input matInput type="password" formControlName="password">
+              <input matInput type="password" formControlName="password" required>
               <mat-icon matSuffix>vpn_key</mat-icon>
             </mat-form-field>
           </div>
         </div>
-        <div class="flex-sb-m w-full p-t-15 p-b-20">
+        <!-- <div class="flex-sb-m w-full p-t-15 p-b-20">
           <div class="form-check">
             <label class="form-check-label">
               <input class="form-check-input" type="checkbox" value=""> Remember me
@@ -35,30 +42,28 @@
           <div>
             <a class="txt1" routerLink="/authentication/forgot-password">Forgot Password?</a>
           </div>
-        </div>
+        </div> -->
         <div class="container-login100-form-btn">
           <button mat-flat-button color="primary" class="login100-form-btn" type="submit">
             Login
           </button>
         </div>
-        <div class="text-center p-t-30 p-b-20">
+        <!-- <div class="text-center p-t-30 p-b-20">
           <span class="txt3">
-            or <a routerLink="/authentication/signup">
-              sign up
-            </a> using
+            You are not registered? <a routerLink="/authentication/signup">
+              Sign up here
+            </a>
           </span>
-        </div>
-        <div class="login100-form-social flex-c-m">
+        </div> -->
+        <!-- <div class="login100-form-social flex-c-m">
           <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
             <i class="fab fa-facebook-f"></i>
           </a>
           <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
             <i class="fab fa-twitter"></i>
           </a>
-        </div>
+        </div> -->
       </form>
-      <div class="login100-more" style="background-image: url('assets/images/pages/bg-01.png');">
-      </div>
     </div>
   </div>
 </div>

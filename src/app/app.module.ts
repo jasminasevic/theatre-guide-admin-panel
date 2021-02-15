@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { JwtModule } from '@auth0/angular-jwt';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { PageLoaderComponent } from './layout/page-loader/page-loader.component';
@@ -66,6 +67,11 @@ import {
   NgxMatNativeDateModule,
   NgxMatTimepickerModule
 } from '@angular-material-components/datetime-picker';
+import { API_URL } from './app.constants';
+
+export function tokenGetter(){
+  return localStorage.get("jwt");
+}
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -118,7 +124,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatSnackBarModule,
     MaterialFileInputModule,
     FullCalendarModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    JwtModule.forRoot({
+      config : {
+        tokenGetter: tokenGetter,
+        allowedDomains: [ API_URL ],
+        disallowedRoutes: []
+      }
+    })
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

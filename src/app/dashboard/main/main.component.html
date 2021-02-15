@@ -5,31 +5,9 @@
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
           <ul class="breadcrumb breadcrumb-style ">
             <li class="breadcrumb-item">
-              <h4 class="font-weight-bold">Hi, Welcome back!</h4>
-              <h4 class="font-weight-normal mb-0">Spice Dashboard,</h4>
+              <h4 class="font-weight-bold">Hi, welcome back!</h4>
             </li>
           </ul>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-          <div class="align-items-center justify-content-between breadcrumb breadcrumb-style">
-            <div class="mb-xl-0">
-              <div class="float-right ml-2">
-                <p class="text-secondary  mb-0">Total Income</p>
-                <apx-chart [series]="commonBarSparklineOptions.series" [chart]="commonBarSparklineOptions.chart"
-                  [plotOptions]="commonBarSparklineOptions.plotOptions" [tooltip]="commonBarSparklineOptions.tooltip">
-                </apx-chart>
-              </div>
-              <div class="float-right mr-3">
-                <p class="text-secondary mb-2">Customer Ratings</p>
-                <div class="rating-star"> <i class="material-icons">star</i>
-                  <i class="material-icons">star</i>
-                  <i class="material-icons">star</i>
-                  <i class="material-icons">star_half</i>
-                  <i class="material-icons">star_border</i>
-                  <span>(9,876)</span> </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -137,62 +115,6 @@
       </div>
     </div>
     <!-- #END# Widgets -->
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-        <div class="card">
-          <div class="header">
-            <h2>
-              Hotel Survay</h2>
-          </div>
-          <div class="body">
-            <div class="d-flex flex-column flex-lg-row">
-              <div class="data-wrapper d-flex m-l-20">
-                <div class="wrapper pr-5">
-                  <h5 class="mb-0">Total Cost</h5>
-                  <div class="d-flex align-items-center">
-                    <h4 class="mb-0">$22,654</h4>
-                  </div>
-                </div>
-                <div class="wrapper">
-                  <h5 class="mb-0">Total Revenue</h5>
-                  <div class="d-flex align-items-center">
-                    <h4 class="mb-0">$35,985</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div mk-morris-js [options]="chartAreaOptions" [data]="chartAreaData" type="Area"
-              class="deshboard-echart-height"></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="card">
-          <div class="header">
-            <h2>Room Booking Chart</h2>
-          </div>
-          <div class="body">
-            <div echarts [options]="donut_chart" class="desktop-pie-height"></div>
-            <table class="table mb-0">
-              <tbody>
-                <tr>
-                  <td><i class="fas fa-circle text-primary"></i> Single</td>
-                  <td class="text-right">734</td>
-                </tr>
-                <tr>
-                  <td><i class="fas fa-circle text-warning"></i> Double</td>
-                  <td class="text-right">567</td>
-                </tr>
-                <tr>
-                  <td><i class="fas fa-circle text-danger"></i> King</td>
-                  <td class="text-right">464</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="row clearfix">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">
