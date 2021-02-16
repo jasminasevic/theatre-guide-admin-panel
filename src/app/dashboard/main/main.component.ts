@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-main',
@@ -8,15 +9,18 @@ import { Router } from '@angular/router';
 })
 export class MainComponent {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, 
+    private jwtHelper: JwtHelperService) {
   }
 
   isUserAuthenticated(){
     const token: string = localStorage.get("jwt");
-    if(token){
+    if(token && !this.jwtHelper.isTokenExpired(token)){
+      console.log("token je tu", token);
       return true;
     }
     else{
+      console.log("token ne radi")
       return false;
     }
   }

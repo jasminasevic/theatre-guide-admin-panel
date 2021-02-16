@@ -68,9 +68,10 @@ import {
   NgxMatTimepickerModule
 } from '@angular-material-components/datetime-picker';
 import { API_URL } from './app.constants';
+import { AuthGuardService } from './guards/auth-guard.service';
 
 export function tokenGetter(){
-  return localStorage.get("jwt");
+  return localStorage.getItem("jwt");
 }
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -128,7 +129,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     JwtModule.forRoot({
       config : {
         tokenGetter: tokenGetter,
-        allowedDomains: [ API_URL ],
+        allowedDomains: [ 'localhost:44355' ],
         disallowedRoutes: []
       }
     })
@@ -156,7 +157,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ShowsService,
     RepertoiresService,
     PurchasesService,
-    CurrenciesService
+    CurrenciesService,
+    AuthGuardService
   ],
   entryComponents: [
     SimpleDialogComponent,

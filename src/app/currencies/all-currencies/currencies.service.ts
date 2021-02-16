@@ -12,7 +12,7 @@ import { Currency } from './currencies.model';
 export class CurrenciesService {
 
   private API_URL = API_URL;
-
+  
   constructor(private httpClient: HttpClient) { }
 
   getAllCurrencies(perPage: number, pageNumber: number, sortOrder: string, searchQuery: string)
@@ -25,7 +25,7 @@ export class CurrenciesService {
       params = params.append('sortOrder', String(sortOrder));
       params = params.append('searchQuery', String(searchQuery));
 
-      return this.httpClient.get<ICurrencyData>(this.API_URL + '/currencies', { params })
+      return this.httpClient.get<ICurrencyData>(this.API_URL + '/currencies', { params } )
         .pipe(
           map((currencies: ICurrencyData) => currencies),
           catchError(err => throwError(err))

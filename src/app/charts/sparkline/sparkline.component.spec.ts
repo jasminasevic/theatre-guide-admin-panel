@@ -1,9 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SparklineComponent } from './sparkline.component';
 describe('SparklineComponent', () => {
   let component: SparklineComponent;
   let fixture: ComponentFixture<SparklineComponent>;
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SparklineComponent]
     }).compileComponents();
