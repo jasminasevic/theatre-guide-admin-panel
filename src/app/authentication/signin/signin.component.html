@@ -8,16 +8,14 @@
           Login
         </span>
         <div class="row">
-          <div *ngIf="invalidLogin" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 alert alert-danger">
-            Invalid username or password.
-          </div>
-        </div>
-        <div class="row">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Username</mat-label>
-              <input matInput formControlName="username" required/>
+              <input matInput formControlName="username" required />
               <mat-icon matSuffix>face</mat-icon>
+              <mat-error *ngIf="loginForm.get('username').hasError('required')">
+                Username is required
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -27,6 +25,9 @@
               <mat-label>Password</mat-label>
               <input matInput type="password" formControlName="password" required>
               <mat-icon matSuffix>vpn_key</mat-icon>
+              <mat-error *ngIf="loginForm.get('password').hasError('required')">
+                Password is required
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -48,13 +49,13 @@
             Login
           </button>
         </div>
-        <!-- <div class="text-center p-t-30 p-b-20">
+        <div class="text-center p-t-30 p-b-20">
           <span class="txt3">
-            You are not registered? <a routerLink="/authentication/signup">
-              Sign up here
-            </a>
+            <span *ngIf="invalidLogin" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 alert alert-danger">
+              Invalid username or password.
+            </span>
           </span>
-        </div> -->
+        </div>
         <!-- <div class="login100-form-social flex-c-m">
           <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
             <i class="fab fa-facebook-f"></i>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, RequiredValidator, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { JwtPayload } from 'jwt-decode';
 import jwtDecode from 'jwt-decode';
@@ -26,8 +26,8 @@ export class SigninComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: [''],
-      password: ['']
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -35,9 +35,16 @@ export class SigninComponent implements OnInit {
   get f() {
     return this.loginForm.controls;
   }
+
+  get username(){ return this.loginForm.get('username');}
+
+  get password(){ return this.loginForm.get('password');}
   
   onSubmit() {
     this.submitted = true;
+
+    if(!(this.username.dirty && this.password.dirty))
+    return;
 
     const credentials = {
       'username' : this.f.username.value,
