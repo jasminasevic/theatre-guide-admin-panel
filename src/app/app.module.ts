@@ -61,6 +61,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/authInterceptor';
 
 import {
   NgxMatDatetimePickerModule,
@@ -139,6 +141,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     },
     DynamicScriptLoaderService,
     ConfigService,

@@ -1,55 +1,68 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardService } from './guards/auth-guard.service';
 
 const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () =>
-      import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+      canActivate: [AuthGuardService]
   },
   {
     path: 'actors',
-    loadChildren: () => import('./actors/actors.module').then(t => t.ActorsModule)
+    loadChildren: () => import('./actors/actors.module').then(t => t.ActorsModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'categories',
-    loadChildren: () => import('./categories/categories.module').then(t => t.CategoriesModule)
+    loadChildren: () => import('./categories/categories.module').then(t => t.CategoriesModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'currencies',
-    loadChildren: () => import('./currencies/currencies.module').then(t => t.CurrenciesModule)
+    loadChildren: () => import('./currencies/currencies.module').then(t => t.CurrenciesModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'directors',
-    loadChildren: () => import('./directors/directors.module').then(t => t.DirectorsModule)
+    loadChildren: () => import('./directors/directors.module').then(t => t.DirectorsModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'purchases',
-    loadChildren: () => import('./purchases/purchases.module').then(r => r.PurchasesModule)
+    loadChildren: () => import('./purchases/purchases.module').then(r => r.PurchasesModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'repertoire',
-    loadChildren: () => import('./repertoire/repertoire.module').then(r => r.RepertoireModule)
+    loadChildren: () => import('./repertoire/repertoire.module').then(r => r.RepertoireModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'roles',
-    loadChildren: () => import('./roles/roles.module').then(m => m.RolesModule)
+    loadChildren: () => import('./roles/roles.module').then(m => m.RolesModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'scenes',
-    loadChildren: () => import('./scenes/scenes.module').then(s => s.ScenesModule)
+    loadChildren: () => import('./scenes/scenes.module').then(s => s.ScenesModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'shows',
-    loadChildren: () => import('./shows/shows.module').then(s => s.ShowsModule)
+    loadChildren: () => import('./shows/shows.module').then(s => s.ShowsModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'theatres',
-    loadChildren: () => import('./theatres/theatres.module').then(t => t.TheatresModule)
+    loadChildren: () => import('./theatres/theatres.module').then(t => t.TheatresModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'users',
-    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'email',

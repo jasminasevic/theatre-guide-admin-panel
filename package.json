@@ -53,6 +53,7 @@
     "cors": "^2.8.5",
     "jquery": "^3.5.1",
     "jquery-sparkline": "^2.4.0",
+    "jwt-decode": "^3.1.2",
     "mat-progress-buttons": "^9.1.1",
     "moment": "^2.26.0",
     "morris.js": "^0.5.0",

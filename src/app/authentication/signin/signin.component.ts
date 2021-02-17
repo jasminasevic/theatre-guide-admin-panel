@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
+import { JwtPayload } from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
+
 @Component({
   selector: 'signin',
   templateUrl: './signin.component.html',
@@ -32,6 +35,7 @@ export class SigninComponent implements OnInit {
   get f() {
     return this.loginForm.controls;
   }
+  
   onSubmit() {
     this.submitted = true;
 
@@ -44,18 +48,24 @@ export class SigninComponent implements OnInit {
       .subscribe(response => {
         const token = (<any>response).token;
         localStorage.setItem("jwt", token);
-        this.invalidLogin = false;
-        this.router.navigate(['/dashboard/main']);
+
+        const decodedToken = jwtDecode<JwtPayload>(token);
+        let roleId = decodedToken['RoleId'];
+
+        if(roleId == 1){
+          this.invalidLogin = false;
+          this.router.navigate(['/dashboard/main']);
+        }
+
+        this.invalidLogin = true;
+        return;
       }, err => {
         this.invalidLogin = true;
       });
 
-
     // stop here if form is invalid
-    if (this.loginForm.invalid) {
+    if (this.invalidLogin == true) {
       return;
-    } else {
-     // this.router.navigate(['/dashboard/main']);
-    }
+    } 
   }
 }
