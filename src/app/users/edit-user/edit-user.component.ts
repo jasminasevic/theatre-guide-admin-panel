@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../all-users/users.service';
 import { NotificationService } from '../../shared/services/notification.service';
 import { RolesService } from 'src/app/roles/all-roles/roles.service';
+import { TheatreService } from 'src/app/theatres/all-theatres/theatres.service';
+import { User } from '../all-users/users.model';
 
 @Component({
   selector: 'app-edit-user',
@@ -13,8 +15,9 @@ import { RolesService } from 'src/app/roles/all-roles/roles.service';
 
 export class EditUserComponent {
   userForm: FormGroup;
-  userDetail: any;
+  userDetail: User;
   roleListing: any = [];
+  theatreListing: any = [];
 
   formdata = {
     firstName: '',
@@ -22,13 +25,16 @@ export class EditUserComponent {
     roleId: '',
     password: '',
     email: '',
+    theatreId: '',
+    status: ''
   };
 
   constructor(private fb: FormBuilder, private router: Router,
     private activatedRoute: ActivatedRoute,
     private usersService: UserService,
     private notificationService: NotificationService,
-    private roleService: RolesService) {
+    private roleService: RolesService,
+    private theatreService: TheatreService) {
     this.userForm = this.createUserForm();
   }
 
@@ -38,17 +44,26 @@ export class EditUserComponent {
           this.roleListing = data
         })
 
+      this.theatreService.getAllTheatreList()
+        .subscribe(data => {
+          this.theatreListing = data,
+          console.log(data)
+        })
+
        let userId = this.activatedRoute.snapshot.params.id;
        this.usersService.getOneUser(userId)
        .subscribe(user =>
         {
           this.userDetail = user;
+          console.log(this.userDetail);
           this.userForm.patchValue({
             firstName: this.userDetail.firstName,
             lastName: this.userDetail.lastName,
             email: this.userDetail.email,
             roleId: this.userDetail.roleId,
-            password: this.userDetail.Password
+            theatreId: this.userDetail.theatreId, 
+            password: this.userDetail.password,
+            status: this.userDetail.status
             });
         });
   }
@@ -75,6 +90,8 @@ export class EditUserComponent {
       lastName: [this.formdata.lastName],
       roleId: [this.formdata.roleId, [Validators.required]],
       password: [this.formdata.password],
+      theatreId: [this.formdata.theatreId],
+      status: [this.formdata.status],
       email: [
         this.formdata.email,
         [Validators.required, Validators.email, Validators.minLength(5)]
@@ -87,5 +104,4 @@ export class EditUserComponent {
   }
 
 }
-
 

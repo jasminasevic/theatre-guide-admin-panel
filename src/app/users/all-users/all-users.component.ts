@@ -24,9 +24,11 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   displayedColumns = [
     'no',
     'firstName',
-    'lastName',
     'email',
+    'theatre',
     'roleName',
+    'createdAt',
+    'status',
     'actions'
   ];
 

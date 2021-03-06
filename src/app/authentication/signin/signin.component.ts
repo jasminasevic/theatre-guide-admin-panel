@@ -62,10 +62,12 @@ export class SigninComponent implements OnInit {
         if(roleId == 1){
           this.invalidLogin = false;
           this.router.navigate(['/dashboard/main']);
+          return;
         }
-
+        
         this.invalidLogin = true;
         return;
+        
       }, err => {
         this.invalidLogin = true;
       });

@@ -71,6 +71,32 @@
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Theatre</mat-label>
+                    <mat-select formControlName="theatreId">
+                      <mat-option value="0">--</mat-option>
+                      <mat-option *ngFor="let theatre of theatreListing" [value]="theatre.id">
+                        {{ theatre.theatreName }}
+                      </mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="userForm.get('roleId').hasError('required')">
+                      Role is required
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status">
+                      <mat-option value="Approved">Approved</mat-option>
+                      <mat-option value="Declined">Declined</mat-option>
+                      <mat-option value="Pending">Pending</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Password</mat-label>
                     <input matInput formControlName="password" type="password" required>
                     <mat-error *ngIf="userForm.get('password').hasError('required')">

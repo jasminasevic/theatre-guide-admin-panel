@@ -1,3 +1,4 @@
+import { DateSelectionModelChange } from '@angular/material/datepicker';
 import { PurchaseWithDetails } from 'src/app/purchases/all-purchases/purchaseWithDetails.model';
 
 export class User {
@@ -10,6 +11,10 @@ export class User {
   roleName: string;
   getDetailedPurchaseDtos: PurchaseWithDetails[] | null;
   showFollowing: number;
+  status: Status;
+  theatreId?: number;
+  theatre?: string;
+  createdAt: Date;
 
   constructor(user) {
     {
@@ -22,7 +27,16 @@ export class User {
       this.roleName = user.roleName || '';
       this.getDetailedPurchaseDtos = user.purchaseWithDetails || '';
       this.showFollowing = user.showFollowing || '';
+      this.status = user.status || '';
+      this.theatre = user.theare || '';
+      this.theatreId = user.theatreId || '';
+      this.createdAt = user.createdAt || '';
     }
   }
+}
 
+enum Status {
+  Approved,
+  Pending,
+  Rejected
 }

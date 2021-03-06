@@ -38,7 +38,23 @@ export class TheatreService {
   }
 
   getTheatreList(): Observable<TheatreBasic[]>{
-    return this.httpClient.get<TheatreBasic[]>(this.API_URL + '/theatres')
+
+    let params = new HttpParams();
+    params = params.append('type', 'getTheatresList');
+
+    return this.httpClient.get<TheatreBasic[]>(this.API_URL + '/theatres', { params })
+      .pipe(
+        map((theatreList: TheatreBasic[]) => theatreList),
+        catchError(err => throwError(err))
+      )
+  }
+
+  getAllTheatreList(): Observable<TheatreBasic[]>{
+
+    let params = new HttpParams();
+    params = params.append('type', 'getAllTheatresList');
+
+    return this.httpClient.get<TheatreBasic[]>(this.API_URL + '/theatres', { params })
       .pipe(
         map((theatreList: TheatreBasic[]) => theatreList),
         catchError(err => throwError(err))
