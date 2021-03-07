@@ -7,7 +7,9 @@ import {
   Renderer2,
   HostListener
 } from '@angular/core';
+import { UserService } from 'src/app/users/all-users/users.service';
 import { ROUTES } from './sidebar-items';
+import { PendingUsersNumberService} from '../../shared/services/pendingUsersNumber.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -22,10 +24,13 @@ export class SidebarComponent implements OnInit {
   listMaxHeight: string;
   listMaxWidth: string;
   headerHeight = 60;
+  pendingUserRequests: number; 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
-    public elementRef: ElementRef
+    public elementRef: ElementRef,
+    private userService: UserService,
+    private pendingUsersNumber: PendingUsersNumberService
   ) { }
   @HostListener('window:resize', ['$event'])
   windowResizecall(event) {
@@ -62,6 +67,11 @@ export class SidebarComponent implements OnInit {
     this.sidebarItems = ROUTES.filter(sidebarItem => sidebarItem);
     this.initLeftSidebar();
     this.bodyTag = this.document.body;
+    this.pendingUsers();
+    this.pendingUsersNumber.currentPendingUserStatus$
+      .subscribe(pendingRequests => {
+        this.pendingUserRequests = pendingRequests
+      })
   }
   initLeftSidebar() {
     const _this = this;
@@ -101,5 +111,15 @@ export class SidebarComponent implements OnInit {
       this.renderer.removeClass(this.document.body, 'side-closed-hover');
       this.renderer.addClass(this.document.body, 'submenu-closed');
     }
+  }
+
+  public users: any;
+
+  pendingUsers(){
+    this.userService.getUsersFilteredByStatus()
+      .subscribe(data => {
+        this.users = data,
+        this.pendingUsersNumber.changePendingStatus(this.users)
+      });
   }
 }

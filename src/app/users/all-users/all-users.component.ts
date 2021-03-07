@@ -27,7 +27,7 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
     'email',
     'theatre',
     'roleName',
-    'createdAt',
+    // 'createdAt',
     'status',
     'actions'
   ];

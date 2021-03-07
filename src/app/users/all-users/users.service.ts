@@ -5,6 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { API_URL, httpOptions } from '../../app.constants';
 import { IUserData } from '../../shared/interfaces/IUserData';
+import { UserFilteredByStatus } from '../../users/all-users/usersFilteredByStatus.model';
 
 
 @Injectable()
@@ -29,6 +30,19 @@ export class UserService {
     return this.httpClient.get<IUserData>(this.API_URL + '/users', { params })
     .pipe(
       map((userData: IUserData) => userData),
+      catchError(err => throwError(err)),
+    )
+  }
+
+  getUsersFilteredByStatus() : Observable<number> {
+    
+    let params = new HttpParams();
+    params = params.append('type', 'usersFilteredByStatus');
+    params = params.append('status', 'Pending');
+
+    return this.httpClient.get<number>(this.API_URL + '/users', { params })
+    .pipe(
+      map((userData: number) => userData),
       catchError(err => throwError(err)),
     )
   }

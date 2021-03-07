@@ -1,4 +1,6 @@
+import { User } from 'src/app/users/all-users/users.model';
 import { RouteInfo } from './sidebar.metadata';
+
 export const ROUTES: RouteInfo[] = [
   {
     path: '',
@@ -189,7 +191,7 @@ export const ROUTES: RouteInfo[] = [
     class: 'menu-toggle',
     groupTitle: false,
     badge: '',
-    badgeClass: '',
+    badgeClass: 'badge bg-orange sidebar-badge float-right',
     submenu: [
       {
         path: '/users/all-users',

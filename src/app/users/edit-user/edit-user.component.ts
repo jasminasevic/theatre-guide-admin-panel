@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, IterableDiffers } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../all-users/users.service';
@@ -6,6 +6,7 @@ import { NotificationService } from '../../shared/services/notification.service'
 import { RolesService } from 'src/app/roles/all-roles/roles.service';
 import { TheatreService } from 'src/app/theatres/all-theatres/theatres.service';
 import { User } from '../all-users/users.model';
+import { PendingUsersNumberService } from 'src/app/shared/services/pendingUsersNumber.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -18,6 +19,7 @@ export class EditUserComponent {
   userDetail: User;
   roleListing: any = [];
   theatreListing: any = [];
+  initialStatus: any;
 
   formdata = {
     firstName: '',
@@ -28,14 +30,20 @@ export class EditUserComponent {
     theatreId: '',
     status: ''
   };
-
+  pendingUserRequests: number; 
   constructor(private fb: FormBuilder, private router: Router,
     private activatedRoute: ActivatedRoute,
     private usersService: UserService,
     private notificationService: NotificationService,
     private roleService: RolesService,
-    private theatreService: TheatreService) {
+    private theatreService: TheatreService,
+    private userService: UserService,
+    private pendingUsersNumberService: PendingUsersNumberService) {
     this.userForm = this.createUserForm();
+    this.pendingUsersNumberService.currentPendingUserStatus$
+      .subscribe(pendingRequests => {
+        this.pendingUserRequests = pendingRequests
+      })
   }
 
   ngOnInit(){
@@ -46,8 +54,7 @@ export class EditUserComponent {
 
       this.theatreService.getAllTheatreList()
         .subscribe(data => {
-          this.theatreListing = data,
-          console.log(data)
+          this.theatreListing = data
         })
 
        let userId = this.activatedRoute.snapshot.params.id;
@@ -56,6 +63,8 @@ export class EditUserComponent {
         {
           this.userDetail = user;
           console.log(this.userDetail);
+          this.initialStatus = user.status;
+          console.log(this.initialStatus);
           this.userForm.patchValue({
             firstName: this.userDetail.firstName,
             lastName: this.userDetail.lastName,
@@ -68,6 +77,8 @@ export class EditUserComponent {
         });
   }
 
+  users: number;
+
   onSubmit() {
     this.usersService.editUser(this.userDetail.id, this.userForm.value)
       .subscribe(() => {
@@ -78,7 +89,15 @@ export class EditUserComponent {
                   'center'
                 );
         this.router.navigate(['/users/all-users']);
+      if(this.userForm.status != this.initialStatus)
+      {
+        this.userService.getUsersFilteredByStatus()
+        .subscribe(data => {
+          this.users = data,
+          this.pendingUsersNumberService.changePendingStatus(this.users)
         });
+      }
+    });
   }
 
   createUserForm(): FormGroup {
