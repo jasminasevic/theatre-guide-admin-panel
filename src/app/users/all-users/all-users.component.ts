@@ -9,6 +9,7 @@ import { DeleteDialogComponent } from './dialog/delete/delete.component';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { NotificationService } from '../../shared/services/notification.service';
+import { PendingUsersNumberService } from 'src/app/shared/services/pendingUsersNumber.service';
 
 @Component({
   selector: 'app-all-users',
@@ -21,6 +22,8 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   user: User;
   dataSource: UserDataSource;
   userDetail: User;
+  pendingUserRequests: number; 
+  users: number;
   displayedColumns = [
     'no',
     'firstName',
@@ -39,7 +42,13 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
   constructor(
     private usersService: UserService,
     private dialog: MatDialog,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService,
+    private pendingUsersNumberService: PendingUsersNumberService) {
+    this.pendingUsersNumberService.currentPendingUserStatus$
+      .subscribe(pendingRequests => {
+        this.pendingUserRequests = pendingRequests
+      })
+    }
 
   ngOnInit() {
     this.dataSource = new UserDataSource(this.usersService);
@@ -105,9 +114,15 @@ export class AllUsersComponent implements AfterViewInit, OnInit {
             'Record Deleted Successfully!',
             'bottom',
             'center'
-          )};
-        });
-     });
+          );
+        };
+        this.usersService.getUsersFilteredByStatus()
+            .subscribe(data => {
+              this.users = data,
+              this.pendingUsersNumberService.changePendingStatus(this.users)
+          });
+      });
+    });
 }
 
   confirmDelete(row){

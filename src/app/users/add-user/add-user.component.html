@@ -47,19 +47,6 @@
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Role</mat-label>
-                    <mat-select formControlName="roleId" required>
-                      <mat-option *ngFor="let role of roleListing" [value]="role.id">
-                        {{ role.roleName }}
-                      </mat-option>
-                    </mat-select>
-                    <!-- <mat-error *ngIf="userForm.get('RoleId').hasError('required')">
-                      Role is required
-                    </mat-error> -->
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Email</mat-label>
                     <input matInput formControlName="email" required>
                     <mat-error *ngIf="userForm.get('email').hasError('email') && userForm.get('email').touched">
@@ -67,8 +54,6 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
                     <mat-label>Password</mat-label>
@@ -78,26 +63,45 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Re-Enter Password</mat-label>
-                    <input matInput formControlName="ConfirmPassword" type="password" required>
-                    <mat-error *ngIf="userForm.get('ConfirmPassword').hasError('required')">
-                      Re-Enter password is required
-                    </mat-error>
-                  </mat-form-field>
-                </div> -->
               </div>
-              <!-- <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Upload Image</mat-label>
-                    <ngx-mat-file-input formControlName="uploadImg">
-                    </ngx-mat-file-input>
-                    <mat-icon matSuffix>face</mat-icon>
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="roleId" required (ngModelChange)="roleChanged($event)">
+                      <mat-option *ngFor="let role of roleListing" [value]="role.id">
+                        {{ role.roleName }}
+                      </mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="userForm.get('RoleId').hasError('required')">
+                      Role is required
+                    </mat-error> -->
                   </mat-form-field>
                 </div>
-              </div> -->
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" *ngIf="selectedRole==2">
+                  <mat-form-field class="example-full-width mb-3">
+                    <mat-label>Theatre</mat-label>
+                    <mat-select formControlName="theatreId" required>
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let theatre of theatreListing" [value]="theatre.id">
+                        {{ theatre.theatreName }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row" *ngIf="selectedRole==2">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status">
+                      <mat-option value="Approved">Approved</mat-option>
+                      <mat-option value="Declined">Declined</mat-option>
+                      <mat-option value="Pending">Pending</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <button class="mr-3" [disabled]="!userForm.valid " mat-raised-button color="primary">Submit</button>

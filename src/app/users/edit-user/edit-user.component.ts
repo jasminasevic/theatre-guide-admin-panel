@@ -20,6 +20,9 @@ export class EditUserComponent {
   roleListing: any = [];
   theatreListing: any = [];
   initialStatus: any;
+  pendingUserRequests: number; 
+  users: number;
+  selectedRole: any;
 
   formdata = {
     firstName: '',
@@ -30,7 +33,7 @@ export class EditUserComponent {
     theatreId: '',
     status: ''
   };
-  pendingUserRequests: number; 
+  
   constructor(private fb: FormBuilder, private router: Router,
     private activatedRoute: ActivatedRoute,
     private usersService: UserService,
@@ -62,9 +65,7 @@ export class EditUserComponent {
        .subscribe(user =>
         {
           this.userDetail = user;
-          console.log(this.userDetail);
           this.initialStatus = user.status;
-          console.log(this.initialStatus);
           this.userForm.patchValue({
             firstName: this.userDetail.firstName,
             lastName: this.userDetail.lastName,
@@ -77,7 +78,9 @@ export class EditUserComponent {
         });
   }
 
-  users: number;
+  roleChanged(value){
+    this.selectedRole = value;
+  }
 
   onSubmit() {
     this.usersService.editUser(this.userDetail.id, this.userForm.value)
@@ -89,14 +92,14 @@ export class EditUserComponent {
                   'center'
                 );
         this.router.navigate(['/users/all-users']);
-      if(this.userForm.status != this.initialStatus)
-      {
-        this.userService.getUsersFilteredByStatus()
-        .subscribe(data => {
-          this.users = data,
-          this.pendingUsersNumberService.changePendingStatus(this.users)
-        });
-      }
+        if(this.userForm.status != this.initialStatus)
+        {
+          this.userService.getUsersFilteredByStatus()
+          .subscribe(data => {
+            this.users = data,
+            this.pendingUsersNumberService.changePendingStatus(this.users)
+          });
+        }
     });
   }
 

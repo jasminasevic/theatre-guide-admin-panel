@@ -127,7 +127,6 @@ export class TheatreDataSource implements DataSource<Theatre>{
     .subscribe(
       theatres =>
       {
-        console.log(theatres);
         this.theatreSubject.next(theatres.data);
         this.totalCount = theatres.totalCount;
       }

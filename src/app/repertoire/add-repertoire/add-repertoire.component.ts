@@ -78,8 +78,7 @@ export class AddRepertoireComponent implements OnInit {
       .subscribe(
         (data: ShowForRepertoire[]) => {
         this.displayShowData(data),
-        this.repertoireDetails = data,
-        console.log(this.repertoireDetails)
+        this.repertoireDetails = data
       })}
 
   displayShowData(data){
