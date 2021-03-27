@@ -91,11 +91,23 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <ngx-mat-file-input formControlName="theatreImage" placeholder="Select Theatre Image" multiple></ngx-mat-file-input>
+                    <mat-label>Visibility</mat-label>
+                    <mat-select formControlName="isTheatreVisible" required>
+                      <mat-option *ngFor="let visibility of isTheatreVisible" [value]="visibility.id">
+                        {{ visibility.value }}
+                      </mat-option>
+                    </mat-select>
                   </mat-form-field>
                 </div>
               </div>
-
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <ngx-mat-file-input formControlName="theatreImage" placeholder="Select Theatre Image" multiple>
+                    </ngx-mat-file-input>
+                  </mat-form-field>
+                </div>
+              </div>
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="fill">

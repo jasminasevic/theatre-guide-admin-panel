@@ -13,6 +13,16 @@ export class AddTheatreComponent {
 
   theatreForm: FormGroup;
 
+  isTheatreVisible: any = [
+    {
+      id: false,
+      value: 'No'
+    },
+    {
+      id: true,
+      value: 'Yes'
+    }];
+
   constructor(private fb: FormBuilder,
       private theatreService: TheatreService,
       private router: Router,
@@ -33,7 +43,7 @@ export class AddTheatreComponent {
           WorkingHours: ['',
             [
             Validators.required,
-            Validators.pattern('^([2][0-4]|[0-1][0-9])[:]([2][0-4]|[0-1][0-9])-([2][0-4]|[0-1][0-9])[:]([2][0-4]|[0-1][0-9])$')
+          //  Validators.pattern('^([2][0-4]|[0-1][0-9])[:]([2][0-4]|[0-1][0-9])-([2][0-4]|[0-1][0-9])[:]([2][0-4]|[0-1][0-9])$')
           ]],
           Location: [''],
           Telephone: ['',
@@ -41,6 +51,7 @@ export class AddTheatreComponent {
             Validators.required,
             Validators.pattern('^[\+]?[(]?[0-9\\s]{3,7}[)]?[-\\s\.]?[0-9]{3,5}[-\\s\.]?[0-9]{3,5}$')
           ]],
+          IsTheatreVisible: [''],
           TheatreImage: ['']
         });
       }
@@ -65,6 +76,7 @@ export class AddTheatreComponent {
     formData.append("WorkingHours", this.theatreForm.get('WorkingHours').value);
     formData.append("Telephone", this.theatreForm.get('Telephone').value);
     formData.append("Location", this.theatreForm.get('Location').value);
+    formData.append("IsVisible", this.theatreForm.get('IsTheatreVisible').value);
 
     const images = this.theatreForm.get('TheatreImage').value;
     for(var i=0; i<images.length; i++){

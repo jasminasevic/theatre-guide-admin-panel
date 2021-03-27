@@ -21,8 +21,19 @@ export class EditTheatreComponent {
     telephone: '',
     workingHours: '',
     location: '',
-    theatreImage: ''
+    theatreImage: '',
+    isTheatreVisible: ''
   }
+
+  isTheatreVisible: any = [
+    {
+      id: false,
+      value: 'No'
+    },
+    {
+      id: true,
+      value: 'Yes'
+    }];
 
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -45,6 +56,7 @@ export class EditTheatreComponent {
           workingHours: this.theatreDetails.workingHours,
           telephone: this.theatreDetails.telephone,
           location: this.theatreDetails.location,
+          isTheatreVisible: this.theatreDetails.isVisible
           // theatreImage: this.theatreDetails.theatreImage
         });
       })
@@ -53,7 +65,7 @@ export class EditTheatreComponent {
   createTheatreForm() : FormGroup {
     return this.fb.group({
       name : [this.formData.name,
-        [
+        [ 
           Validators.required,
           Validators.pattern('^[A-Z][a-zA-Z0-9-\\s]{1,}([a-zA-Z0-9-]{1,})*$')
         ]
@@ -78,7 +90,8 @@ export class EditTheatreComponent {
         ]
       ],
       location: [this.formData.location],
-      theatreImage: [this.formData.theatreImage]
+      theatreImage: [this.formData.theatreImage],
+      isTheatreVisible: [this.formData.isTheatreVisible]
     });
   }
 
@@ -93,6 +106,7 @@ export class EditTheatreComponent {
     formData.append("workingHours", this.theatreForm.get('workingHours').value);
     formData.append("telephone", this.theatreForm.get('telephone').value);
     formData.append("location", this.theatreForm.get('location').value);
+    formData.append("isVisible", this.theatreForm.get('isTheatreVisible').value.toString());
 
     const images = this.theatreForm.get('theatreImage').value;
     for(var i=0; i<images.length; i++){

@@ -117,7 +117,7 @@ export class EditSceneComponent implements OnInit {
 
   onSubmit() {
     this.mapFormValuesToSceneModel();
-
+    console.log(this.sceneDetails);
     this.sceneService.editScene(this.sceneDetails.id, this.sceneDetails)
       .subscribe(
         () => {

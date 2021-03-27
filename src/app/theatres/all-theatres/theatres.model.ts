@@ -8,6 +8,7 @@ export class Theatre {
   workingHours: string;
   telephone: string;
   location: string;
+  isTheatreVisible: boolean;
   theatreImage: IImage[];
 
   constructor(theatre){
@@ -17,6 +18,7 @@ export class Theatre {
     this.workingHours = theatre.workingHours || '';
     this.telephone = theatre.telephone || '';
     this.location = theatre.location || '';
+    this.isTheatreVisible = theatre.isTheatreVisible || ''; 
     this.theatreImage = theatre.theatreImage || '';
   }
 }

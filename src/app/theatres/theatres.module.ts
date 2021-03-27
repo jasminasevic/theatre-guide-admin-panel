@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
 import { RouterModule } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
 
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -42,11 +43,11 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatDialogModule,
     MatSortModule,
     MatToolbarModule,
-    MatSortModule,
     MatCheckboxModule,
     MatDatepickerModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
     TheatresRoutingModule,
     RouterModule,
     NgxMatFileInputModule
