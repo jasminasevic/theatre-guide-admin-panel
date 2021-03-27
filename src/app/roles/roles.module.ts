@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RolesRoutingModule } from '../roles/roles-routing.module';
 import { AllRolesComponent} from './all-roles/all-roles.component';
 import { AddRoleComponent } from './add-role/add-role.component';
-import { AboutRoleComponent } from './about-role/about-role.component';
 import { EditRoleComponent } from './edit-role/edit-role.component';
 import { DeleteDialogComponent } from './all-roles/dialog/delete/delete.component';
 import { MatTableModule } from '@angular/material/table';
@@ -40,7 +39,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   declarations: [
     AllRolesComponent,
     AddRoleComponent,
-    AboutRoleComponent,
     EditRoleComponent,
     DeleteDialogComponent
   ]

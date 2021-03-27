@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ActorsRoutingModule } from '../actors/actors-routing.module';
 import { AllActorsComponent} from './all-actors/all-actors.component';
 import { AddActorComponent } from './add-actor/add-actor.component';
-import { AboutActorComponent } from './about-actor/about-actor.component';
 import { EditActorComponent } from './edit-actor/edit-actor.component';
 import { DeleteDialogComponent } from './all-actors/dialog/delete/delete.component';
 import { MatTableModule } from '@angular/material/table';
@@ -24,7 +23,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   declarations: [
     AllActorsComponent,
     AddActorComponent,
-    AboutActorComponent,
     EditActorComponent,
     DeleteDialogComponent
   ],

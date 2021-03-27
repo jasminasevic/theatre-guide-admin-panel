@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ScenesRoutingModule } from '../scenes/scenes-routing.module';
 import { AllScenesComponent} from './all-scenes/all-scenes.component';
 import { AddSceneComponent } from './add-scene/add-scene.component';
-import { AboutSceneComponent } from './about-scene/about-scene.component';
 import { EditSceneComponent } from './edit-scene/edit-scene.component';
 import { DeleteDialogComponent } from './all-scenes/dialog/delete/delete.component';
 import { MatTableModule } from '@angular/material/table';
@@ -43,7 +42,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     AllScenesComponent,
     AddSceneComponent,
     EditSceneComponent,
-    AboutSceneComponent,
     DeleteDialogComponent
   ],
 })

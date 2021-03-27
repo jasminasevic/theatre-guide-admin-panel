@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AllRepertoriesComponent } from './all-repertories/all-repertories.component';
 import { AddRepertoireComponent } from './add-repertoire/add-repertoire.component';
 import { EditRepertoireComponent } from './edit-repertoire/edit-repertoire.component';
-import { AboutRepertoireComponent } from './about-repertoire/about-repertoire.component';
-import { AboutRepertoireResolverService } from './about-repertoire/about-repertoire-resolver.service';
 
 const routes: Routes = [
   {
@@ -18,11 +16,6 @@ const routes: Routes = [
   {
     path: 'edit-play/:id',
     component: EditRepertoireComponent
-  },
-  {
-    path: 'about-play/:id',
-    component: AboutRepertoireComponent,
-    resolve: { aboutPlay: AboutRepertoireResolverService }
   }
 ]
 

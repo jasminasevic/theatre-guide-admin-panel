@@ -19,7 +19,6 @@ import { UsersRoutingModule } from './users-routing.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AddUserComponent } from './add-user/add-user.component';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-import { AboutUserComponent } from './about-user/about-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { DeleteDialogComponent } from './all-users/dialog/delete/delete.component';
@@ -28,7 +27,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AddUserComponent,
-    AboutUserComponent,
     EditUserComponent,
     AllUsersComponent,
     DeleteDialogComponent

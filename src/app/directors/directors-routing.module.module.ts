@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AllDirectorsComponent } from './all-directors/all-directors.component';
 import { AddDirectorComponent } from './add-director/add-director.component';
 import { EditDirectorComponent } from './edit-director/edit-director.component';
-import { AboutDirectorComponent } from './about-director/about-director.component';
 
 const routes: Routes = [
   {
@@ -17,10 +16,6 @@ const routes: Routes = [
   {
     path: 'edit-director/:id',
     component: EditDirectorComponent
-  },
-  {
-    path: 'about-director/:id',
-    component: AboutDirectorComponent
   }
 ]
 

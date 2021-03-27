@@ -24,7 +24,6 @@ import { AllTheatresComponent } from './all-theatres/all-theatres.component';
 import { AddTheatreComponent } from './add-theatre/add-theatre.component';
 import { DeleteDialogComponent } from './all-theatres/dialog/delete/delete.component';
 import { EditTheatreComponent } from './edit-theatre/edit-theatre.component';
-import { AboutTheatreComponent } from './about-theatre/about-theatre.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
@@ -57,8 +56,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     AllTheatresComponent,
     AddTheatreComponent,
     DeleteDialogComponent,
-    EditTheatreComponent,
-    AboutTheatreComponent
+    EditTheatreComponent
   ]
 })
 export class TheatresModule { }

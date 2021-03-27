@@ -8,13 +8,11 @@ import { AuthGuardService } from '../guards/auth-guard.service';
 const routes: Routes = [
   {
     path: 'all-currencies',
-    component: AllCurrenciesComponent,
-    canActivate: [AuthGuardService]
+    component: AllCurrenciesComponent
   },
   {
     path: 'add-currency',
-    component: AddCurrencyComponent,
-    canActivate: [AuthGuardService]
+    component: AddCurrencyComponent
   },
   {
     path: 'edit-currency/:id',

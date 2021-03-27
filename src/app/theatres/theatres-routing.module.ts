@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AllTheatresComponent } from './all-theatres/all-theatres.component';
 import { AddTheatreComponent } from './add-theatre/add-theatre.component';
 import { EditTheatreComponent } from './edit-theatre/edit-theatre.component';
-import { AboutTheatreComponent } from './about-theatre/about-theatre.component';
 
 const routes: Routes = [
   {
@@ -17,11 +16,7 @@ const routes: Routes = [
   {
     path : 'edit-theatre/:id',
     component : EditTheatreComponent
-  },
-  {
-    path : 'about-theatre/:id',
-    component : AboutTheatreComponent
-  },
+  }
 ];
 
 @NgModule({

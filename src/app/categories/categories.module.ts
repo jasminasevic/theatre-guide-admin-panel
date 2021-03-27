@@ -19,7 +19,6 @@ import { CategoriesRoutingModule } from './categories-routing.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-import { AboutCategoryComponent } from './about-category/about-category.component';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { AllCategoriesComponent } from './all-categories/all-categories.component';
 import { DeleteDialogComponent } from './all-categories/dialog/delete/delete.component';
@@ -28,7 +27,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AddCategoryComponent,
-    AboutCategoryComponent,
     EditCategoryComponent,
     AllCategoriesComponent,
     DeleteDialogComponent

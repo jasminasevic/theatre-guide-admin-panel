@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DirectorsRoutingModule } from './directors-routing.module.module';
 import { AddDirectorComponent } from './add-director/add-director.component';
-import { AboutDirectorComponent } from './about-director/about-director.component';
 import { EditDirectorComponent } from './edit-director/edit-director.component';
 import { AllDirectorsComponent } from './all-directors/all-directors.component';
 import { DeleteDialogComponent } from './all-directors/dialog/delete/delete.component';
@@ -42,7 +41,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AddDirectorComponent,
-    AboutDirectorComponent,
     EditDirectorComponent,
     AllDirectorsComponent,
     DeleteDialogComponent

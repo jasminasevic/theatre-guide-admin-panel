@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ShowsRoutingModule } from '../shows/shows-routing.module';
 import { AllShowsComponent} from './all-shows/all-shows.component';
 import { AddShowComponent } from './add-show/add-show.component';
-import { AboutShowComponent } from './about-show/about-show.component';
 import { EditShowComponent } from './edit-show/edit-show.component';
 import { DeleteDialogComponent } from './all-shows/dialog/delete/delete.component';
 import { MatTableModule } from '@angular/material/table';
@@ -49,7 +48,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     AllShowsComponent,
     AddShowComponent,
     EditShowComponent,
-    AboutShowComponent,
     DeleteDialogComponent,
   ],
 })
