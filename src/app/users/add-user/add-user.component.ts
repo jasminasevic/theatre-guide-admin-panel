@@ -36,6 +36,8 @@ export class AddUserComponent implements OnInit {
       })
     }
 
+  namePattern = "^[A-Z][a-zA-Z ]+$";
+
   ngOnInit(){
     this.roleService.getRoleList()
       .subscribe(data => {
@@ -47,20 +49,28 @@ export class AddUserComponent implements OnInit {
         this.theatreListing = theatres
       });
 
+
     this.userForm = this.fb.group({
       id: 0,
-      firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
-      lastName: [''],
-      email: ['',
-        [Validators.required, Validators.email, Validators.minLength(5)]],
-      password: ['', [Validators.required]],
-      //ConfirmPassword: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.pattern(this.namePattern)]],
+      lastName: ['', [Validators.required, Validators.pattern(this.namePattern)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       roleId: ['', Validators.required],
       theatreId: ['', Validators.required],
-      status: ['']
-      // uploadImg: ['']
+      status: ['', Validators.required]
     });
   }
+
+  //Getter methods to access formControls
+  get firstName() { return this.userForm.get('firstName'); }
+  get lastName() { return this.userForm.get('lastName'); }
+  get email() { return this.userForm.get('email'); }
+  get password() { return this.userForm.get('password'); }
+  get roleId() { return this.userForm.get('roleId'); }
+  get theatreId() { return this.userForm.get('theatreId'); }
+  get status() { return this.userForm.get('status'); }
+  
 
   roleChanged(value){
     this.selectedRole = value;

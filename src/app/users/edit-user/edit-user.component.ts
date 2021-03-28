@@ -78,6 +78,29 @@ export class EditUserComponent {
         });
   }
 
+  //Getter methods to access formControls
+  get firstName() { return this.userForm.get('firstName'); }
+  get lastName() { return this.userForm.get('lastName'); }
+  get email() { return this.userForm.get('email'); }
+  get password() { return this.userForm.get('password'); }
+  get roleId() { return this.userForm.get('roleId'); }
+  get theatreId() { return this.userForm.get('theatreId'); }
+  get status() { return this.userForm.get('status'); }
+
+  namePattern = "^[A-Z][a-zA-Z ]+$";
+
+  createUserForm(): FormGroup {
+    return this.fb.group({
+      firstName: [this.formdata.firstName, [Validators.required, Validators.pattern(this.namePattern)]],
+      lastName: [this.formdata.lastName, [Validators.required, Validators.pattern(this.namePattern)]],
+      roleId: [this.formdata.roleId, Validators.required],
+      password: [this.formdata.password, [Validators.required, Validators.minLength(6)]],
+      theatreId: [this.formdata.theatreId, Validators.required],
+      status: [this.formdata.status, Validators.required],
+      email: [this.formdata.email, [Validators.required, Validators.email]]
+    });
+  }
+
   roleChanged(value){
     this.selectedRole = value;
   }
@@ -100,24 +123,6 @@ export class EditUserComponent {
             this.pendingUsersNumberService.changePendingStatus(this.users)
           });
         }
-    });
-  }
-
-  createUserForm(): FormGroup {
-    return this.fb.group({
-      firstName: [
-        this.formdata.firstName,
-        [Validators.required, Validators.pattern('[a-zA-Z]+')]
-      ],
-      lastName: [this.formdata.lastName],
-      roleId: [this.formdata.roleId, [Validators.required]],
-      password: [this.formdata.password],
-      theatreId: [this.formdata.theatreId],
-      status: [this.formdata.status],
-      email: [
-        this.formdata.email,
-        [Validators.required, Validators.email, Validators.minLength(5)]
-      ]
     });
   }
 

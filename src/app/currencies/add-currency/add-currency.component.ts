@@ -12,6 +12,7 @@ import { CurrenciesService } from '../all-currencies/currencies.service';
 export class AddCurrencyComponent {
 
   currencyForm: FormGroup;
+  namePattern = "^[A-Z][a-zA-Z ]+$";
 
   constructor(private router: Router,
     private fb: FormBuilder,
@@ -19,13 +20,12 @@ export class AddCurrencyComponent {
     private notificationService: NotificationService) {
       this.currencyForm = this.fb.group({
         id: 0,
-        currencyName: ['',
-        [
-          Validators.required,
-          Validators.pattern('^[a-zA-Z]{2,}$')
-        ]]
+        currencyName: ['', [Validators.required, Validators.pattern(this.namePattern)]]
       });
     }
+
+  //Getter methods to access formControls
+  get currencyName() { return this.currencyForm.get('currencyName'); }
 
   onSubmit(){
     this.currencyService.addCurrency(this.currencyForm.value)

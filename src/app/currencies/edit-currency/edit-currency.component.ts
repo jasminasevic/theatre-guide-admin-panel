@@ -27,14 +27,16 @@ export class EditCurrencyComponent implements OnInit {
       this.currencyForm = this.createCurrencyForm();
     }
 
+  namePattern = "^[A-Z][a-zA-Z ]+$";
+
   createCurrencyForm() : FormGroup {
     return this.fb.group({
-      currencyName: [this.formData.currencyName, [
-        Validators.required,
-        Validators.pattern('^[a-zA-Z]{2,}$')
-      ]]
+      currencyName: [this.formData.currencyName, [Validators.required, Validators.pattern(this.namePattern)]]
     })
   }
+
+  //Getter methods to access formControls
+  get currencyName() { return this.currencyForm.get('currencyName'); }
 
   ngOnInit() {
     let currencyId = this.activatedRoute.snapshot.params['id'];
