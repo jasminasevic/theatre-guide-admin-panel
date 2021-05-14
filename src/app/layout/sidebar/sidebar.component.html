@@ -43,8 +43,8 @@
             <span class="hide-menu">{{sidebarItem.title}}
             </span>
             <span *ngIf="sidebarItem.badge != '' " [ngClass]="[sidebarItem.badgeClass]">{{sidebarItem.badge}}</span>
-            <span *ngIf="sidebarItem.title == 'Users' && users != null"
-              [ngClass]="[sidebarItem.badgeClass]">{{pendingUserRequests}}</span>
+            <span *ngIf="sidebarItem.title == 'Users' && users != null" [ngClass]="[sidebarItem.badgeClass]"
+              title="Pending theatre requests">{{pendingUserRequests}}</span>
           </a>
           <!-- Second level menu -->
           <ul class="ml-menu" *ngIf="sidebarItem.submenu.length > 0">

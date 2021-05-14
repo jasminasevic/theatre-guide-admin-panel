@@ -40,5 +40,15 @@ export class PurchasesService {
       )
   }
 
+  getPurchasesTotalNumber() : Observable<number>{
+    let params = new HttpParams();
+    params = params.append('Type', 'totalPurchasesNumber');
+
+    return this.httpClient.get<number>(this.API_URL + '/purchases', { params })
+      .pipe(
+        map((purchases: number) => purchases),
+        catchError(err => throwError(err))
+      )
+  }
 
 }
