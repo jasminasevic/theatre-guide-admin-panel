@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, RequiredValidator, Validators } from '@angular/
 import { AuthenticationService } from '../authentication.service';
 import { JwtPayload } from 'jwt-decode';
 import jwtDecode from 'jwt-decode';
+import { TOKEN_KEY } from 'src/app/app.constants';
+import { TokenStorageService } from '../tokenStorage.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'signin',
@@ -17,12 +20,14 @@ export class SigninComponent implements OnInit {
   hide = true;
 
   invalidLogin: boolean;
+  readonly TOKEN_KEY = TOKEN_KEY;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private token: TokenStorageService
   ) { }
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -37,7 +42,6 @@ export class SigninComponent implements OnInit {
   }
 
   get username(){ return this.loginForm.get('username');}
-
   get password(){ return this.loginForm.get('password');}
   
   onSubmit() {
@@ -54,13 +58,15 @@ export class SigninComponent implements OnInit {
     this.authenticationService.loginUser(credentials)
       .subscribe(response => {
         const token = (<any>response).token;
-        localStorage.setItem("jwt", token);
-
-        const decodedToken = jwtDecode<JwtPayload>(token);
-        let roleId = decodedToken['RoleId'];
+        this.token.saveToken(token);
+        let roleId = this.token.setRoleId();
 
         if(roleId == 1){
           this.invalidLogin = false;
+          let userId = this.token.setUserId();
+          let firstName = this.token.setFirstName();
+          this.token.saveUserId(userId);
+          this.token.saveFirstName(firstName);
           this.router.navigate(['/dashboard/main']);
           return;
         }

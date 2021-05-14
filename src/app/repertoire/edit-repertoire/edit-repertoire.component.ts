@@ -121,7 +121,7 @@ export class EditRepertoireComponent implements OnInit {
    onChangeObj($event){
     this.counter += 1;
     if(this.counter > 1){
-     this.showService.getShowsWithPricesForRepertoire($event)
+     this.showService.getShowWithPricesForRepertoire($event)
       .subscribe(
         (data: ShowForRepertoire[]) => {
           this.displayShowData(data),

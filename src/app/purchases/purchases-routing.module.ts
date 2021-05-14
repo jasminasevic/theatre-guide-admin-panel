@@ -6,11 +6,11 @@ import { AboutPurchaseResolverService } from './about-purchase/about-purchase-re
 
 const routes: Routes = [
   {
-    path: 'all-purchases',
+    path: 'all-reservations',
     component: AllPurchasesComponent
   },
   {
-    path: 'about-purchase/:id',
+    path: 'about-reservation/:id',
     component: AboutPurchaseComponent,
     resolve: { aboutPurchase: AboutPurchaseResolverService }
   }

@@ -41,7 +41,7 @@ export class ShowsService {
       )
   }
 
-  getShowsForRepertoire(showId: number) : Observable<ShowForRepertoire[]>{
+  getShowForRepertoire(showId: number) : Observable<ShowForRepertoire[]>{
 
     let params = new HttpParams();
     params = params.append('type', 'repertoire');
@@ -53,7 +53,7 @@ export class ShowsService {
       )
   }
 
-  getShowsWithPricesForRepertoire(showId: number) : Observable<ShowForRepertoire[]>{
+  getShowWithPricesForRepertoire(showId: number) : Observable<ShowForRepertoire[]>{
 
     let params = new HttpParams();
     params = params.append('type', 'ticketPrices');

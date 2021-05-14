@@ -11,3 +11,15 @@ export const httpOptions = {
     // 'Authorization' : 'Bearer '+ tokenGetter()
   })
 };
+
+export const TOKEN_KEY = 'jwt';
+
+export const USER_KEY = 'PerformerData';
+
+export const USER_ID_KEY = 'Id';
+
+export const USER = 'Identity';
+
+export const FIRST_NAME = 'FirstName';
+
+export const ROLE_KEY = 'Role';

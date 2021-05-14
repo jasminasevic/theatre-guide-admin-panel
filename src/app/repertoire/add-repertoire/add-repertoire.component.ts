@@ -74,7 +74,7 @@ export class AddRepertoireComponent implements OnInit {
   }
 
   onChangeObj($event){
-    this.showService.getShowsForRepertoire($event)
+    this.showService.getShowForRepertoire($event)
       .subscribe(
         (data: ShowForRepertoire[]) => {
         this.displayShowData(data),

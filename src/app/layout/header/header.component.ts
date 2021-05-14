@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { RightSidebarService } from '../../shared/services/rightsidebar.service';
 import { ConfigService } from '../../shared/services/config.service';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
+import { TokenStorageService } from 'src/app/authentication/tokenStorage.service';
 const document: any = window.document;
 
 @Component({
@@ -19,6 +21,8 @@ const document: any = window.document;
 
 export class HeaderComponent implements OnInit, AfterViewInit {
   public config: any = {};
+  userFirstName: string;
+  userId: number;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -26,11 +30,14 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     public elementRef: ElementRef,
     private dataService: RightSidebarService,
     private configService: ConfigService,
-  ) { }
+    private authService: AuthenticationService,
+    private token: TokenStorageService) { 
+      this.userFirstName = this.token.getFirstName();
+      this.userId = this.token.getUserId();
+    }
 
   logOut(){
-    localStorage.removeItem("jwt");
-    console.log('ok');
+    this.authService.logOut();    
   }
 
   notifications: any[] = [

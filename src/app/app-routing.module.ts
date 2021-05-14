@@ -30,7 +30,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: 'purchases',
+    path: 'reservations',
     loadChildren: () => import('./purchases/purchases.module').then(r => r.PurchasesModule),
     canActivate: [AuthGuardService]
   },
@@ -92,11 +92,6 @@ const routes: Routes = [
     loadChildren: () => import('./apps/apps.module').then(m => m.AppsModule)
   },
   {
-    path: 'widget',
-    loadChildren: () =>
-      import('./widget/widget.module').then(m => m.WidgetModule)
-  },
-  {
     path: 'ui',
     loadChildren: () => import('./ui/ui.module').then(m => m.UiModule)
   },
@@ -112,11 +107,6 @@ const routes: Routes = [
   {
     path: 'media',
     loadChildren: () => import('./media/media.module').then(m => m.MediaModule)
-  },
-  {
-    path: 'charts',
-    loadChildren: () =>
-      import('./charts/charts.module').then(m => m.ChartsModule)
   },
   {
     path: 'timeline',
