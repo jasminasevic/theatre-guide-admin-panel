@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenStorageService } from 'src/app/authentication/tokenStorage.service';
 import { PurchasesService } from 'src/app/purchases/all-purchases/purchases.service';
+import { TheatreService } from '../../theatres/all-theatres/theatres.service';
 
 @Component({
   selector: 'app-main',
@@ -12,9 +11,11 @@ import { PurchasesService } from 'src/app/purchases/all-purchases/purchases.serv
 export class MainComponent implements OnInit {
   userFirstName: string;
   purchasesNumber: any;
+  approvedTheatresNumber: any;
 
   constructor(private token: TokenStorageService,
-    private purchaseService: PurchasesService) {
+    private purchaseService: PurchasesService,
+    private theatreService: TheatreService) {
     this.userFirstName = this.token.getFirstName();
   }
 
@@ -22,6 +23,11 @@ export class MainComponent implements OnInit {
     this.purchaseService.getPurchasesTotalNumber()
       .subscribe(data => {
         this.purchasesNumber = data
+      })
+
+    this.theatreService.getCountedApprovedTheatres()
+      .subscribe(data => {
+        this.approvedTheatresNumber = data
       })
   }
 

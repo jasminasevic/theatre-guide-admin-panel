@@ -61,6 +61,18 @@ export class TheatreService {
       )
   }
 
+  getCountedApprovedTheatres(): Observable<number>{
+
+    let params = new HttpParams();
+    params = params.append('type', 'getCountedApprovedTheatres');
+
+    return this.httpClient.get<number>(this.API_URL + '/theatres', { params })
+      .pipe(
+        map((theatresNumber: number) => theatresNumber),
+        catchError(err => throwError(err))
+      )
+  }
+
   addTheatre(theatre) : Observable<Theatre> {
     return this.httpClient.post<Theatre>(this.API_URL + "/theatres", theatre)
       .pipe(
