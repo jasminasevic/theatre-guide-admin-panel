@@ -30,6 +30,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
+    path: 'loggings',
+    loadChildren: () => import('./loggings/loggings.module').then(m => m.LoggingsModule),
+    canActivate: [AuthGuardService] 
+  },
+  {
     path: 'reservations',
     loadChildren: () => import('./purchases/purchases.module').then(r => r.PurchasesModule),
     canActivate: [AuthGuardService]
@@ -64,55 +69,55 @@ const routes: Routes = [
     loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
     canActivate: [AuthGuardService]
   },
-  {
-    path: 'email',
-    loadChildren: () => import('./email/email.module').then(m => m.EmailModule)
-  },
-  {
-    path: 'booking',
-    loadChildren: () =>
-      import('./booking/booking.module').then(m => m.BookingModule)
-  },
-  {
-    path: 'rooms',
-    loadChildren: () =>
-      import('./rooms/rooms.module').then(m => m.RoomModule)
-  },
-  {
-    path: 'departments',
-    loadChildren: () =>
-      import('./departments/departments.module').then(m => m.DepartmentsModule)
-  },
-  {
-    path: 'staff',
-    loadChildren: () => import('./staff/staff.module').then(m => m.StaffModule)
-  },
-  {
-    path: 'apps',
-    loadChildren: () => import('./apps/apps.module').then(m => m.AppsModule)
-  },
-  {
-    path: 'ui',
-    loadChildren: () => import('./ui/ui.module').then(m => m.UiModule)
-  },
-  {
-    path: 'forms',
-    loadChildren: () => import('./forms/forms.module').then(m => m.FormModule)
-  },
-  {
-    path: 'tables',
-    loadChildren: () =>
-      import('./tables/tables.module').then(m => m.TablesModule)
-  },
-  {
-    path: 'media',
-    loadChildren: () => import('./media/media.module').then(m => m.MediaModule)
-  },
-  {
-    path: 'timeline',
-    loadChildren: () =>
-      import('./timeline/timeline.module').then(m => m.TimelineModule)
-  },
+  // {
+  //   path: 'email',
+  //   loadChildren: () => import('./email/email.module').then(m => m.EmailModule)
+  // },
+  // {
+  //   path: 'booking',
+  //   loadChildren: () =>
+  //     import('./booking/booking.module').then(m => m.BookingModule)
+  // },
+  // {
+  //   path: 'rooms',
+  //   loadChildren: () =>
+  //     import('./rooms/rooms.module').then(m => m.RoomModule)
+  // },
+  // {
+  //   path: 'departments',
+  //   loadChildren: () =>
+  //     import('./departments/departments.module').then(m => m.DepartmentsModule)
+  // },
+  // {
+  //   path: 'staff',
+  //   loadChildren: () => import('./staff/staff.module').then(m => m.StaffModule)
+  // },
+  // {
+  //   path: 'apps',
+  //   loadChildren: () => import('./apps/apps.module').then(m => m.AppsModule)
+  // },
+  // {
+  //   path: 'ui',
+  //   loadChildren: () => import('./ui/ui.module').then(m => m.UiModule)
+  // },
+  // {
+  //   path: 'forms',
+  //   loadChildren: () => import('./forms/forms.module').then(m => m.FormModule)
+  // },
+  // {
+  //   path: 'tables',
+  //   loadChildren: () =>
+  //     import('./tables/tables.module').then(m => m.TablesModule)
+  // },
+  // {
+  //   path: 'media',
+  //   loadChildren: () => import('./media/media.module').then(m => m.MediaModule)
+  // },
+  // {
+  //   path: 'timeline',
+  //   loadChildren: () =>
+  //     import('./timeline/timeline.module').then(m => m.TimelineModule)
+  // },
   {
     path: 'icons',
     loadChildren: () => import('./icons/icons.module').then(m => m.IconsModule)
@@ -124,15 +129,15 @@ const routes: Routes = [
         m => m.AuthenticationModule
       )
   },
-  {
-    path: 'extra-pages',
-    loadChildren: () =>
-      import('./extra-pages/extra-pages.module').then(m => m.ExtraPagesModule)
-  },
-  {
-    path: 'maps',
-    loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule)
-  },
+  // {
+  //   path: 'extra-pages',
+  //   loadChildren: () =>
+  //     import('./extra-pages/extra-pages.module').then(m => m.ExtraPagesModule)
+  // },
+  // {
+  //   path: 'maps',
+  //   loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule)
+  // },
   {
     path: '',
     redirectTo: 'authentication',

@@ -69,6 +69,7 @@ export class AllPurchasesComponent implements OnInit {
       .pipe(
         tap(() => this.loadPurchasePages())
       )
+      .subscribe()
   }
 
   loadPurchasePages(){

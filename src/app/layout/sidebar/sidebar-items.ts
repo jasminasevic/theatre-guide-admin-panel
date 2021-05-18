@@ -386,6 +386,29 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       }
     ],
+  },
+  {
+    path: '',
+    title: 'Loggings',
+    iconType: 'material-icons-two-tone',
+    icon: 'change_history',
+    class: 'menu-toggle',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [
+      {
+        path: '/loggings/all-loggings',
+        title: 'All Loggings',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        submenu: [],
+      }
+    ],
   }
   // ,
   //{
