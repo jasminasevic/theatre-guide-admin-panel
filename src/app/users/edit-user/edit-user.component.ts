@@ -94,8 +94,8 @@ export class EditUserComponent {
       firstName: [this.formdata.firstName, [Validators.required, Validators.pattern(this.namePattern)]],
       lastName: [this.formdata.lastName, [Validators.required, Validators.pattern(this.namePattern)]],
       roleId: [this.formdata.roleId, Validators.required],
-      password: [this.formdata.password, [Validators.required, Validators.minLength(6)]],
-      theatreId: [this.formdata.theatreId, Validators.required],
+      password: [this.formdata.password, Validators.minLength(6)],
+      theatreId: [this.formdata.theatreId],
       status: [this.formdata.status, Validators.required],
       email: [this.formdata.email, [Validators.required, Validators.email]]
     });

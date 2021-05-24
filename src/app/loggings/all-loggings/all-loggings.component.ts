@@ -82,6 +82,8 @@ export class AllLoggingsComponent implements OnInit {
   }
 
   convertObjectToString(obj){
+    if(obj){
+      
     const parsedObject = JSON.parse(obj);
     let data: string = '\n';
     
@@ -89,6 +91,7 @@ export class AllLoggingsComponent implements OnInit {
       .forEach(([key, value]) => { data += key + ': ' + String(value) + "\n"});
 
     return data;
+    }
   }
 }
 
