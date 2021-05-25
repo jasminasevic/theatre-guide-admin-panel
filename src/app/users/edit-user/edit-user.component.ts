@@ -1,4 +1,4 @@
-import { Component, IterableDiffers } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../all-users/users.service';
@@ -24,18 +24,6 @@ export class EditUserComponent {
   pendingUserRequests: number; 
   users: number;
   selectedRole: any;
-
-  formdata: UserDetails = {
-    id: 0,
-    firstName: '',
-    lastName: '',
-    roleId: null,
-    password: '',
-    email: '',
-    theatreId: null,
-    status: 0,
-    theatreName: ''
-  };
 
   userData: UserDetails = {
     id: 0,
@@ -106,13 +94,13 @@ export class EditUserComponent {
 
   createUserForm(): FormGroup {
     return this.fb.group({
-      firstName: [this.formdata.firstName, [Validators.required, Validators.pattern(this.namePattern)]],
-      lastName: [this.formdata.lastName, [Validators.required, Validators.pattern(this.namePattern)]],
-      roleId: [this.formdata.roleId, Validators.required],
-      password: [this.formdata.password, Validators.minLength(6)],
-      theatreId: [this.formdata.theatreId],
-      status: [this.formdata.status, Validators.required],
-      email: [this.formdata.email, [Validators.required, Validators.email]]
+      firstName: [this.userData.firstName, [Validators.required, Validators.pattern(this.namePattern)]],
+      lastName: [this.userData.lastName, [Validators.required, Validators.pattern(this.namePattern)]],
+      roleId: [this.userData.roleId, Validators.required],
+      password: [this.userData.password, Validators.minLength(6)],
+      theatreId: [this.userData.theatreId],
+      status: [this.userData.status, Validators.required],
+      email: [this.userData.email, [Validators.required, Validators.email]]
     });
   }
 
@@ -123,7 +111,6 @@ export class EditUserComponent {
   onSubmit() {
 
     this.mapValuesToUserModel();
-    console.log(this.userData);
 
     this.usersService.editUser(this.userDetail.id, this.userData)
       .subscribe(() => {

@@ -99,7 +99,6 @@ export class AddUserComponent implements OnInit {
   onSubmit() {
 
     this.mapValuesToUserModel();
-    console.log('mapirane vrednosti su ', this.userDetails);
 
     this.userService.addUser(this.userDetails)
     .subscribe(() => {
