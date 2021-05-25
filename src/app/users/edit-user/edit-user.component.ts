@@ -7,6 +7,7 @@ import { RolesService } from 'src/app/roles/all-roles/roles.service';
 import { TheatreService } from 'src/app/theatres/all-theatres/theatres.service';
 import { User } from '../all-users/users.model';
 import { PendingUsersNumberService } from 'src/app/shared/services/pendingUsersNumber.service';
+import { UserDetails } from '../all-users/userDetails.model';
 
 @Component({
   selector: 'app-edit-user',
@@ -24,14 +25,28 @@ export class EditUserComponent {
   users: number;
   selectedRole: any;
 
-  formdata = {
+  formdata: UserDetails = {
+    id: 0,
     firstName: '',
     lastName: '',
-    roleId: '',
+    roleId: null,
     password: '',
     email: '',
-    theatreId: '',
-    status: ''
+    theatreId: null,
+    status: 0,
+    theatreName: ''
+  };
+
+  userData: UserDetails = {
+    id: 0,
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    roleId: 0,
+    theatreId: null,
+    theatreName: '',
+    status: 0
   };
   
   constructor(private fb: FormBuilder, private router: Router,
@@ -106,7 +121,11 @@ export class EditUserComponent {
   }
 
   onSubmit() {
-    this.usersService.editUser(this.userDetail.id, this.userForm.value)
+
+    this.mapValuesToUserModel();
+    console.log(this.userData);
+
+    this.usersService.editUser(this.userDetail.id, this.userData)
       .subscribe(() => {
          this.notificationService.showNotification(
                   'snackbar-success',
@@ -128,6 +147,21 @@ export class EditUserComponent {
 
   cancel(){
     this.router.navigate(['/users/all-users']);
+  }
+
+  mapValuesToUserModel(){
+    this.userData.id = this.userDetail.id;
+    this.userData.firstName = this.userForm.value.firstName;
+    this.userData.lastName = this.userForm.value.lastName;
+    this.userData.email = this.userForm.value.email;
+    if(this.userForm.value.password != ''){
+      this.userData.password = this.userForm.value.password;
+    }
+    this.userData.roleId = this.userForm.value.roleId;
+    if(this.userData.roleId == 2){
+      this.userData.theatreId = this.userForm.value.theatreId
+    }
+    this.userData.status = this.userForm.value.status;
   }
 
 }

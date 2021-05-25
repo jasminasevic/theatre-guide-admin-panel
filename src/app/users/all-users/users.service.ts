@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 import { API_URL, httpOptions } from '../../app.constants';
 import { IUserData } from '../../shared/interfaces/IUserData';
 import { UserFilteredByStatus } from '../../users/all-users/usersFilteredByStatus.model';
+import { UserDetails } from './userDetails.model';
 
 
 @Injectable()
@@ -55,17 +56,17 @@ export class UserService {
     )
   }
 
-  addUser(user: User): Observable<User> {
+  addUser(user: UserDetails): Observable<UserDetails> {
     return this.httpClient.post(this.API_URL + "/users", user, httpOptions)
     .pipe(
-      map((user: User) => user),
+      map((user: UserDetails) => user),
       catchError(err => throwError(err)));
   }
 
-  editUser(id: number, user : User) {
-    return this.httpClient.put<User>(this.API_URL + "/users/" + id, user)
+  editUser(id: number, user : UserDetails) {
+    return this.httpClient.put<UserDetails>(this.API_URL + "/users/" + id, user)
     .pipe(
-      map((user: User) => user),
+      map((user: UserDetails) => user),
       catchError(err => throwError(err)));
   }
 

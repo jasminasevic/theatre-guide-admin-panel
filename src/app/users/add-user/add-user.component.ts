@@ -7,6 +7,7 @@ import { RolesService } from 'src/app/roles/all-roles/roles.service';
 import { TheatreService } from 'src/app/theatres/all-theatres/theatres.service';
 import { TheatreBasic } from 'src/app/theatres/all-theatres/theatreBasic.model';
 import { PendingUsersNumberService } from 'src/app/shared/services/pendingUsersNumber.service';
+import { UserDetails } from '../all-users/userDetails.model';
 
 @Component({
   selector: 'app-add-user',
@@ -22,6 +23,17 @@ export class AddUserComponent implements OnInit {
   theatreListing: TheatreBasic[];
   pendingUserRequests: number; 
   users: number;
+  userDetails: UserDetails = {
+    id: 0,
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    roleId: 0,
+    theatreId: null,
+    theatreName: '',
+    status: 0
+  };
 
   constructor(private fb: FormBuilder,
     private userService: UserService,
@@ -57,7 +69,7 @@ export class AddUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       roleId: ['', Validators.required],
-      theatreId: ['', Validators.required],
+      theatreId: [''],
       status: ['', Validators.required]
     });
   }
@@ -85,7 +97,11 @@ export class AddUserComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userService.addUser(this.userForm.value)
+
+    this.mapValuesToUserModel();
+    console.log('mapirane vrednosti su ', this.userDetails);
+
+    this.userService.addUser(this.userDetails)
     .subscribe(() => {
       this.notificationService.showNotification(
                'snackbar-success',
@@ -101,6 +117,18 @@ export class AddUserComponent implements OnInit {
       this.router.navigateByUrl('/SampleComponent', { skipLocationChange: true });
       this.router.navigate(['/users/all-users']);
     });
+  }
+
+  mapValuesToUserModel(){
+    this.userDetails.firstName = this.userForm.value.firstName;
+    this.userDetails.lastName = this.userForm.value.lastName;
+    this.userDetails.email = this.userForm.value.email;
+    this.userDetails.password = this.userForm.value.password;
+    this.userDetails.roleId = this.userForm.value.roleId;
+    if(this.userDetails.roleId == 2){
+      this.userDetails.theatreId = this.userForm.value.theatreId
+    }
+    this.userDetails.status = this.userForm.value.status;
   }
 
 }

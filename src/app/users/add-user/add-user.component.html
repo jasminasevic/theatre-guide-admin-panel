@@ -93,6 +93,21 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="fill">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status">
+                      <mat-option value="Approved">Approved</mat-option>
+                      <mat-option value="Declined">Declined</mat-option>
+                      <mat-option value="Pending">Pending</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="status.hasError('required')">
+                      Status is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" *ngIf="selectedRole==2">
                   <mat-form-field class="example-full-width mb-3">
                     <mat-label>Theatre</mat-label>
@@ -104,21 +119,6 @@
                     </mat-select>
                     <mat-error *ngIf="theatreId.hasError('required')">
                       Theatre is required for "Theatre" role
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="row" *ngIf="selectedRole==2">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <mat-form-field class="example-full-width mb-3" appearance="fill">
-                    <mat-label>Status</mat-label>
-                    <mat-select formControlName="status">
-                      <mat-option value="Approved">Approved</mat-option>
-                      <mat-option value="Declined">Declined</mat-option>
-                      <mat-option value="Pending">Pending</mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="status.hasError('required')">
-                      Status is required
                     </mat-error>
                   </mat-form-field>
                 </div>
