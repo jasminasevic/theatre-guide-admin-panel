@@ -3,7 +3,7 @@ export class Logging {
     performer: string;
     useCaseName: string;
     loggingDate: Date;
-    useCaseData: object;
+    useCaseData: string;
 
     constructor(logging){
         this.id = logging.id;

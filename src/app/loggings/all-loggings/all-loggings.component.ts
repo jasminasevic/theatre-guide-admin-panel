@@ -80,19 +80,6 @@ export class AllLoggingsComponent implements OnInit {
       this.input.nativeElement.value
     );
   }
-
-  convertObjectToString(obj){
-    if(obj){
-      
-    const parsedObject = JSON.parse(obj);
-    let data: string = '\n';
-    
-    Object.entries(parsedObject)
-      .forEach(([key, value]) => { data += key + ': ' + String(value) + "\n"});
-
-    return data;
-    }
-  }
 }
 
   
@@ -110,13 +97,42 @@ export class LoggingDataSource implements DataSource<Logging>{
   }
 
   totalCount: number;
+  useCaseData: Logging[] = [];
 
   loadLoggings(pageSize = 10, pageIndex = 0, sortOrder = '', sortDirection = '', searchQuery = ''){
     this.loggingService.getAllLoggings(pageSize, pageIndex += 1, sortOrder + '_' + sortDirection, searchQuery)
       .subscribe(loggings => {
-        this.loggingSubject.next(loggings.data),
+        this.useCaseData = [];
+        for(let i=0; i<loggings.data.length; i++){
+            let newData: Logging = {
+            id: loggings.data[i].id,
+            performer:  loggings.data[i].performer,
+            loggingDate: loggings.data[i].loggingDate,
+            useCaseName: loggings.data[i].useCaseName,
+            useCaseData: this.convertObjectToString(loggings.data[i].useCaseData)
+          }
+          this.useCaseData.push(newData);
+        }
+       
+        this.loggingSubject.next(this.useCaseData),
         this.totalCount = loggings.totalCount
       })
+  }
+
+
+  convertObjectToString(obj){
+    if(obj){
+      const parsedObject = JSON.parse(obj);
+      if(typeof parsedObject != "object"){
+        return parsedObject;
+      }
+
+      let data: string = '\n';
+      Object.entries(parsedObject)
+        .forEach(([key, value]) => { data += key + ': ' + String(value) + "\n"});
+
+      return data;
+    }
   }
 
 }
